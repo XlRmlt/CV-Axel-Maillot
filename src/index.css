@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Styles personnalisés */
+@layer base {
+  body {
+    @apply bg-background-dark text-text-primary;
+  }
+}
+
+@layer components {
+  .nav-link {
+    @apply px-4 py-2 text-text-muted hover:text-primary transition-colors duration-200;
+  }
+
+  .nav-link.active {
+    @apply text-primary font-medium;
+  }
+
+  .social-icon {
+    @apply text-text-muted hover:text-primary transition-colors duration-200;
+  }
+}
+
+@layer utilities {
+  .layout-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Animation classes */
+.fade-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
