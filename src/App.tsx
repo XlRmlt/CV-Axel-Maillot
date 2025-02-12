@@ -7,6 +7,7 @@ import About from './components/About/About';
 import Projects from './components/Projects/Projects';
 import Resume from './components/Resume/Resume';
 import './components/Theme/theme.css';
+import './index.css';
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('home');

@@ -1,104 +1,119 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FaReact, FaNode, FaDatabase, FaTools } from 'react-icons/fa';
-import { SiTypescript, SiNextdotjs, SiTailwindcss, SiMongodb } from 'react-icons/si';
 
-interface Skill {
+interface SkillCategory {
   name: string;
-  icon: JSX.Element;
-  color: string;
-  proficiency: number;
+  skills: {
+    name: string;
+    level: number;
+    color: string;
+    description: string;
+  }[];
 }
 
-const Skills: React.FC = () => {
+const SkillsSection = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
 
-  const skills: Skill[] = [
-    { name: 'React', icon: <FaReact />, color: '#61DAFB', proficiency: 90 },
-    { name: 'TypeScript', icon: <SiTypescript />, color: '#3178C6', proficiency: 85 },
-    { name: 'Node.js', icon: <FaNode />, color: '#339933', proficiency: 80 },
-    { name: 'Next.js', icon: <SiNextdotjs />, color: '#000000', proficiency: 85 },
-    { name: 'TailwindCSS', icon: <SiTailwindcss />, color: '#06B6D4', proficiency: 90 },
-    { name: 'MongoDB', icon: <SiMongodb />, color: '#47A248', proficiency: 75 },
+  const categories: SkillCategory[] = [
+    {
+      name: "Front-end",
+      skills: [
+        {
+          name: "React/Next.js",
+          level: 95,
+          color: "#61DAFB",
+          description: "Création d'applications web modernes et performantes"
+        },
+        {
+          name: "TypeScript",
+          level: 90,
+          color: "#3178C6",
+          description: "Développement robuste avec typage statique"
+        },
+        {
+          name: "TailwindCSS",
+          level: 85,
+          color: "#06B6D4",
+          description: "Création d'interfaces utilisateur responsives"
+        }
+      ]
+    },
+    {
+      name: "Back-end",
+      skills: [
+        {
+          name: "Node.js",
+          level: 85,
+          color: "#339933",
+          description: "APIs RESTful et services web"
+        },
+        {
+          name: "MongoDB",
+          level: 80,
+          color: "#47A248",
+          description: "Gestion de bases de données NoSQL"
+        }
+      ]
+    }
   ];
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
-  };
-
   return (
-    <div ref={ref} className="mt-12">
-      <h3 className="text-2xl font-bold mb-8">Compétences Techniques</h3>
-      
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate={inView ? "show" : "hidden"}
-        className="grid grid-cols-2 md:grid-cols-3 gap-6"
+    <div ref={ref} className="py-12">
+      <motion.h2
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        className="text-3xl font-bold mb-8 text-center"
       >
-        {skills.map((skill, index) => (
+        Compétences Techniques
+      </motion.h2>
+
+      <div className="space-y-12">
+        {categories.map((category, categoryIndex) => (
           <motion.div
-            key={index}
-            variants={item}
-            className="bg-background-popup p-6 rounded-lg"
+            key={category.name}
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ delay: categoryIndex * 0.2 }}
+            className="space-y-6"
           >
-            <div className="flex items-center space-x-4">
-              <div 
-                className="text-3xl"
-                style={{ color: skill.color }}
-              >
-                {skill.icon}
-              </div>
-              <div className="flex-1">
-                <h4 className="font-semibold mb-2">{skill.name}</h4>
-                <div className="relative h-2 bg-background-selected rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${skill.proficiency}%` }}
-                    transition={{ duration: 1, delay: index * 0.1 }}
-                    className="absolute top-0 left-0 h-full rounded-full"
-                    style={{ backgroundColor: skill.color }}
-                  />
-                </div>
-              </div>
+            <h3 className="text-xl font-semibold mb-4">{category.name}</h3>
+            <div className="space-y-6">
+              {category.skills.map((skill, skillIndex) => (
+                <motion.div
+                  key={skill.name}
+                  initial={{ x: -50, opacity: 0 }}
+                  animate={inView ? { x: 0, opacity: 1 } : {}}
+                  transition={{ delay: (categoryIndex * 0.2) + (skillIndex * 0.1) }}
+                  className="bg-background-popup rounded-lg p-6 hover:shadow-lg transition-shadow"
+                >
+                  <div className="flex justify-between mb-2">
+                    <h4 className="font-medium">{skill.name}</h4>
+                    <span className="text-primary">{skill.level}%</span>
+                  </div>
+                  
+                  <div className="relative h-2 bg-background-darker rounded-full overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={inView ? { width: `${skill.level}%` } : {}}
+                      transition={{ duration: 1, delay: (categoryIndex * 0.2) + (skillIndex * 0.1) }}
+                      className="absolute top-0 left-0 h-full rounded-full"
+                      style={{ backgroundColor: skill.color }}
+                    />
+                  </div>
+                  
+                  <p className="mt-3 text-sm text-text-muted">{skill.description}</p>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         ))}
-      </motion.div>
-
-      <div className="mt-12">
-        <h3 className="text-2xl font-bold mb-6">Autres outils et technologies</h3>
-        <div className="flex flex-wrap gap-3">
-          {['Git', 'Docker', 'AWS', 'Jest', 'GraphQL', 'Redis'].map((tool, index) => (
-            <motion.span
-              key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: index * 0.1 }}
-              className="px-4 py-2 bg-background-selected rounded-full text-sm"
-            >
-              {tool}
-            </motion.span>
-          ))}
-        </div>
       </div>
     </div>
   );
 };
 
-export default Skills;
+export default SkillsSection;

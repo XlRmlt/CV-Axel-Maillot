@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ParticlesContainer from './ParticlesContainer';
+import AnimatedAvatar from './AnimatedAvatar';
 
 const Home: React.FC = () => {
   return (
@@ -8,6 +9,8 @@ const Home: React.FC = () => {
       <ParticlesContainer />
       
       <div className="relative z-10 max-w-3xl mx-auto text-center px-4">
+        <AnimatedAvatar />
+        
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
