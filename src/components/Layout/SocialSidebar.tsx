@@ -12,20 +12,14 @@ const SocialSidebar = () => {
 
   return (
     <aside className="social-sidebar">
-      {/* Mettre Avatar */}
       <div> </div>
 
-      {/* Icônes sociales */}
-      <div className="social-links">
+      <div className="social-icons mt-16">
         {socialLinks.map((link, index) => (
           <motion.a
             key={index}
             href={link.href}
-            className="social-link"
-            whileHover={{ x: 5 }}
-            initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 }}
+            className="social-icon"
             aria-label={link.label}
           >
             {link.icon}
@@ -33,10 +27,9 @@ const SocialSidebar = () => {
         ))}
       </div>
 
-      {/* Texte FOLLOW ME */}
-      <div className="follow-me">
+      <span className="follow-me mb-24">
         FOLLOW ME
-      </div>
+      </span>
     </aside>
   );
 };

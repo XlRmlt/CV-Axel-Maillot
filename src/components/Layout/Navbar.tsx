@@ -7,11 +7,11 @@ interface NavBarProps {
 
 const NavBar: React.FC<NavBarProps> = ({ activeSection, setActiveSection }) => {
   const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'resume', label: 'Resume' },
-    { id: 'blog', label: 'Blog' }
+    { id: 'home', label: 'Accueil' },
+    { id: 'about', label: 'À propos' },
+    { id: 'career', label: 'Parcours' },
+    { id: 'skills', label: 'Compétences' },
+    { id: 'interests', label: 'Centres d\'intérêt' }
   ];
 
   return (

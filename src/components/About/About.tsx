@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import Skills from './Skills';
+import Skills from '../Skills/Skills';
 
 const About: React.FC = () => {
   const [ref, inView] = useInView({
