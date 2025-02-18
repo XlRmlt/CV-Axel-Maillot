@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaTwitter, FaGithub, FaFacebook, FaLinkedin } from 'react-icons/fa';
+import ThemeToggle from '../Theme/ThemeToggle';
 
 const SocialSidebar = () => {
   const socialLinks = [
@@ -12,22 +13,26 @@ const SocialSidebar = () => {
 
   return (
     <aside className="social-sidebar">
-      <div> </div>
+      <div>
+        <ThemeToggle />
+      </div>
 
-      <div className="social-icons mt-16">
+      <div className="social-icons">
         {socialLinks.map((link, index) => (
           <motion.a
             key={index}
             href={link.href}
             className="social-icon"
             aria-label={link.label}
+            whileHover={{ x: 5 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
             {link.icon}
           </motion.a>
         ))}
       </div>
 
-      <span className="follow-me mb-24">
+      <span className="follow-me">
         FOLLOW ME
       </span>
     </aside>

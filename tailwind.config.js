@@ -6,24 +6,22 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Philosopher', 'sans-serif'],
+      },
       colors: {
         background: {
-          primary: 'var(--background-primary)',
-          popup: 'var(--background-popup)',
-          selected: 'var(--background-selected)',
-          hover: 'var(--background-hover)',
-          'gradient-start': 'var(--background-gradient-start)',
-          'gradient-end': 'var(--background-gradient-end)',
+          light: 'var(--color-background-light)',
+          dark: 'var(--color-background-dark)',
+          darker: 'var(--color-background-darker)',
         },
         text: {
-          primary: 'var(--text-primary)',
-          grey: 'var(--text-grey)',
-          muted: 'var(--text-muted)',
-          error: 'var(--text-error)',
+          primary: 'var(--color-text-primary)',
+          muted: 'var(--color-text-muted)',
         },
-        border: {
-          default: 'var(--border-default)',
-          color: 'var(--border-color)',
+        primary: {
+          DEFAULT: 'var(--color-primary)',
+          dark: 'var(--color-primary-dark)',
         },
       },
     },
