@@ -11,11 +11,25 @@ const About: React.FC = () => {
 
   const timelineItems = [
     {
-      year: '2024',
-      title: 'Développeur Full Stack',
-      description: 'Spécialisé en TypeScript et React',
+      year: '2025',
+      title: 'Stage IA - BioMérieux (6 mois)',
+      description: "Refonte d’une application R&D avec R/Shiny & JS. Application possible à l'externe. Projet Agile."
     },
-    // Ajoutez vos expériences ici
+    {
+      year: '2024',
+      title: 'Erasmus - Stockholms Universitet',
+      description: 'Semestre en informatique au DSV Department'
+    },
+    {
+      year: '2024',
+      title: 'Stage IA - Efor Group (3 mois)',
+      description: 'Création d’un assistant IA personnalisé avec embedding, RAG et Chatbot. Tech : Python, TypeScript, Docker, GitLab.'
+    },
+    {
+      year: '2023',
+      title: 'Stage - Schneider Electric (3 mois)',
+      description: 'Application d’automatisation interne en Python. Connexion PDM, documentation complète, gain de productivité.'
+    }    
   ];
 
   return (
@@ -36,7 +50,9 @@ const About: React.FC = () => {
         className="prose dark:prose-invert mb-12"
       >
         <p>
-          // Ajoutez votre description ici
+          Étudiant en 5e année à l’INSA Lyon, passionné par l’Intelligence Artificielle et la Cybersécurité.
+          J’ai eu l’opportunité de travailler sur des projets concrets (IA, automatisation, chatbot, R/Shiny…).
+          Curieux, autonome, et toujours motivé pour apprendre !
         </p>
       </motion.div>
 

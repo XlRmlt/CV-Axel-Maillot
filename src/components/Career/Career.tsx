@@ -15,28 +15,66 @@ const Career: React.FC = () => {
   const timelineItems: TimelineItem[] = [
     {
       type: 'work',
-      title: 'Développeur Full Stack',
-      organization: 'Entreprise XYZ',
-      period: '2023 - Présent',
+      title: 'Développeur IA',
+      organization: 'BioMérieux',
+      period: '2025 (6 mois)',
       description: [
-        'Développement d\'applications web avec React et TypeScript',
-        'Mise en place d\'architectures scalables',
-        'Travail en équipe agile'
+        'Refonte d’une application web interne',
+        'Tech : R/Shiny, JavaScript',
+        'Approche Agile avec releases'
       ],
-      technologies: ['React', 'TypeScript', 'Node.js', 'GraphQL']
+    },
+    {
+      type: 'work',
+      title: 'Développeur IA',
+      organization: 'Efor Group',
+      period: '2024 (3 mois)',
+      description: [
+        'Chatbot d’entreprise IA personnalisé',
+        'Embedding, RAG, assistants IA',
+        'Python, TypeScript (React), GitLab, Docker'
+      ],
+    },
+    {
+      type: 'work',
+      title: 'Développeur Python',
+      organization: 'Schneider Electric',
+      period: '2023 (3 mois)',
+      description: [
+        'Application d’automatisation interne',
+        'Connexion à base PDM',
+        'Gain de productivité mesurable'
+      ],
     },
     {
       type: 'education',
-      title: 'Master en Développement Web',
-      organization: 'École XYZ',
+      title: 'Ingénieur Informatique',
+      organization: 'INSA Lyon',
+      period: '2022 - 2025',
+      description: ['Filière Informatique, projets avancés IA'],
+    },
+    {
+      type: 'education',
+      title: 'Erasmus - Informatique',
+      organization: 'Stockholms Universitet (DSV)',
+      period: '2024',
+      description: ['Semestre en Suède'],
+    },
+    {
+      type: 'education',
+      title: 'Prépa PT*',
+      organization: 'Lycée la Martinière Monplaisir',
       period: '2020 - 2022',
-      description: [
-        'Spécialisation en développement web moderne',
-        'Projets pratiques en conditions réelles',
-        'Méthodes agiles et gestion de projet'
-      ]
+      description: [],
+    },
+    {
+      type: 'education',
+      title: 'Bac S(SI) Mention TB',
+      organization: 'Lycée Saint Marc',
+      period: '2020',
+      description: [],
     }
-  ];
+  ];  
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">

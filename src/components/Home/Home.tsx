@@ -5,10 +5,10 @@ import TypeWriter from './TypeWriter';
 
 const Home: React.FC = () => {
   const roles = [
-    "Développeur Full Stack TypeScript",
-    "React Developer",
-    "Node.js Developer",
-    "UI/UX Enthusiast"
+    "Développeur Full Stack",
+    "Ingénieur Informatique",
+    "Passionné d'IA",
+    "Fasciné par la Cyber"
   ];
 
   return (
@@ -78,7 +78,6 @@ const Home: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="w-64 h-64 rounded-full flex-shrink-0 hidden md:block overflow-hidden"
         >
-          {/* Ici vous pouvez ajouter votre avatar animé */}
         </motion.div>
       </div>
     </div>

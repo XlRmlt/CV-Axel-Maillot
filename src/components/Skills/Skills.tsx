@@ -6,7 +6,6 @@ interface SkillCategory {
   name: string;
   skills: {
     name: string;
-    level: number;
     color: string;
     description: string;
   }[];
@@ -23,43 +22,89 @@ const SkillsSection = () => {
       name: "Front-end",
       skills: [
         {
-          name: "React/Next.js",
-          level: 95,
+          name: "React",
           color: "#61DAFB",
-          description: "Création d'applications web modernes et performantes"
+          description: "Création d'interfaces dynamiques et réactives"
         },
         {
           name: "TypeScript",
-          level: 90,
           color: "#3178C6",
-          description: "Développement robuste avec typage statique"
+          description: "Typage statique robuste pour du code maintenable"
         },
         {
           name: "TailwindCSS",
-          level: 85,
           color: "#06B6D4",
-          description: "Création d'interfaces utilisateur responsives"
+          description: "Stylisation rapide et responsive via classes utilitaires"
         }
       ]
     },
     {
-      name: "Back-end",
+      name: "Back-end & Data",
       skills: [
         {
           name: "Node.js",
-          level: 85,
           color: "#339933",
-          description: "APIs RESTful et services web"
+          description: "Création d’APIs backend et services web"
         },
         {
-          name: "MongoDB",
-          level: 80,
-          color: "#47A248",
-          description: "Gestion de bases de données NoSQL"
+          name: "Python",
+          color: "#3776AB",
+          description: "Scripts, traitement de données et automatisation"
+        },
+        {
+          name: "SQL",
+          color: "#4479A1",
+          description: "Requêtes, jointures et gestion de base relationnelle"
+        },
+        {
+          name: "R / Shiny",
+          color: "#276DC3",
+          description: "Interfaces statistiques et dashboards interactifs"
+        }
+      ]
+    },
+    {
+      name: "DevOps & Outils",
+      skills: [
+        {
+          name: "Git / GitLab",
+          color: "#F1502F",
+          description: "Versioning, CI/CD, merge requests"
+        },
+        {
+          name: "Docker",
+          color: "#2496ED",
+          description: "Conteneurisation pour le déploiement d’applications"
+        },
+        {
+          name: "Azure",
+          color: "#007FFF",
+          description: "Bases de cloud computing (Microsoft Azure)"
+        }
+      ]
+    },
+    {
+      name: "Autres",
+      skills: [
+        {
+          name: "Prolog",
+          color: "#9D4EDD",
+          description: "Programmation logique"
+        },
+        {
+          name: "Matlab / SolidWorks",
+          color: "#FFB000",
+          description: "Calcul scientifique et modélisation"
+        },
+        {
+          name: "Office / VBA",
+          color: "#185ABD",
+          description: "Macros, automatisation et outils bureautiques"
         }
       ]
     }
   ];
+
 
   return (
     <div ref={ref} className="py-12">
@@ -92,13 +137,11 @@ const SkillsSection = () => {
                 >
                   <div className="flex justify-between mb-2">
                     <h4 className="font-medium">{skill.name}</h4>
-                    <span className="text-primary">{skill.level}%</span>
                   </div>
                   
                   <div className="relative h-2 bg-background-darker rounded-full overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
-                      animate={inView ? { width: `${skill.level}%` } : {}}
                       transition={{ duration: 1, delay: (categoryIndex * 0.2) + (skillIndex * 0.1) }}
                       className="absolute top-0 left-0 h-full rounded-full"
                       style={{ backgroundColor: skill.color }}

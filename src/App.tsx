@@ -8,6 +8,7 @@ import About from './components/About/About';
 import Career from './components/Career/Career';
 import Skills from './components/Skills/Skills';
 import Interests from './components/Interests/Interests';
+import Resume from './components/Resume/Resume';
 import './index.css';
 
 const App: React.FC = () => {
@@ -25,6 +26,8 @@ const App: React.FC = () => {
         return <Skills />;
       case 'interests':
         return <Interests />;
+      case 'resume':
+        return <Resume />;
       default:
         return null;
     }
