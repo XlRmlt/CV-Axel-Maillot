@@ -1,0 +1,17 @@
+.skills {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+}
+
+.skills-icon {
+    font-size: 3rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.skills-icon:hover {
+    transform: scale(1.1);
+}

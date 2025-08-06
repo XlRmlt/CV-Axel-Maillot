@@ -1,14 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import './skills.css';
 
-interface SkillCategory {
+interface Skills {
+  icon: string;
   name: string;
-  skills: {
-    name: string;
-    color: string;
-    description: string;
-  }[];
+  color: string;
+  description: string;
 }
 
 const SkillsSection = () => {
@@ -17,91 +16,90 @@ const SkillsSection = () => {
     threshold: 0.1,
   });
 
-  const categories: SkillCategory[] = [
+  const categories: Skills[] = [
     {
-      name: "Front-end",
-      skills: [
-        {
-          name: "React",
-          color: "#61DAFB",
-          description: "Création d'interfaces dynamiques et réactives"
-        },
-        {
-          name: "TypeScript",
-          color: "#3178C6",
-          description: "Typage statique robuste pour du code maintenable"
-        },
-        {
-          name: "TailwindCSS",
-          color: "#06B6D4",
-          description: "Stylisation rapide et responsive via classes utilitaires"
-        }
-      ]
+      icon: "react",
+      name: "React",
+      color: "#61DAFB",
+      description: "Création d'interfaces dynamiques et réactives"
     },
     {
-      name: "Back-end & Data",
-      skills: [
-        {
-          name: "Node.js",
-          color: "#339933",
-          description: "Création d’APIs backend et services web"
-        },
-        {
-          name: "Python",
-          color: "#3776AB",
-          description: "Scripts, traitement de données et automatisation"
-        },
-        {
-          name: "SQL",
-          color: "#4479A1",
-          description: "Requêtes, jointures et gestion de base relationnelle"
-        },
-        {
-          name: "R / Shiny",
-          color: "#276DC3",
-          description: "Interfaces statistiques et dashboards interactifs"
-        }
-      ]
+      icon: "TypeScript",
+      name: "TypeScript",
+      color: "#3178C6",
+      description: "Typage statique robuste pour du code maintenable"
     },
     {
-      name: "DevOps & Outils",
-      skills: [
-        {
-          name: "Git / GitLab",
-          color: "#F1502F",
-          description: "Versioning, CI/CD, merge requests"
-        },
-        {
-          name: "Docker",
-          color: "#2496ED",
-          description: "Conteneurisation pour le déploiement d’applications"
-        },
-        {
-          name: "Azure",
-          color: "#007FFF",
-          description: "Bases de cloud computing (Microsoft Azure)"
-        }
-      ]
+      icon: "TypeScript",
+      name: "TypeScript",
+      color: "#3178C6",
+      description: "Typage statique robuste pour du code maintenable"
     },
     {
-      name: "Autres",
-      skills: [
-        {
-          name: "Prolog",
-          color: "#9D4EDD",
-          description: "Programmation logique"
-        },
-        {
-          name: "Matlab / SolidWorks",
-          color: "#FFB000",
-          description: "Calcul scientifique et modélisation"
-        },
-        {
-          name: "Office / VBA",
-          color: "#185ABD",
-          description: "Macros, automatisation et outils bureautiques"
-        }
-      ]
+      icon: "tailwindcss",
+      name: "TailwindCSS",
+      color: "#06B6D4",
+      description: "Stylisation rapide et responsive via classes utilitaires"
+    },
+    {
+      icon: "Node.js",
+      name: "Node.js",
+      color: "#339933",
+      description: "Création d’APIs backend et services web"
+    },
+    {
+      icon: "Express",
+      name: "Python",
+      color: "#3776AB",
+      description: "Scripts, traitement de données et automatisation"
+    },
+    {
+      icon: "SQL",
+      name: "SQL",
+      color: "#4479A1",
+      description: "Requêtes, jointures et gestion de base relationnelle"
+    },
+    {
+      icon: "R",
+      name: "R / Shiny",
+      color: "#276DC3",
+      description: "Interfaces statistiques et dashboards interactifs"
+    },
+    {
+      icon: "Git",
+      name: "Git / GitLab",
+      color: "#F1502F",
+      description: "Versioning, CI/CD, merge requests"
+    },
+    {
+      icon: "Docker",
+      name: "Docker",
+      color: "#2496ED",
+      description: "Conteneurisation pour le déploiement d’applications"
+    },
+    {
+      icon: "Kubernetes",
+      name: "Azure",
+      color: "#007FFF",
+      description: "Bases de cloud computing (Microsoft Azure)"
+    },
+    {
+      icon: "Prolog",
+      name: "Prolog",
+      color: "#9D4EDD",
+      description: "Programmation logique"
+    },
+    {
+      icon: "Matlab",
+      name: "Matlab / SolidWorks",
+      color: "#FFB000",
+      description: "Calcul scientifique et modélisation"
+    },
+    {
+      icon: "Office",
+      name: "Office / VBA",
+      color: "#185ABD",
+      description: "Macros, automatisation et outils bureautiques"
     }
   ];
 
@@ -116,41 +114,24 @@ const SkillsSection = () => {
         Compétences Techniques
       </motion.h2>
 
-      <div className="space-y-12">
-        {categories.map((category, categoryIndex) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {categories.map((skill, index) => (
           <motion.div
-            key={category.name}
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ delay: categoryIndex * 0.2 }}
-            className="space-y-6"
+            key={skill.name}
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: index * 0.1 }}
+            className="bg-background-popup rounded-xl p-6 hover:shadow-lg transition-shadow"
           >
-            <h3 className="text-xl font-semibold mb-4">{category.name}</h3>
-            <div className="space-y-6">
-              {category.skills.map((skill, skillIndex) => (
-                <motion.div
-                  key={skill.name}
-                  initial={{ x: -50, opacity: 0 }}
-                  animate={inView ? { x: 0, opacity: 1 } : {}}
-                  transition={{ delay: (categoryIndex * 0.2) + (skillIndex * 0.1) }}
-                  className="bg-background-popup rounded-lg p-6 hover:shadow-lg transition-shadow"
-                >
-                  <div className="flex justify-between mb-2">
-                    <h4 className="font-medium">{skill.name}</h4>
-                  </div>
-                  
-                  <div className="relative h-2 bg-background-darker rounded-full overflow-hidden">
-                    <motion.div
-                      initial={{ width: 0 }}
-                      transition={{ duration: 1, delay: (categoryIndex * 0.2) + (skillIndex * 0.1) }}
-                      className="absolute top-0 left-0 h-full rounded-full"
-                      style={{ backgroundColor: skill.color }}
-                    />
-                  </div>
-                  
-                  <p className="mt-3 text-sm text-text-muted">{skill.description}</p>
-                </motion.div>
-              ))}
+            <div className="skills flex items-center">
+              <div className="mr-4 w-8 h-8 flex items-center justify-center rounded-full">
+                {/* Replace with icon component if available */}
+                <span className="skills-icon text-white font-bold text-lg">{skill.icon}</span>
+              </div>
+              <div>
+                <span className="skills-name block font-medium text-lg">{skill.name}</span>
+                <span className="skills-description block text-sm text-text-muted">{skill.description}</span>
+              </div>
             </div>
           </motion.div>
         ))}
