@@ -74,7 +74,7 @@ const Interests: React.FC = () => {
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-bold mb-12 text-center"
+        className="title text-3xl font-bold mb-12 text-center"
       >
         Mes Centres d'Intérêt
       </motion.h2>
@@ -91,7 +91,9 @@ const Interests: React.FC = () => {
             <div className="interest flex items-center">
               <div className="interest-icon">{interest.icon}</div>
               <div className="interest-info">
-              <span className="interest-title">{interest.title}</span>
+                <span className="interest-title">{interest.title}</span>
+                <span className="interest-description">{interest.description}</span>
+              </div>
             </div>
           </motion.div>
         ))}

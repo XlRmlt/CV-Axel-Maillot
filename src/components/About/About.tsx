@@ -37,7 +37,7 @@ const About: React.FC = () => {
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-3xl font-bold mb-8"
+        className="title text-3xl font-bold mb-8"
       >
         À propos de moi
       </motion.h2>

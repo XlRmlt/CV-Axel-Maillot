@@ -15,7 +15,7 @@ const Resume: React.FC = () => {
   return (
     <div className="">
       <div className="first-line">
-        <h2 className="m-0">Mon CV</h2>
+        <h2 className="title m-0">Mon CV</h2>
         <a
           href={selectedCV.path}
           download
