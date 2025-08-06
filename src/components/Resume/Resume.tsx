@@ -19,7 +19,7 @@ const Resume: React.FC = () => {
         <a
           href={selectedCV.path}
           download
-          className="dowload-button"
+          className="download-button"
           aria-label={`Télécharger le CV ${selectedCV.lang}`}
         >
           <FaDownload />

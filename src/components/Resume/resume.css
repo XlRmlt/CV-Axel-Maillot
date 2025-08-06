@@ -15,7 +15,11 @@
   color: inherit;
   font-size: 1.25rem;
   padding: 0.5rem;
-  margin-right: 2rem !important;
+  margin-right: 2rem;
+}
+
+.download-button:hover {
+  transform: scale(1.05);
 }
 
 .visual {
