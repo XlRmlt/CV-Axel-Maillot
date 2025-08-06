@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGamepad, FaCode, FaMusic, FaBook, FaPlane, FaCamera } from 'react-icons/fa';
+import { FaCamera, FaHeadphones, FaDice, FaGlassCheers, FaLanguage } from 'react-icons/fa';
+import './interests.css';
+import { GiGamepad, GiSoccerBall, GiChessKnight, GiBoxingGlove, GiCompass } from 'react-icons/gi';
 
 interface Interest {
   icon: React.ReactNode;
@@ -12,40 +14,58 @@ interface Interest {
 const Interests: React.FC = () => {
   const interests: Interest[] = [
     {
-      icon: <FaCode />,
-      title: "Programmation",
-      description: "Passionné par le développement web et les nouvelles technologies. J'aime particulièrement explorer les frameworks modernes et contribuer à des projets open source.",
+      icon: <GiSoccerBall />,
+      title: "Football",
+      description: "J'ai pu faire du football en club pendant 10 ans, je continue la pratique dans différentes équipes selon ma localisation.",
       color: "bg-blue-500"
     },
     {
-      icon: <FaGamepad />,
+      icon: <GiGamepad />,
       title: "Jeux Vidéo",
-      description: "Amateur de jeux stratégiques et de RPG. J'apprécie particulièrement les jeux qui combinent narration complexe et mécaniques innovantes.",
+      description: "Je profite des différents jeux vidéo pour me détendre et rencontrer de nouvelles personnes.",
       color: "bg-purple-500"
     },
     {
-      icon: <FaMusic />,
+      icon: <FaHeadphones />,
       title: "Musique",
-      description: "Pratique d'instruments et découverte constante de nouveaux genres musicaux. La musique m'accompagne dans mon travail et mes loisirs.",
+      description: "Je passe un grande partie de mon temps à écouter de la musique, que ce soit pour me concentrer ou pour me détendre.",
       color: "bg-green-500"
     },
     {
-      icon: <FaBook />,
-      title: "Lecture",
-      description: "Passionné de science-fiction et de développement personnel. La lecture est pour moi une source d'inspiration et d'apprentissage continu.",
-      color: "bg-red-500"
-    },
-    {
-      icon: <FaPlane />,
-      title: "Voyage",
-      description: "Découverte de nouvelles cultures et exploration de différents pays. Chaque voyage est une opportunité d'élargir mes horizons.",
+      icon: <FaDice />,
+      title: "Jeux de Société",
+      description: "Dès que j'en ai l'occasion, je joue à des jeux de société avec ma famille et mes amis.",
       color: "bg-yellow-500"
     },
     {
-      icon: <FaCamera />,
-      title: "Photographie",
-      description: "Capture de moments et d'ambiances uniques. La photographie me permet de voir le monde sous un angle différent.",
+      icon: <GiChessKnight />,
+      title: "Échecs",
+      description: "Je joue occasionnellement aux échecs car j'apprécie le challenge intellectuel qu'ils représentent.",
+      color: "bg-red-500"
+    },
+    {
+      icon: <GiBoxingGlove />,
+      title: "Boxe",
+      description: "J'ai pour l'instant une petite année de pratique de la boxe, mais j'espère bientôt pouvoir en faire plus régulièrement.",
       color: "bg-indigo-500"
+    },
+    {
+      icon: <FaGlassCheers />,
+      title: "Sorties",
+      description: "J'aime beaucoup les sorties entre amis, notamment pour se retrouver dans un bar à jeux",
+      color: "bg-pink-500"
+    },
+    {
+      icon: <GiCompass />,
+      title: "Voyages",
+      description: "J'aime beaucoup voyager, m'enrichir de nouvelles cultures et pouvoir admirer les paysages.",
+      color: "bg-teal-500"
+    },
+    {
+      icon: <FaLanguage />,
+      title: "Nouvelles langues",
+      description: "J'apprécie grandement apprendre de nouvelles langues, que ce soit pour le plaisir ou pour des voyages.",
+      color: "bg-gray-500"
     }
   ];
 
@@ -68,12 +88,12 @@ const Interests: React.FC = () => {
             transition={{ delay: index * 0.1 }}
             className="bg-background-popup rounded-xl p-6 hover:shadow-lg transition-shadow"
           >
-            <div className={`w-12 h-12 ${interest.color} rounded-lg flex items-center justify-center text-white mb-4`}>
-              <span className="text-2xl">{interest.icon}</span>
+            <div className="interest flex items-center">
+              <span className="interest-icon">{interest.icon}</span>
+              <span className="interest-title">{interest.title}</span>
             </div>
-            
-            <h3 className="text-xl font-semibold mb-3">{interest.title}</h3>
-            <p className="text-text-muted">{interest.description}</p>
+
+            <p className="interest-description text-text-muted">{interest.description}</p>
           </motion.div>
         ))}
       </div>

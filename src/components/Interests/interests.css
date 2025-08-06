@@ -1,0 +1,30 @@
+.interest {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+}
+
+.interest-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.interest-icon:hover {
+  transform: scale(1.1);
+}
+
+.interest-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.interest:hover .interest-title {
+  opacity: 1;
+  visibility: visible;
+}

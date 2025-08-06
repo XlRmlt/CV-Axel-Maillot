@@ -12,7 +12,7 @@ import Resume from './components/Resume/Resume';
 import './index.css';
 
 const App: React.FC = () => {
-  const [activeSection, setActiveSection] = useState('resume');
+  const [activeSection, setActiveSection] = useState('interests');
 
   const renderSection = () => {
     switch (activeSection) {
