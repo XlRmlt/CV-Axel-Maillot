@@ -89,11 +89,10 @@ const Interests: React.FC = () => {
             className="bg-background-popup rounded-xl p-6 hover:shadow-lg transition-shadow"
           >
             <div className="interest flex items-center">
-              <span className="interest-icon">{interest.icon}</span>
+              <div className="interest-icon">{interest.icon}</div>
+              <div className="interest-info">
               <span className="interest-title">{interest.title}</span>
             </div>
-
-            <p className="interest-description text-text-muted">{interest.description}</p>
           </motion.div>
         ))}
       </div>

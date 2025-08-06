@@ -1,30 +1,45 @@
 .interest {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.75rem;
-  position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    position: relative;
 }
 
 .interest-icon {
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.2s ease;
+    font-size: 3rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
 .interest-icon:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.interest-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
 }
 
 .interest-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+    font-size: 1.75rem;
+    font-weight: bold;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.interest:hover .interest-title {
-  opacity: 1;
-  visibility: visible;
+.interest-description {
+    font-size: 1.25rem;
+    font-weight: semibold;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.interest:hover .interest-title,
+.interest:hover .interest-description {
+    opacity: 1;
+    visibility: visible;
 }
