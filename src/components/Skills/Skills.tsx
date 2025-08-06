@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, {useState} from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
   SiReact, 
@@ -10,17 +10,21 @@ import {
   SiPostgresql, 
   SiR,
   SiGit,
-  SiDocker
+  SiDocker,
+  SiC,
+  SiCplusplus,
 } from 'react-icons/si';
+import { FaCogs } from 'react-icons/fa';
 import { FaCode, FaMicrosoft, FaCloud } from 'react-icons/fa';
 import { TbMathFunction } from 'react-icons/tb';
 import './skills.css';
+import TypeWriterCode from './TypeWriterCode';
 
 interface Skills {
   icon: React.ReactNode;
   title: string;
   color: string;
-  description: string;
+  codeSnippet?: string;
 }
 
 const SkillsSection = () => {
@@ -29,85 +33,105 @@ const SkillsSection = () => {
     threshold: 0.1,
   });
 
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   const categories: Skills[] = [
+    {
+      icon: <SiPython color="#3776AB" size={28} />,
+      title: "Python",
+      color: "#3776AB",
+      codeSnippet: `def greet(name):\n    return f"Hello, world ! Je m'appelle {name}!"\n\ngreet("Axel")`
+    },
     {
       icon: <SiReact color="#61DAFB" size={28} />,
       title: "React",
       color: "#61DAFB",
-      description: "Création d'interfaces dynamiques et réactives"
+      codeSnippet: `const App = () => <h1>Bienvenue sur mon CV interactif !</h1>;`
     },
     {
       icon: <SiTypescript color="#3178C6" size={28} />,
       title: "TypeScript",
       color: "#3178C6",
-      description: "Typage statique robuste pour du code maintenable"
+      codeSnippet: `type Projet = { nom: string; annee: number };\nconst projet: Projet = { nom: "site CV", annee: 2025 };`
     },
     {
       icon: <SiTailwindcss color="#06B6D4" size={28} />,
-      title: "TailwindCSS",
+      title: "CSS / Tailwind",
       color: "#06B6D4",
-      description: "Stylisation rapide et responsive via classes utilitaires"
+      codeSnippet: `<div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded">\n  Petit extrait de ce que je sais faire\n</div>`
     },
     {
       icon: <SiNodedotjs color="#339933" size={28} />,
       title: "Node.js",
       color: "#339933",
-      description: "Création d’APIs backend et services web"
-    },
-    {
-      icon: <SiPython color="#3776AB" size={28} />,
-      title: "Python",
-      color: "#3776AB",
-      description: "Scripts, traitement de données et automatisation"
+      codeSnippet: `const http = require('http');\n\nhttp.createServer((req, res) => {\n  res.writeHead(200, {'Content-Type': 'text/plain'});\n  res.end("Dans un site codé en Typescript");\n}).listen(3000);`
     },
     {
       icon: <SiPostgresql color="#4479A1" size={28} />,
       title: "SQL",
       color: "#4479A1",
-      description: "Requêtes, jointures et gestion de base relationnelle"
+      codeSnippet: `SELECT library FROM this_site;`
     },
     {
       icon: <SiR color="#276DC3" size={28} />,
       title: "R / Shiny",
       color: "#276DC3",
-      description: "Interfaces statistiques et dashboards interactifs"
+      codeSnippet: `ui <- fluidPage(\n  titlePanel("Mon stage à bioMérieux"),\n  sidebarLayout(\n    sidebarPanel(),\n    mainPanel("Ce que j'ai appris")\n  )\n)\nserver <- function(input, output) {}\nshinyApp(ui, server)`
     },
     {
       icon: <SiGit color="#F1502F" size={28} />,
       title: "Git / GitLab",
       color: "#F1502F",
-      description: "Versioning, CI/CD, merge requests"
+      codeSnippet: `git checkout -b "Ce que j'ai appris"\n# Travail...\ngit commit -am "La CI/CD"\ngit push origin "Ce que j'ai appris"`
     },
     {
       icon: <SiDocker color="#2496ED" size={28} />,
       title: "Docker",
       color: "#2496ED",
-      description: "Conteneurisation pour le déploiement d’applications"
+      codeSnippet: `ARG description="Le déploiement via Docker"\nFROM node:18-alpine\nWORKDIR /app\nCOPY . .\nRUN npm install\nCMD ["npm", "start"]`
     },
     {
       icon: <FaMicrosoft color="#007FFF" size={28} />,
       title: "Azure",
       color: "#007FFF",
-      description: "Bases de cloud computing (Microsoft Azure)"
+      codeSnippet: `az login\naz webapp up --name mon-stage --context chez-efor --used azure`
     },
     {
       icon: <FaCode color="#9D4EDD" size={28} />,
       title: "Prolog",
       color: "#9D4EDD",
-      description: "Programmation logique"
+      codeSnippet: `parent(autonomie, axel).\nparent(efficacite, axel).\n\n% Capacité d’analyse\nanalyse(X) :- parent(X, axel), X \\= axel.\n\n% Esprit critique\nesprit_critique(axel) :- analyse(autonomie), analyse(efficacite).`
+    },
+    {
+      icon: <SiC color="#00599C" size={28} />,
+      title: "C",
+      color: "#00599C",
+      codeSnippet: `#include <stdio.h>\n\nint main() { printf("Et évidemment, quel ingénieur informatique n'a pas commencé par du C ?\\n");\n  return 0;\n}`
+    },
+    {
+      icon: <SiCplusplus color="#F34B7D" size={28} />,
+      title: "C++",
+      color: "#F34B7D",
+      codeSnippet: `#include <iostream>\n\nint main() { std::cout << "Et le C++ est quand même plus intéressant de nos jours, surtout pour apprendre la Programmation Orientée Objet" << std::endl;\n  return 0;\n}`
     },
     {
       icon: <TbMathFunction color="#FFB000" size={28} />,
-      title: "Matlab / SolidWorks",
+      title: "Matlab",
       color: "#FFB000",
-      description: "Calcul scientifique et modélisation"
+      codeSnippet: `% Perseverance et apprentissage rapide\nfor i = 1:5\n    disp("J'apprends vite et je ne lâche rien !")\nend`
     },
     {
       icon: <FaCode color="#185ABD" size={28} />,
       title: "Office / VBA",
       color: "#185ABD",
-      description: "Macros, automatisation et outils bureautiques"
-    }
+      codeSnippet: `Sub Bonjour()\n  MsgBox "Je sais aussi utiliser la suite Office." & vbCrLf & "Et j'ai même fait ce langage du démon!"\nEnd Sub`
+    },
+    {
+      icon: <FaCogs color="#E22127" size={28} />,
+      title: "SolidWorks",
+      color: "#E22127",
+      codeSnippet: `// J'ai pu également faire du SolidWorks\n// durant le lycée et la prépa.`
+    },
   ];
 
   return (
@@ -124,10 +148,9 @@ const SkillsSection = () => {
         {categories.map((skill, index) => (
           <motion.div
             key={skill.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: index * 0.1 }}
-            className="bg-background-popup rounded-xl p-6 hover:shadow-lg transition-shadow"
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+            className="bg-background-popup rounded-xl p-6 relative"
           >
             <div className="skills flex items-center">
               <div className="mr-4 w-8 h-8 flex items-center justify-center rounded-full">
@@ -135,9 +158,25 @@ const SkillsSection = () => {
               </div>
               <div className="skills-info">
                 <span className="skills-title block font-medium text-lg">{skill.title}</span>
-                <span className="skills-description block text-sm text-text-muted">{skill.description}</span>
               </div>
             </div>
+
+            {/* Zone d'affichage du code */}
+            <AnimatePresence>
+              {hoveredIndex === index && (
+                <motion.pre
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.3 }}
+                  className="mt-4 p-3 bg-black text-green-400 text-xs rounded-md font-mono overflow-auto shadow-md"
+                >
+                {hoveredIndex === index && (
+                  <TypeWriterCode code={skill.codeSnippet ?? ""} typingSpeed={40} />
+                )}
+                </motion.pre>
+              )}
+            </AnimatePresence>
           </motion.div>
         ))}
       </div>
