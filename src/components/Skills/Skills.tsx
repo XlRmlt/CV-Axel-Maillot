@@ -35,6 +35,7 @@ const SkillsSection = () => {
   });
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [firstTypewriterComplete, setFirstTypewriterComplete] = useState<{[key: number]: boolean}>({});
 
   const categories: Skills[] = [
     {
@@ -165,7 +166,10 @@ const SkillsSection = () => {
         {categories.map((skill, index) => (
           <motion.div
             key={skill.title}
-            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseEnter={() => {
+              setHoveredIndex(index);
+              setFirstTypewriterComplete(prev => ({ ...prev, [index]: false }));
+            }}
             onMouseLeave={() => setHoveredIndex(null)}
             className="bg-background-popup rounded-xl p-6 relative"
           >
@@ -192,35 +196,21 @@ const SkillsSection = () => {
                     {/* Fenêtre de code */}
                     <div className="h-full flex flex-col">
                       <pre className="p-3 bg-black text-green-400 text-xs rounded-md font-mono overflow-auto shadow-md min-h-[100px]">
-                        <TypeWriterCode code={skill.codeSnippet ?? ""} typingSpeed={40} />
+                        <TypeWriterCode 
+                          code={skill.codeSnippet ?? ""} 
+                          typingSpeed={30} 
+                          onComplete={() => setFirstTypewriterComplete(prev => ({ ...prev, [index]: true }))}
+                        />
                       </pre>
                     </div>
                     
                     {/* Fenêtre de rendu */}
                     <div className="h-full flex flex-col">
-                      <div 
-                        className="p-3 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-xs rounded-md font-mono overflow-auto shadow-md min-h-[100px] border border-gray-200 dark:border-gray-700"
-                        style={{
-                            backgroundColor: '#1e1e1e',
-                            color: '#10b981', // green-400
-                            position: 'relative',
-                            zIndex: 10,
-                            marginLeft: '1rem',
-                            paddingLeft: '1rem',
-                            paddingTop: '1rem',
-                            paddingBottom: '1rem',
-                            borderRadius: '0.5rem',
-                          }}
-                      >
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ delay: 1, duration: 0.5 }}
-                          style={{ whiteSpace: 'pre-wrap' }}
-                        >
-                          {skill.codeAnswer}
-                        </motion.div>
-                      </div>
+                      <pre className="p-3 bg-black text-green-400 text-xs rounded-md font-mono overflow-auto shadow-md min-h-[100px]">
+                        {firstTypewriterComplete[index] && (
+                          <TypeWriterCode code={skill.codeAnswer ?? ""} typingSpeed={10} />
+                        )}
+                      </pre>
                     </div>
                   </div>
                 </motion.div>

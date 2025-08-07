@@ -4,25 +4,45 @@ interface TypeWriterCodeProps {
   code: string;
   language?: string;
   typingSpeed?: number;
+  onComplete?: () => void;
 }
 
 const TypeWriterCode: React.FC<TypeWriterCodeProps> = ({
   code,
   language = 'ts',
-  typingSpeed = 15
+  typingSpeed = 15,
+  onComplete
 }) => {
   const [displayed, setDisplayed] = useState('');
+  const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
+    // Réinitialiser les états quand le code change
+    setDisplayed('');
+    setIsComplete(false);
+    
     let i = 0;
     const interval = setInterval(() => {
       setDisplayed(code.slice(0, i));
       i++;
-      if (i > code.length) clearInterval(interval);
+      if (i > code.length) {
+        clearInterval(interval);
+        setIsComplete(true);
+        if (onComplete) {
+          onComplete();
+        }
+      }
     }, typingSpeed);
 
     return () => clearInterval(interval);
-  }, [code, typingSpeed]);
+  }, [code, typingSpeed]); // Retiré onComplete des dépendances
+
+  // Effet séparé pour gérer onComplete sans redémarrer l'animation
+  useEffect(() => {
+    if (isComplete && onComplete) {
+      onComplete();
+    }
+  }, [isComplete, onComplete]);
 
   return (
     <div
