@@ -1,0 +1,46 @@
+:root {
+    --career-icon-size: 3rem;
+}
+
+.career-titles-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* 3 */
+}
+
+.career-title {
+    font-size: 1.25rem; /* 5 */
+    font-weight: 700; /* bold */
+}
+
+.career-icon {
+    color: var(--text-primary);
+    font-size: 1.25rem; /* 5 */
+}
+
+.career-period {
+    color: var(--text-grey);
+    font-style: italic;
+}
+
+.career-organization-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.career-organization-icon {
+  height: var(--career-icon-size);
+  object-fit: contain;
+  margin-right: 0.5rem;
+}
+
+.white-bg-in-dark {
+  border-radius: 4px;
+  padding: 2px;
+  background-color: transparent;
+}
+
+.dark .white-bg-in-dark {
+  background-color: white;
+}

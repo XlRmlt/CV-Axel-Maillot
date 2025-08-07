@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaBriefcase, FaGraduationCap } from 'react-icons/fa';
+import './career.css';
 
 interface TimelineItem {
   type: 'work' | 'education';
   title: string;
   organization: string;
+  organizationIcon?: string;
   period: string;
   description: string[];
   technologies?: string[];
@@ -17,6 +19,7 @@ const Career: React.FC = () => {
       type: 'work',
       title: 'Stage PFE - Développement Web',
       organization: 'BioMérieux',
+      organizationIcon: '/Logos/bioMerieux.png',
       period: '2025 (6 mois)',
       description: [
         'Refonte d’une application web R&Ds interne',
@@ -29,6 +32,7 @@ const Career: React.FC = () => {
       type: 'work',
       title: 'Stage - Développement IA & Web',
       organization: 'Efor Group',
+      organizationIcon: '/Logos/Efor.png',
       period: '2024 (3 mois)',
       description: [
         'Création d’un Chatbot d’entreprise IA personnalisé',
@@ -41,6 +45,7 @@ const Career: React.FC = () => {
       type: 'work',
       title: 'Stage - Développement Python & VBA',
       organization: 'Schneider Electric',
+      organizationIcon: '/Logos/SchneiderElectric.png',
       period: '2023 (3 mois)',
       description: [
         'Création d’une application interne d’automatisation de création de documents clients',
@@ -53,6 +58,7 @@ const Career: React.FC = () => {
       type: 'education',
       title: 'Ingénieur Informatique',
       organization: 'INSA Lyon',
+      organizationIcon: '/Logos/INSA.png',
       period: '2022 - 2025',
       description: ['Filière Informatique, projets avancés IA'],
     },
@@ -60,6 +66,7 @@ const Career: React.FC = () => {
       type: 'education',
       title: 'Erasmus - Informatique',
       organization: 'Stockholms Universitet (DSV)',
+      organizationIcon: '/Logos/SU.png',
       period: '2024',
       description: ['Semestre en Suède'],
     },
@@ -67,6 +74,7 @@ const Career: React.FC = () => {
       type: 'education',
       title: 'Prépa PT*',
       organization: 'Lycée la Martinière Monplaisir',
+      organizationIcon: '/Logos/Prepa.png',
       period: '2020 - 2022',
       description: ['Prépa CPGE scientifique, spécialité Sciences de l’Ingénieur'],
     },
@@ -74,6 +82,7 @@ const Career: React.FC = () => {
       type: 'education',
       title: 'Bac S(SI) Mention TB',
       organization: 'Lycée Saint Marc',
+      organizationIcon: '/Logos/StMarc.gif',
       period: '2020',
       description: ['Bac S(SI) Mention Très Bien Mention Européenne'],
     }
@@ -113,30 +122,38 @@ const Career: React.FC = () => {
             <div className={`flex-1 md:w-1/2 ${
               index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'
             }`}>
-              <div className="bg-background-popup p-6 rounded-xl hover:shadow-lg transition-shadow">
-                <div className="flex items-center gap-3 mb-4">
+              <div className="career-container bg-background-popup p-6 rounded-xl hover:shadow-lg transition-shadow">
+                <div className="career-titles-container flex items-center gap-3 mb-4">
                   {item.type === 'work' ? (
-                    <FaBriefcase className="text-primary text-xl" />
+                    <FaBriefcase className="career-icon text-primary text-xl" />
                   ) : (
-                    <FaGraduationCap className="text-primary text-xl" />
+                    <FaGraduationCap className="career-icon text-primary text-xl" />
                   )}
-                  <span className="text-primary font-medium">{item.period}</span>
+                  <h3 className="career-title text-xl font-bold mb-2">{item.title}</h3>
+                  <span className="career-period text-primary font-medium">{item.period}</span>
+                </div>
+                
+                <div className="career-organization-container">
+                  {item.organizationIcon && (
+                    <img
+                      src={item.organizationIcon}
+                      alt={`${item.organization} logo`}
+                      className={`career-organization-icon w-6 h-6 object-contain mr-2 
+                        ${item.organization.includes('Stockholm') ? 'white-bg-in-dark' : ''}
+                      `}
+                    />
+                  )}
+                  <p className="career-organization-name text-text-muted mb-4">{item.organization}</p>
                 </div>
 
-                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                <p className="text-text-muted mb-4">{item.organization}</p>
-
-                <ul className="space-y-2 mb-4">
+                <div className="career-description space-y-2 mb-4">
                   {item.description.map((desc, i) => (
-                    <li key={i} className="flex items-start">
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 mr-2 flex-shrink-0" />
-                      <span>{desc}</span>
-                    </li>
+                    <p key={i} className="text-base">{desc}</p>
                   ))}
-                </ul>
+                </div>
 
                 {item.technologies && (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="career-technologies flex flex-wrap gap-2">
                     {item.technologies.map((tech, i) => (
                       <span
                         key={i}
