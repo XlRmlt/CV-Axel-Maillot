@@ -207,8 +207,8 @@ const SkillsSection = () => {
                             zIndex: 10,
                             marginLeft: '1rem',
                             paddingLeft: '1rem',
-                            paddingTop: '1px',
-                            paddingBottom: '1px',
+                            paddingTop: '1rem',
+                            paddingBottom: '1rem',
                             borderRadius: '0.5rem',
                           }}
                       >
@@ -216,7 +216,7 @@ const SkillsSection = () => {
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                           transition={{ delay: 1, duration: 0.5 }}
-                          className="whitespace-pre-wrap"
+                          style={{ whiteSpace: 'pre-wrap' }}
                         >
                           {skill.codeAnswer}
                         </motion.div>
