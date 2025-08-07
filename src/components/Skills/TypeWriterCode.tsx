@@ -33,7 +33,6 @@ const TypeWriterCode: React.FC<TypeWriterCodeProps> = ({
             position: 'relative',
             zIndex: 10,
             marginLeft: '1rem',
-            width: '50%',
             paddingLeft: '1rem',
             paddingTop: '1px',
             paddingBottom: '1px',
