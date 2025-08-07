@@ -3,11 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
   SiReact, 
-  SiTypescript, 
-  SiTailwindcss, 
-  SiNodedotjs, 
-  SiPython, 
-  SiPostgresql, 
+  SiTypescript,
+  SiJavascript,
+  SiCss3,
+  SiNodedotjs,
+  SiPython,
+  SiPostgresql,
   SiR,
   SiGit,
   SiDocker,
@@ -15,7 +16,7 @@ import {
   SiCplusplus,
 } from 'react-icons/si';
 import { FaCogs } from 'react-icons/fa';
-import { FaCode, FaMicrosoft, FaCloud } from 'react-icons/fa';
+import { FaCode, FaMicrosoft } from 'react-icons/fa';
 import { TbMathFunction } from 'react-icons/tb';
 import './skills.css';
 import TypeWriterCode from './TypeWriterCode';
@@ -40,7 +41,7 @@ const SkillsSection = () => {
   const categories: Skills[] = [
     {
       icon: <SiPython color="#3776AB" size={28} />,
-      title: "Python",
+      title: "Python - OpenCV",
       color: "#3776AB",
       codeSnippet: `def greet(name):\n    return f"Hello world ! Je m'appelle {name}!"\n\nprint(greet("Axel"))`,
       codeAnswer: `>>> Hello world ! Je m'appelle Axel!`
@@ -60,7 +61,14 @@ const SkillsSection = () => {
       codeAnswer: `> { nom: "site CV", annee: 2025 }`
     },
     {
-      icon: <SiTailwindcss color="#06B6D4" size={28} />,
+      icon: <SiJavascript color="#F7DF1E" size={28} />,
+      title: "JavaScript",
+      color: "#F7DF1E",
+      codeSnippet: `const message = "Je cherche un emploi en Intelligence Artificielle ou en CyberSécurité";\nconsole.log(message);`,
+      codeAnswer: `>>> Je cherche un emploi en Intelligence Artificielle ou en CyberSécurité`
+    },
+    {
+      icon: <SiCss3 color="#06B6D4" size={28} />,
       title: "CSS / Tailwind",
       color: "#06B6D4",
       codeSnippet: `<div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded">\n  Petit extrait de ce que je sais faire\n</div>`,

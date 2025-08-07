@@ -1,7 +1,42 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaBriefcase, FaGraduationCap } from 'react-icons/fa';
+import {
+  SiReact,
+  SiTypescript,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiPython,
+  SiPostgresql,
+  SiR,
+  SiGit,
+  SiDocker,
+  SiC,
+  SiCplusplus,
+  SiJavascript,
+  SiKubernetes
+} from 'react-icons/si';
+import { FaBriefcase, FaGraduationCap, FaMicrosoft, FaCss3Alt } from 'react-icons/fa';
 import './career.css';
+
+const techIcons: Record<string, JSX.Element> = {
+  React: <SiReact className="career-tech-logo" title="React" color="#61DAFB" />,
+  TypeScript: <SiTypescript className="career-tech-logo" title="TypeScript" color="#3178C6" />,
+  TailwindCSS: <SiTailwindcss className="career-tech-logo" title="TailwindCSS" color="#06B6D4" />,
+  'Node.js': <SiNodedotjs className="career-tech-logo" title="Node.js" color="#339933" />,
+  Python: <SiPython className="career-tech-logo" title="Python" color="#3776AB" />,
+  PostgreSQL: <SiPostgresql className="career-tech-logo" title="PostgreSQL" color="#336791" />,
+  'R/Shiny': <SiR className="career-tech-logo" title="R/Shiny" color="#276DC3" />,
+  Git: <SiGit className="career-tech-logo" title="Git" color="#F05032" />,
+  GitLab: <SiGit className="career-tech-logo" title="GitLab" color="#FC6D26" />,
+  Docker: <SiDocker className="career-tech-logo" title="Docker" color="#2496ED" />,
+  Azure: <FaMicrosoft className="career-tech-logo" title="Azure" color="#0078D4" />,
+  C: <SiC className="career-tech-logo" title="C" color="#A8B9CC" />,
+  Cpp: <SiCplusplus className="career-tech-logo" title="C++" color="#00599C" />,
+  VBA: <FaMicrosoft className="career-tech-logo" title="VBA" color="#185ABD" />,
+  CSS: <FaCss3Alt className="career-tech-logo" title="CSS" color="#264de4" />,
+  JavaScript: <SiJavascript className="career-tech-logo" title="JavaScript" color="#F7DF1E" />,
+  Kubernetes: <SiKubernetes className="career-tech-logo" title="Kubernetes" color="#326CE5" />,
+};
 
 interface TimelineItem {
   type: 'work' | 'education';
@@ -152,18 +187,17 @@ const Career: React.FC = () => {
                   ))}
                 </div>
 
-                {item.technologies && (
-                  <div className="career-technologies flex flex-wrap gap-2">
-                    {item.technologies.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                )}
+                {item.technologies && item.technologies.map((tech, i) => (
+                  <span
+                    key={i}
+                    className="bg-background-primary text-primary rounded-full p-1 flex items-center justify-center"
+                    title={tech}
+                  >
+                    {techIcons[tech] || (
+                      <span className="text-xs font-mono px-2">{tech}</span>
+                    )}
+                  </span>
+                ))}
               </div>
             </div>
           </motion.div>

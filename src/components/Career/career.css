@@ -1,5 +1,5 @@
 :root {
-    --career-icon-size: 3rem;
+    --career-icon-size: 1.75rem;
 }
 
 .career-titles-container {
@@ -30,7 +30,7 @@
 }
 
 .career-organization-icon {
-  height: var(--career-icon-size);
+  height: 3rem;
   object-fit: contain;
   margin-right: 0.5rem;
 }
@@ -43,4 +43,10 @@
 
 .dark .white-bg-in-dark {
   background-color: white;
+}
+
+.career-tech-logo {
+    width: var(--career-icon-size);
+    height: var(--career-icon-size);
+    padding: 0.5rem;
 }
