@@ -15,36 +15,39 @@ const Career: React.FC = () => {
   const timelineItems: TimelineItem[] = [
     {
       type: 'work',
-      title: 'Développeur IA',
+      title: 'Stage PFE - Développement Web',
       organization: 'BioMérieux',
       period: '2025 (6 mois)',
       description: [
-        'Refonte d’une application web interne',
-        'Tech : R/Shiny, JavaScript',
+        'Refonte d’une application web R&Ds interne',
+        'Amélioration de l’interface et l’expérience utilisateur',
         'Approche Agile avec releases'
       ],
+      technologies: ['R/Shiny', 'JavaScript', 'CSS', 'GitLab', 'Docker', 'Kubernetes'],
     },
     {
       type: 'work',
-      title: 'Développeur IA',
+      title: 'Stage - Développement IA & Web',
       organization: 'Efor Group',
       period: '2024 (3 mois)',
       description: [
-        'Chatbot d’entreprise IA personnalisé',
+        'Création d’un Chatbot d’entreprise IA personnalisé',
+        'Intégration de fonctionnalités avancées d’IA au sein d’une équipe Agile',
         'Embedding, RAG, assistants IA',
-        'Python, TypeScript (React), GitLab, Docker'
       ],
+      technologies: ['Python', 'TypeScript', 'React', 'GitLab', 'Docker', 'Azure'],
     },
     {
       type: 'work',
-      title: 'Développeur Python',
+      title: 'Stage - Développement Python & VBA',
       organization: 'Schneider Electric',
       period: '2023 (3 mois)',
       description: [
-        'Application d’automatisation interne',
-        'Connexion à base PDM',
-        'Gain de productivité mesurable'
+        'Création d’une application interne d’automatisation de création de documents clients',
+        'Connexion aux bases de données PDM',
+        'Gain de productivité de plusieurs semaines',
       ],
+      technologies: ['Python', 'VBA'],
     },
     {
       type: 'education',
@@ -65,16 +68,16 @@ const Career: React.FC = () => {
       title: 'Prépa PT*',
       organization: 'Lycée la Martinière Monplaisir',
       period: '2020 - 2022',
-      description: [],
+      description: ['Prépa CPGE scientifique, spécialité Sciences de l’Ingénieur'],
     },
     {
       type: 'education',
       title: 'Bac S(SI) Mention TB',
       organization: 'Lycée Saint Marc',
       period: '2020',
-      description: [],
+      description: ['Bac S(SI) Mention Très Bien Mention Européenne'],
     }
-  ];  
+  ];
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">
