@@ -13,9 +13,10 @@ import {
   SiC,
   SiCplusplus,
   SiJavascript,
-  SiKubernetes
+  SiKubernetes,
 } from 'react-icons/si';
-import { FaBriefcase, FaGraduationCap, FaMicrosoft, FaCss3Alt } from 'react-icons/fa';
+import { TbMathFunction } from 'react-icons/tb';
+import { FaBriefcase, FaGraduationCap, FaMicrosoft, FaCss3Alt, FaCogs, FaCode } from 'react-icons/fa';
 import './career.css';
 
 const techIcons: Record<string, JSX.Element> = {
@@ -24,7 +25,8 @@ const techIcons: Record<string, JSX.Element> = {
   TailwindCSS: <SiTailwindcss className="career-tech-logo" title="TailwindCSS" color="#06B6D4" />,
   'Node.js': <SiNodedotjs className="career-tech-logo" title="Node.js" color="#339933" />,
   Python: <SiPython className="career-tech-logo" title="Python" color="#3776AB" />,
-  PostgreSQL: <SiPostgresql className="career-tech-logo" title="PostgreSQL" color="#336791" />,
+  SQL: <SiPostgresql className="career-tech-logo" title="SQL" color="#336791" />,
+  'R': <SiR className="career-tech-logo" title="R" color="#276DC3" />,
   'R/Shiny': <SiR className="career-tech-logo" title="R/Shiny" color="#276DC3" />,
   Git: <SiGit className="career-tech-logo" title="Git" color="#F05032" />,
   GitLab: <SiGit className="career-tech-logo" title="GitLab" color="#FC6D26" />,
@@ -36,6 +38,9 @@ const techIcons: Record<string, JSX.Element> = {
   CSS: <FaCss3Alt className="career-tech-logo" title="CSS" color="#264de4" />,
   JavaScript: <SiJavascript className="career-tech-logo" title="JavaScript" color="#F7DF1E" />,
   Kubernetes: <SiKubernetes className="career-tech-logo" title="Kubernetes" color="#326CE5" />,
+  'SolidWorks': <FaCogs className="career-tech-logo" title="SolidWorks" color="#E22127" />,
+  'Prolog': <FaCode className="career-tech-logo" title="Prolog" color="#74283c" />,
+  'Matlab': <TbMathFunction className="career-tech-logo" title="Matlab" color="#E16737" />,
 };
 
 interface TimelineItem {
@@ -96,6 +101,7 @@ const Career: React.FC = () => {
       organizationIcon: '/Logos/INSA.png',
       period: '2022 - 2025',
       description: ['Filière Informatique, projets avancés IA'],
+      technologies: ['Python', 'TypeScript', 'JavaScript', 'CSS', 'C', 'Cpp', 'R', 'Git', 'SQL', 'Prolog', 'Matlab']
     },
     {
       type: 'education',
@@ -104,6 +110,7 @@ const Career: React.FC = () => {
       organizationIcon: '/Logos/SU.png',
       period: '2024',
       description: ['Semestre en Suède'],
+      technologies: ['Python']
     },
     {
       type: 'education',
@@ -112,6 +119,7 @@ const Career: React.FC = () => {
       organizationIcon: '/Logos/Prepa.png',
       period: '2020 - 2022',
       description: ['Prépa CPGE scientifique, spécialité Sciences de l’Ingénieur'],
+      technologies: ['Python', 'SolidWorks', 'SQL']
     },
     {
       type: 'education',
@@ -120,6 +128,7 @@ const Career: React.FC = () => {
       organizationIcon: '/Logos/StMarc.gif',
       period: '2020',
       description: ['Bac S(SI) Mention Très Bien Mention Européenne'],
+      technologies: ['SolidWorks', 'C']
     }
   ];
 
