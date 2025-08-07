@@ -42,106 +42,106 @@ const SkillsSection = () => {
       icon: <SiPython color="#3776AB" size={28} />,
       title: "Python",
       color: "#3776AB",
-      codeSnippet: `def greet(name):\n    return f"Hello world ! Je m'appelle {name}!"\n\ngreet("Axel")`,
-      codeAnswer: `Hello world ! Je m'appelle Axel!`
+      codeSnippet: `def greet(name):\n    return f"Hello world ! Je m'appelle {name}!"\n\nprint(greet("Axel"))`,
+      codeAnswer: `>>> Hello world ! Je m'appelle Axel!`
     },
     {
       icon: <SiReact color="#61DAFB" size={28} />,
       title: "React",
       color: "#61DAFB",
       codeSnippet: `const App = () => <h1>Bienvenue sur mon CV interactif !</h1>;`,
-      codeAnswer: `Bienvenue sur mon CV interactif !`
+      codeAnswer: `> Bienvenue sur mon CV interactif !`
     },
     {
       icon: <SiTypescript color="#3178C6" size={28} />,
       title: "TypeScript",
       color: "#3178C6",
       codeSnippet: `type Projet = { nom: string; annee: number };\nconst projet: Projet = { nom: "site CV", annee: 2025 };`,
-      codeAnswer: `{ nom: "site CV", annee: 2025 }`
+      codeAnswer: `> { nom: "site CV", annee: 2025 }`
     },
     {
       icon: <SiTailwindcss color="#06B6D4" size={28} />,
       title: "CSS / Tailwind",
       color: "#06B6D4",
       codeSnippet: `<div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded">\n  Petit extrait de ce que je sais faire\n</div>`,
-      codeAnswer: `Petit extrait de ce que je sais faire`
+      codeAnswer: `> Petit extrait de ce que je sais faire`
     },
     {
       icon: <SiNodedotjs color="#339933" size={28} />,
       title: "Node.js",
       color: "#339933",
       codeSnippet: `const http = require('http');\n\nhttp.createServer((req, res) => {\n  res.writeHead(200, {'Content-Type': 'text/plain'});\n  res.end("Dans un site codé en Typescript");\n}).listen(3000);`,
-      codeAnswer: `Dans un site codé en Typescript`
+      codeAnswer: `> Dans un site codé en Typescript`
     },
     {
       icon: <SiPostgresql color="#4479A1" size={28} />,
       title: "SQL",
       color: "#4479A1",
       codeSnippet: `SELECT library FROM this_site;`,
-      codeAnswer: `library: React`
+      codeAnswer: `> library\n--------\nReact`
     },
     {
       icon: <SiR color="#276DC3" size={28} />,
       title: "R / Shiny",
       color: "#276DC3",
       codeSnippet: `ui <- fluidPage(\n  titlePanel("Mon stage à bioMérieux"),\n  sidebarLayout(\n    sidebarPanel(),\n    mainPanel("Apprentissage")\n  )\n)\nserver <- function(input, output) {}\nshinyApp(ui, server)`,
-      codeAnswer: `Mon stage à bioMérieux\n Apprentissage`
+      codeAnswer: `> Mon stage à bioMérieux\n Apprentissage`
     },
     {
       icon: <SiGit color="#F1502F" size={28} />,
       title: "Git / GitLab",
       color: "#F1502F",
       codeSnippet: `git checkout -b "Ce que j'ai appris"\n# Travail...\ngit commit -am "La CI/CD"\ngit push origin "Ce que j'ai appris"`,
-      codeAnswer: `Branche "Ce que j'ai appris" créée, commit "La CI/CD"`
+      codeAnswer: `> Branche "Ce que j'ai appris" créée, commit "La CI/CD"`
     },
     {
       icon: <SiDocker color="#2496ED" size={28} />,
       title: "Docker",
       color: "#2496ED",
       codeSnippet: `ARG description="Le déploiement via Docker"\nFROM node:18-alpine\nWORKDIR /app\nCOPY . .\nRUN npm install\nCMD ["npm", "start"]`,
-      codeAnswer: `Application Node.js démarrée dans un conteneur Docker`
+      codeAnswer: `> Application Node.js démarrée dans un conteneur Docker`
     },
     {
       icon: <FaMicrosoft color="#007FFF" size={28} />,
       title: "Azure",
       color: "#007FFF",
       codeSnippet: `az login\naz webapp up --name mon-stage --context chez-efor --used azure`,
-      codeAnswer: `Déploiement de l'application "mon-stage" sur Azure`
+      codeAnswer: `> Déploiement de l'application "mon-stage" sur Azure`
     },
     {
       icon: <SiC color="#00599C" size={28} />,
       title: "C",
       color: "#00599C",
-      codeSnippet: `#include <stdio.h>\n\nint main() { printf("Et évidemment, quel ingénieur informatique n'a pas commencé par du C ?\\n");\n  return 0;\n}`,
-      codeAnswer: `Et évidemment, quel ingénieur informatique n'a pas commencé par du C ?`
+      codeSnippet: `#include <stdio.h>\n\nint main() {\n    printf("Et évidemment, quel ingénieur informatique n'a pas commencé par du C ?\\n");\n    return 0;\n}`,
+      codeAnswer: `> Et évidemment, quel ingénieur informatique n'a pas commencé par du C ?`
     },
     {
       icon: <SiCplusplus color="#F34B7D" size={28} />,
       title: "C++",
       color: "#F34B7D",
-      codeSnippet: `#include <iostream>\n\nint main() { std::cout << "Et le C++ est quand même plus intéressant de nos jours, surtout pour apprendre la Programmation Orientée Objet" << std::endl;\n  return 0;\n}`,
-      codeAnswer: `Et le C++ est quand même plus intéressant de nos jours, surtout pour apprendre la Programmation Orientée Objet`
+      codeSnippet: `#include <iostream>\n\nint main() {\n    std::cout << "Et le C++ est quand même plus intéressant de nos jours, surtout pour apprendre la Programmation Orientée Objet" << std::endl;\n    return 0;\n}`,
+      codeAnswer: `> Et le C++ est quand même plus intéressant de nos jours, surtout pour apprendre la Programmation Orientée Objet`
     },
     {
       icon: <FaCode color="#9D4EDD" size={28} />,
       title: "Prolog",
       color: "#9D4EDD",
       codeSnippet: `parent(autonomie, axel).\nparent(efficacite, axel).\n\n% Capacité d’analyse\nanalyse(X) :- parent(X, axel), X \\= axel.\n\n% Esprit critique\nesprit_critique(axel) :- analyse(autonomie), analyse(efficacite).`,
-      codeAnswer: `% Déclare que l'autonomie et l'efficacité sont des "parents" de moi\n% => Elles ont contribué à me forger\n\nparent(autonomie, axel).\nparent(efficacite, axel).\n\n% Déclare que j’analyse tout ce qui m’a construit, sauf moi-même\nanalyse(X) :- parent(X, axel), X \\= axel.\n\n% J’ai un esprit critique si j’analyse autonomie et efficacité\nesprit_critique(axel) :- analyse(autonomie), analyse(efficacite).`
+      codeAnswer: `% Déclare que l'autonomie et l'efficacité sont mes "parents" (i.e. me constituent)\nparent(autonomie, axel).\nparent(efficacite, axel).\n\n% Déclare que j’analyse tout ce qui me constitue\nanalyse(X) :- parent(X, axel), X \\= axel.\n\n% Je base mon esprit critique sur mon analyse de l'autonomie et de l'efficacité\nesprit_critique(axel) :- analyse(autonomie), analyse(efficacite).`
     },
     {
       icon: <TbMathFunction color="#FFB000" size={28} />,
       title: "Matlab",
       color: "#FFB000",
       codeSnippet: `% Perseverance et apprentissage rapide\nfor i = 1:5\n    disp("J'apprends vite et je ne lâche rien !")\nend`,
-      codeAnswer: `J'apprends vite et je ne lâche rien !\nJ'apprends vite et je ne lâche rien !\nJ'apprends vite et je ne lâche rien !\nJ'apprends vite et je ne lâche rien !\nJ'apprends vite et je ne lâche rien !`
+      codeAnswer: `>> J'apprends vite et je ne lâche rien !\n>> J'apprends vite et je ne lâche rien !\n>> J'apprends vite et je ne lâche rien !\n>> J'apprends vite et je ne lâche rien !\n>> J'apprends vite et je ne lâche rien !`
     },
     {
       icon: <FaCode color="#185ABD" size={28} />,
       title: "Office / VBA",
       color: "#185ABD",
-      codeSnippet: `Sub Bonjour()\n  MsgBox "Je sais aussi utiliser la suite Office." & vbCrLf & "Et j'ai même fait ce langage du démon!"\nEnd Sub`,
-      codeAnswer: `Je sais aussi utiliser la suite Office.\nEt j'ai même fait ce langage du démon!`
+      codeSnippet: `Sub Bonjour()\n    MsgBox "Je sais aussi utiliser la suite Office." & vbCrLf & "Et j'ai même fait ce langage du démon!"\nEnd Sub`,
+      codeAnswer: `> Je sais aussi utiliser la suite Office.\n> Et j'ai même fait ce langage du démon!`
     },
     {
       icon: <FaCogs color="#E22127" size={28} />,
