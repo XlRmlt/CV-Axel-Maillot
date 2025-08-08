@@ -28,3 +28,5 @@ yarn-error.log*
 # Cache
 .cache/
 .parcel-cache/
+
+structure.txt
