@@ -18,7 +18,10 @@
   --navbar-text: var(--text-grey);
   --navbar-text-hover: var(--text-primary);
   --navbar-text-active: var(--text-primary);
-  
+
+  --point-color: #4ECDC4;
+  --segment-color: #55c; /* Couleur des segments de la timeline */
+
   --font-family-base: 'Philosopher', sans-serif;
 }
 
@@ -39,7 +42,10 @@
   --navbar-bg: rgba(3, 7, 18, 0.8);
   --navbar-text: var(--text-grey);
   --navbar-text-hover: var(--text-primary);
-  --navbar-text-active: var(--text-primary);  
+  --navbar-text-active: var(--text-primary);
+
+  --point-color: #4ECDC4;
+  --segment-color: #ccc; /* Couleur des segments de la timeline en mode sombre */
 }
 
 /* Base styles */

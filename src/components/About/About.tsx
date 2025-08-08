@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Skills from '../Skills/Skills';
+import { TypeAnimation } from 'react-type-animation';
+import Timeline from './Timeline';
 
 const About: React.FC = () => {
   const [ref, inView] = useInView({
@@ -11,26 +13,57 @@ const About: React.FC = () => {
 
   const timelineItems = [
     {
-      year: '2025',
-      title: 'Stage IA - BioMérieux (6 mois)',
-      description: "Refonte d’une application R&D avec R/Shiny & JS. Application possible à l'externe. Projet Agile."
+      id: '2025-biomérieux',
+      debut: '02-2025',
+      fin: '08-2025',
+      title: 'Stage IA - BioMérieux',
+      technologies: ['R/Shiny', 'JavaScript', 'CSS', 'GitLab', 'Docker', 'Kubernetes']
     },
     {
-      year: '2024',
-      title: 'Erasmus - Stockholms Universitet',
-      description: 'Semestre en informatique au DSV Department'
+      id: '2024-efor',
+      debut: '05-2024',
+      fin: '08-2024',
+      title: 'Stage IA - Efor Group',
+      technologies: ['Python', 'TypeScript', 'React', 'GitLab', 'Docker', 'Azure']
     },
     {
-      year: '2024',
-      title: 'Stage IA - Efor Group (3 mois)',
-      description: 'Création d’un assistant IA personnalisé avec embedding, RAG et Chatbot. Tech : Python, TypeScript, Docker, GitLab.'
+      id: '2023-schneider',
+      debut: '06-2023',
+      fin: '08-2023',
+      title: 'Stage - Schneider Electric',
+      technologies: ['Python', 'VBA']
     },
     {
-      year: '2023',
-      title: 'Stage - Schneider Electric (3 mois)',
-      description: 'Application d’automatisation interne en Python. Connexion PDM, documentation complète, gain de productivité.'
-    }    
+      id: '2022-2025-insa',
+      debut: '09-2022',
+      fin: '08-2025',
+      title: 'Ingénieur Informatique - INSA Lyon',
+      technologies: ['Python', 'TypeScript', 'JavaScript', 'CSS', 'C', 'Cpp', 'R', 'Git', 'SQL', 'Prolog', 'Matlab']
+    },
+    {
+      id: '2024-suede',
+      debut: '08-2024',
+      fin: '01-2025',
+      title: 'Erasmus - Stockholms Universitet (DSV)',
+      technologies: ['Python']
+    },
+    {
+      id: '2020-2022-prepa',
+      debut: '09-2020',
+      fin: '07-2022',
+      title: 'Prépa PT* - Lycée la Martinière Monplaisir',
+      technologies: ['Python', 'SolidWorks', 'SQL']
+    },
+    {
+      id: '2020-bac',
+      debut: '09-2017',
+      fin: '07-2020',
+      title: 'Bac S(SI) Mention TB - Lycée Saint Marc',
+      technologies: ['SolidWorks', 'C']
+    }
   ];
+
+
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-16">
@@ -50,41 +83,26 @@ const About: React.FC = () => {
         className="prose dark:prose-invert mb-12"
       >
         <p>
-          Étudiant en 5e année à l’INSA Lyon, passionné par l’Intelligence Artificielle et la Cybersécurité.
-          J’ai eu l’opportunité de travailler sur des projets concrets (IA, automatisation, chatbot, R/Shiny…).
-          Curieux, autonome, et toujours motivé pour apprendre !
+          Je suis récemment diplômé de L'INSA Lyon en Informatique
+        </p>
+        <p>
+          Je suis un jeune ingénieur recherchant un projet stimulant dans le domaine de <TypeAnimation
+            sequence={[
+              'l’Intelligence Artificielle',
+              1000,
+              'la Cybersécurité',
+              1000
+            ]}
+            wrapper="span"
+            speed={50}
+            repeat={Infinity}
+          />.
         </p>
       </motion.div>
 
       <div className="mb-16">
         <h3 className="text-2xl font-bold mb-6">Parcours</h3>
-        <div className="relative">
-          {/* Ligne verticale */}
-          <div className="absolute left-0 md:left-1/2 h-full w-px bg-border-default" />
-
-          {/* Timeline items */}
-          {timelineItems.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className={`relative flex flex-col md:flex-row ${
-                index % 2 === 0 ? 'md:flex-row-reverse' : ''
-              } mb-8`}
-            >
-              <div className="flex-1 md:w-1/2 p-4">
-                <div className="bg-background-popup p-6 rounded-lg">
-                  <span className="text-primary font-bold">{item.year}</span>
-                  <h4 className="text-xl font-bold mt-2">{item.title}</h4>
-                  <p className="text-muted mt-2">{item.description}</p>
-                </div>
-              </div>
-              {/* Point sur la timeline */}
-              <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full transform -translate-x-1/2 mt-6" />
-            </motion.div>
-          ))}
-        </div>
+        <Timeline items={timelineItems} />
       </div>
 
       <Skills />
