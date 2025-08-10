@@ -1,7 +1,7 @@
 .timeline-container {
   position: relative;
-  padding: 4rem 2rem;
-  min-height: 30rem;            /* espace pour cartes haut/bas */
+  padding: 6rem 2rem;
+  min-height: 40rem;            /* espace élargi pour cartes décalées */
   overflow-x: auto;             /* scroll si besoin */
 }
 
@@ -19,12 +19,21 @@
 /* Segment représentant la durée */
 .timeline-duration {
   position: absolute;
-  top: calc(50% - 2px);
+  top: 50%;
   height: 4px;
-  background: var(--text-highlight);
   border-radius: 9999px;
   z-index: 1;
   opacity: 0.9;
+}
+
+.timeline-duration.work {
+  background: var(--work-color); /* Couleur des segments de travail */
+  transform: translateY(-2px);
+}
+
+.timeline-duration.education {
+  background: var(--education-color); /* Couleur des projets */
+  transform: translateY(2px);
 }
 
 /* Point et carte */
@@ -36,14 +45,14 @@
   z-index: 2;
 }
 
-.timeline-event.top {
+.timeline-event.work {
   flex-direction: column;
-  transform: translate(-50%, calc(-50% - 5.5rem));
+  /* transform maintenant géré dynamiquement dans le JSX */
 }
 
-.timeline-event.bottom {
+.timeline-event.education {
   flex-direction: column-reverse;
-  transform: translate(-50%, calc(-50% + 5.5rem));
+  /* transform maintenant géré dynamiquement dans le JSX */
 }
 
 /* Icone */
@@ -63,8 +72,7 @@
   padding: 1.25rem 1.5rem;
   margin: 0.75rem 0;
   border-radius: 0.75rem;
-  min-width: 260px;
-  max-width: 420px;
+  width: 260px;
   text-align: center;
   box-shadow: 0 6px 18px rgba(0,0,0,0.15);
 }
@@ -120,4 +128,30 @@
 /* Petits écrans : cartes un peu plus compactes */
 @media (max-width: 640px) {
   .timeline-card { min-width: 220px; padding: 0.75rem; }
+}
+
+/* Marqueurs d'années */
+.timeline-year-marker {
+  position: absolute;
+  top: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.timeline-year-tick {
+  width: 2px;
+  height: 12px;
+  background: var(--text-grey);
+  margin: 0 auto;
+  transform: translateY(-6px);
+}
+
+.timeline-year-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-grey);
+  text-align: center;
+  margin-top: 0.5rem;
+  white-space: nowrap;
 }
