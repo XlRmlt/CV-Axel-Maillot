@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import Skills from '../Skills/Skills';
+import SkillsIcons from './SkillsIcons';
 import { TypeAnimation } from 'react-type-animation';
 import Timeline from './Timeline';
 
@@ -113,11 +113,18 @@ const About: React.FC = () => {
       </motion.div>
 
       <div className="mb-16">
-        <h3 className="text-2xl font-bold mb-6">Parcours</h3>
+        <br />
+        <h2 className="text-3xl font-bold mb-6">Parcours</h2>
         <Timeline items={timelineItems} />
       </div>
 
-      <Skills />
+      <div className="mb-16">
+        <br />
+        <h2 className="text-3xl font-bold mb-6">Compétences techniques</h2>
+        <br />
+        <SkillsIcons />
+        <br /><br />
+      </div>
     </div>
   );
 };

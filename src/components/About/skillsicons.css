@@ -1,0 +1,50 @@
+:root {
+  --icon-size: 2rem;
+}
+
+.skills-container {
+  width: 100%;
+  overflow: visible;
+  position: relative;
+}
+
+.skills-scroll {
+  display: flex;
+  gap: 2rem;
+  animation: scroll 20s linear infinite;
+  width: fit-content;
+}
+
+.about-skills-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  height: 60px;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  flex-shrink: 0;
+}
+
+.about-skills-icons:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Pause l'animation au survol */
+.skills-scroll:hover {
+  animation-play-state: paused;
+}
