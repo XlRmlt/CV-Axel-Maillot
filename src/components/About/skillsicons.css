@@ -4,7 +4,9 @@
 
 .skills-container {
   width: 100%;
-  overflow: visible;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  overflow: hidden;
   position: relative;
 }
 
@@ -28,11 +30,27 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   flex-shrink: 0;
+  position: relative; /* Pour positionner le tooltip */
 }
 
 .about-skills-icons:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.skill-tooltip {
+  position: absolute;
+  top: -2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.7rem;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 @keyframes scroll {

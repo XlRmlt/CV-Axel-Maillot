@@ -121,9 +121,8 @@ const About: React.FC = () => {
       <div className="mb-16">
         <br />
         <h2 className="text-3xl font-bold mb-6">Compétences techniques</h2>
-        <br />
         <SkillsIcons />
-        <br /><br />
+        <br />
       </div>
     </div>
   );
