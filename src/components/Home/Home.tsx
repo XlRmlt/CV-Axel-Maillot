@@ -7,8 +7,8 @@ const Home: React.FC = () => {
   const roles = [
     "Développeur Full Stack",
     "Ingénieur Informatique",
-    "Passionné d'IA",
-    "Fasciné par la Cyber"
+    "Cherche un projet dans l'IA",
+    "Cherche un projet dans la Cyber"
   ];
 
   return (

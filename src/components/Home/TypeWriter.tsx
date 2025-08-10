@@ -20,31 +20,28 @@ const TypeWriter: React.FC<TypeWriterProps> = ({
 
   useEffect(() => {
     const currentWord = words[wordIndex];
-    
-    const timeout = setTimeout(() => {
-      setText(prev => {
-        if (!isDeleting) {
-          // Typing
-          if (prev.length < currentWord.length) {
+    let timeout: NodeJS.Timeout;
+
+    if (!isDeleting && text === currentWord) {
+      // Finished typing, wait before deleting
+      timeout = setTimeout(() => setIsDeleting(true), delayBetweenWords);
+    } else if (isDeleting && text === '') {
+      // Finished deleting, move to next word
+      timeout = setTimeout(() => {
+        setIsDeleting(false);
+        setWordIndex((prev) => (prev + 1) % words.length);
+      }, 200);
+    } else {
+      timeout = setTimeout(() => {
+        setText(prev => {
+          if (!isDeleting) {
             return currentWord.slice(0, prev.length + 1);
           } else {
-            // Word completed, start deleting after delay
-            setTimeout(() => setIsDeleting(true), delayBetweenWords);
-            return prev;
+            return currentWord.slice(0, prev.length - 1);
           }
-        } else {
-          // Deleting
-          if (prev.length > 0) {
-            return prev.slice(0, -1);
-          } else {
-            // Word deleted, move to next word
-            setIsDeleting(false);
-            setWordIndex((prev) => (prev + 1) % words.length);
-            return '';
-          }
-        }
-      });
-    }, isDeleting ? deletingSpeed : typingSpeed);
+        });
+      }, isDeleting ? deletingSpeed : typingSpeed);
+    }
 
     return () => clearTimeout(timeout);
   }, [text, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, delayBetweenWords]);
