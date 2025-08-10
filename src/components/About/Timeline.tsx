@@ -88,7 +88,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
     window.addEventListener('resize', measureDimensions);
     
     return () => window.removeEventListener('resize', measureDimensions);
-  }, [items]); // Re-mesurer quand les items changent
+  }, [items]);
 
   // Pré-calcule les bornes temporelles
   const parsed = items.map(it => {
@@ -99,9 +99,13 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
 
   const minMonth = Math.min(...parsed.map(p => monthIndex(p.start)));
   const maxMonth = Math.max(...parsed.map(p => monthIndex(p.end)));
-  const total = Math.max(1, maxMonth - minMonth); // éviter div/0
+  const total = Math.max(1, maxMonth - minMonth);
 
-  const toPct = (m: number) => ((m - minMonth) / total) * 100;
+  // Ajouter un delta pour éviter le débordement à gauche
+  const deltaMargin = 7; // Marge en pourcentage
+  const timelineWidth = 100 - deltaMargin; // Largeur utilisable
+
+  const toPct = (m: number) => deltaMargin + ((maxMonth - m) / total) * timelineWidth;
 
   // Calcule les positions et détecte les collisions
   const calculatePositions = () => {
@@ -171,8 +175,8 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
     const endYear = Math.floor(maxMonth / 12);
     const years = [];
     
-    for (let year = startYear; year <= endYear; year++) {
-      const januaryMonth = year * 12; // Janvier de cette année
+    for (let year = endYear; year >= startYear; year--) {
+      const januaryMonth = year * 12;
       const position = toPct(januaryMonth);
       years.push({ year, position });
     }
@@ -185,7 +189,10 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
   return (
     <div className="timeline-container" ref={containerRef}>
       {/* Ligne de fond */}
-      <div className="timeline-horizontal-line" />
+      <div className="timeline-horizontal-line" style={{
+        left: `${deltaMargin}%`,
+        width: `${timelineWidth}%`
+      }} />
 
       {/* Marqueurs d'années */}
       {yearMarkers.map((marker) => (
@@ -204,12 +211,15 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
         const startM = monthIndex(p.start);
         const endM = monthIndex(p.end);
         const left = toPct(startM);
-        const width = toPct(endM) - left; // largeur min 6%
+        const right = toPct(endM);
+        const width = Math.abs(left - right);
+        const actualLeft = Math.min(left, right);
+        
         return (
           <div
             key={`${p.id}-range`}
             className={`timeline-duration ${p.type === 'work' ? 'work' : 'education'}`}
-            style={{ left: `${left}%`, width: `${width}%` }}
+            style={{ left: `${actualLeft}%`, width: `${width}%` }}
           />
         );
       })}
