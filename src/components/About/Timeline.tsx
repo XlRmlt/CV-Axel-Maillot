@@ -73,14 +73,15 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
-  const [dimensions, setDimensions] = useState({ containerWidth: 960, cardWidth: 260 });
+  const [dimensions, setDimensions] = useState({ containerWidth: 960, cardWidth: 260, cardHeight: 180 });
 
   useLayoutEffect(() => {
     const measureDimensions = () => {
       if (containerRef.current && cardRef.current) {
         const containerWidth = containerRef.current.offsetWidth;
         const cardWidth = cardRef.current.offsetWidth;
-        setDimensions({ containerWidth, cardWidth });
+        const cardHeight = cardRef.current.offsetHeight;
+        setDimensions({ containerWidth, cardWidth, cardHeight });
       }
     };
 
@@ -169,6 +170,31 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
 
   const positionsWithOffset = calculatePositions();
 
+  // === Calcul dynamique de la hauteur du conteneur ===
+  // Trouver le nombre de couches max pour chaque type
+  const maxWorkOffset = positionsWithOffset
+    .filter(p => p.type === 'work')
+    .reduce((max, p) => Math.max(max, p.offset), 0);
+  const maxEduOffset = positionsWithOffset
+    .filter(p => p.type === 'education')
+    .reduce((max, p) => Math.max(max, p.offset), 0);
+
+  // Hauteur d'une carte + marge (marge verticale entre cartes)
+  const cardHeight = dimensions.cardHeight || 180;
+  const cardMargin = 12; // px, correspond à .timeline-card margin (0.75rem)
+  // Décalage vertical de base (distance entre la ligne et la première carte)
+  const baseOffset = 24; // px, correspond à 1.5rem
+
+  // Hauteur totale = espace au-dessus + espace au-dessous + ligne + padding
+  // Padding vertical du container : 6rem haut + 6rem bas = 192px
+  // On veut que la hauteur du container soit suffisante pour toutes les couches
+  const totalHeight =
+    baseOffset + // espace entre la ligne et la première carte
+    (maxWorkOffset * (cardHeight + cardMargin)) + // couches work au-dessus
+    baseOffset +
+    (maxEduOffset * (cardHeight + cardMargin)) + // couches education en dessous
+    192; // padding top + bottom
+
   // Calculer les années à afficher sur la timeline
   const getYearMarkers = () => {
     const startYear = Math.floor(minMonth / 12);
@@ -187,7 +213,11 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
   const yearMarkers = getYearMarkers();
 
   return (
-    <div className="timeline-container" ref={containerRef}>
+    <div
+      className="timeline-container"
+      ref={containerRef}
+      style={{ minHeight: `${totalHeight}px` }}
+    >
       {/* Ligne de fond */}
       <div className="timeline-horizontal-line" style={{
         left: `${deltaMargin}%`,
