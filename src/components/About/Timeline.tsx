@@ -7,7 +7,7 @@ import {
   SiReact, SiTypescript, SiTailwindcss, SiNodedotjs, SiPython, SiPostgresql,
   SiR, SiGit, SiDocker, SiC, SiCplusplus, SiJavascript, SiKubernetes
 } from 'react-icons/si';
-import { FaMicrosoft, FaCss3Alt, FaCogs, FaCode } from 'react-icons/fa';
+import { FaMicrosoft, FaCss3Alt, FaCogs, FaCode, FaBriefcase, FaGraduationCap } from 'react-icons/fa';
 import { TbMathFunction } from 'react-icons/tb';
 
 const techIcons: Record<string, JSX.Element> = {
@@ -36,9 +36,11 @@ const techIcons: Record<string, JSX.Element> = {
 
 type TimelineItem = {
   id: string;
+  type: string; // 'work' | 'education'
   debut: string;       // "MM-YYYY"
   fin: string;         // "MM-YYYY"
   title: string;
+  organization: string;
   technologies?: string[];
 };
 
@@ -102,6 +104,31 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
         );
       })}
 
+      {parsed.map((p, index) => {
+        const startM = monthIndex(p.start);
+        const endM = monthIndex(p.end);
+        const mid = (startM + endM) / 2;
+        const left = toPct(mid);
+        
+        return (
+          <motion.div
+            key={p.id}
+            className={'timeline-icon-container'}
+            style={{ left: `${left}%` }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: index * 0.08 }}
+          >
+            {p.type === 'work' ? (
+              <FaBriefcase className="timeline-icon text-primary text-xl" />
+            ) : (
+              <FaGraduationCap className="timeline-icon text-primary text-xl" />
+            )}
+          </motion.div>
+        );
+      })}
+
       {/* Points + cartes (centrées sur le milieu de la période) */}
       {parsed.map((p, index) => {
         const startM = monthIndex(p.start);
@@ -109,20 +136,26 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
         const mid = (startM + endM) / 2;
         const left = toPct(mid);
 
+        const isTop = index % 2 === 0;
+        
         return (
           <motion.div
             key={p.id}
-            className={`timeline-event ${index % 2 === 0 ? 'top' : 'bottom'}`}
+            className={`timeline-event ${isTop ? 'top' : 'bottom'}`}
             style={{ left: `${left}%` }}
-            initial={{ opacity: 0, y: index % 2 === 0 ? -20 : 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.08 }}
           >
-            <div className="timeline-point" />
             <div className="timeline-card">
               <span className="timeline-dates">{formatRangeFr(p.start, p.end)}</span>
-              <h4 className="timeline-title">{p.title}</h4>
+              <div className="timeline-title-container">
+                <div className="timeline-title-text">
+                  <h4 className="timeline-title">{p.title}</h4>
+                  <h4 className="timeline-organization">{p.organization}</h4>
+                </div>
+              </div>
 
               {p.technologies && p.technologies.length > 0 && (
                 <div className="timeline-tech-list">
