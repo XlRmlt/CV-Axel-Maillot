@@ -2,13 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import ParticlesContainer from './ParticlesContainer';
 import TypeWriter from './TypeWriter';
+import AnimatedCharacter from "./AnimatedCharacter";
 
 const Home: React.FC = () => {
   const roles = [
     "Développeur Full Stack",
+    "Recherche un projet dans l'IA",
     "Ingénieur Informatique",
-    "Cherche un projet dans l'IA",
-    "Cherche un projet dans la Cyber"
+    "Recherche un projet dans la Cyber"
   ];
 
   return (
@@ -50,35 +51,11 @@ const Home: React.FC = () => {
               delayBetweenWords={2000}
             />
           </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex gap-4"
-          >
-            <a
-              href="#contact"
-              className="inline-block bg-primary px-8 py-3 rounded-full hover:bg-primary-dark transition-colors text-text-primary"
-            >
-              Me contacter
-            </a>
-            <a
-              href="#projects"
-              className="inline-block border-2 border-primary px-8 py-3 rounded-full hover:bg-primary/10 transition-colors text-text-primary"
-            >
-              Mes projets
-            </a>
-          </motion.div>
         </div>
-
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="w-64 h-64 rounded-full flex-shrink-0 hidden md:block overflow-hidden"
-        >
-        </motion.div>
+        
+        <div className="min-h-screen flex flex-col items-center justify-center">
+          <AnimatedCharacter size={220} className="mb-6" />
+        </div>
       </div>
     </div>
   );
