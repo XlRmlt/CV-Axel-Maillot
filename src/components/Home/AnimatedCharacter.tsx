@@ -64,14 +64,14 @@ const AnimatedCharacter: React.FC<Props> = ({
             transition={{ repeat: Infinity, duration: speed * 3, ease: "easeInOut" }}
             style={{ transformOrigin: "60px 30px" }}
           />
-          {/* Yeux (avec clignement animé) */}
-          <motion.ellipse
+            {/* Yeux (avec clignement animé) */}
+            <motion.ellipse
             cx="54"
-            cy="28"
+            cy="27"
             rx="2.2"
             ry="2.2"
             fill="#fff"
-            style={{ transformOrigin: "54px 30px" }}
+            style={{ transformOrigin: "54px 29px" }}
             animate={{ scaleY: [1, 1, 0.1, 1] }}
             transition={{
               repeat: Infinity,
@@ -79,14 +79,14 @@ const AnimatedCharacter: React.FC<Props> = ({
               times: [0, 0.85, 0.9, 1],
               ease: "easeInOut"
             }}
-          />
-          <motion.ellipse
+            />
+            <motion.ellipse
             cx="66"
-            cy="28"
+            cy="27"
             rx="2.2"
             ry="2.2"
             fill="#fff"
-            style={{ transformOrigin: "66px 30px" }}
+            style={{ transformOrigin: "66px 29px" }}
             animate={{ scaleY: [1, 1, 0.1, 1] }}
             transition={{
               repeat: Infinity,
@@ -94,19 +94,19 @@ const AnimatedCharacter: React.FC<Props> = ({
               times: [0, 0.85, 0.9, 1],
               ease: "easeInOut"
             }}
-          />
-          {/* clignement (léger écrasement vertical) */}
-          <motion.ellipse
+            />
+            {/* clignement (léger écrasement vertical) */}
+            <motion.ellipse
             cx="60"
-            cy="30"
+            cy="29"
             rx="13"
             ry="13"
             fill="currentColor"
-            style={{ transformOrigin: "60px 30px" }}
+            style={{ transformOrigin: "60px 29px" }}
             animate={{ scaleY: [1, 0.92, 1] }}
             transition={{ repeat: Infinity, duration: speed * 5, ease: "easeInOut", delay: 0.2 }}
             opacity="0"
-          />
+            />
 
           {/* Dégradés poils */}
           <defs>
@@ -120,36 +120,49 @@ const AnimatedCharacter: React.FC<Props> = ({
 
           {/* Moustache large */}
           {/* Deux lobes symétriques pour une forme naturelle au-dessus de la lèvre */}
-          <g style={{ pointerEvents: "none" }}>
-            {/* Lobe gauche : rotation négative autour d’un pivot proche du centre */}
-            <path
+            <g style={{ pointerEvents: "none" }}>
+            <motion.path
               d={`
-                M60,31
-                Q56,29 49,33.2
-                Q56,36 60,31
-                Z
+              M60,31
+              Q56,29 49,33.2
+              Q56,36 60,31
+              Z
               `}
-              transform="rotate(-9 56 31)"
+              animate={{ rotate: [-5, -3, 1, 6, 12, 9, 6, 2, 6, -5] }}
+              transition={{
+              repeat: Infinity,
+              duration: speed * 3.8,
+              times: [0, 0.13, 0.25, 0.44, 0.58, 0.72, 0.86, 0.93, 1],
+              // ease: "easeInOut"
+              }}
+              style={{ originX: "60px", originY: "31px" }}
               fill="url(#barbeGradient)"
               opacity="0.95"
             />
 
             {/* Lobe droit : rotation positive, miroir du gauche */}
-            <path
+            <motion.path
               d={`
-                M60,31
-                Q64,29 71,33.2
-                Q64,36 60,31
-                Z
+              M60,31
+              Q64,29 71,33.2
+              Q64,36 60,31
+              Z
               `}
-              transform="rotate(9 64 31)"
+              animate={{ rotate: [5, 3, -1, -6, -12, -9, -6, -2, -6, 5] }}
+              transition={{
+              repeat: Infinity,
+              duration: speed * 3.8,
+              times: [0, 0.13, 0.25, 0.44, 0.58, 0.72, 0.86, 0.93, 1],
+              // ease: "easeInOut"
+              }}
+              style={{ originX: "60px", originY: "31px" }}
               fill="url(#barbeGradient)"
               opacity="0.95"
             />
 
             {/* petite fente centrale (philtrum) pour casser l’effet “barre” */}
             <path d="M59.6,31 L60.4,31 L60,32.4 Z" fill="currentColor" opacity="0.35" />
-          </g>
+            </g>
 
           {/* Bouche parlante */}
           <Mouth cx={60} cy={36} color="#fff" speed={speed} talking smile={0.8} intensity={0.95} />
