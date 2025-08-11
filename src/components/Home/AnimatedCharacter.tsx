@@ -168,14 +168,24 @@ const AnimatedCharacter: React.FC<Props> = ({
           <Mouth cx={60} cy={36} color="#fff" speed={speed} talking smile={0.8} intensity={0.95} />
 
           {/* Barbe courte sous la bouche */}
-          <path
-            d={`
-              M46,34
-              q14,11 28,0
-              q-1,17 -14,20
-              q-13,-3 -14,-20
-              Z
-            `}
+          <motion.path
+            animate={{
+              d: [10, 11, 12, 13, 15, 14, 13, 12, 13, 10].map(
+                y => `
+                  M46,34
+                  q14,${y} 28,0
+                  q-1,17 -14,20
+                  q-13,-3 -14,-20
+                  Z
+                `
+              )
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: speed * 3.8,
+              times: [0, 0.13, 0.25, 0.44, 0.58, 0.72, 0.86, 0.93, 1],
+              ease: "easeInOut"
+            }}
             fill="url(#barbeGradient)"
             opacity="0.95"
           />
