@@ -22,6 +22,7 @@
   --work-color: #01a2ff;
   --education-color: #7228f1; /* Couleur des segments de la timeline */
 
+  --character-color: #7228f1;
   --font-family-base: 'Philosopher', sans-serif;
 }
 
@@ -46,6 +47,8 @@
 
   --work-color: #4ECDC4;
   --education-color: #55f; /* Couleur des segments de la timeline */
+
+  --character-color: rgb(21, 152, 234);
 }
 
 /* Base styles */
