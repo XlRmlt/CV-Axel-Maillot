@@ -172,8 +172,8 @@ const AnimatedCharacter: React.FC<Props> = ({
             d={`
               M46,34
               q14,11 28,0
-              q-1,11 -14,16
-              q-13,-5 -14,-16
+              q-1,17 -14,20
+              q-13,-3 -14,-20
               Z
             `}
             fill="url(#barbeGradient)"
