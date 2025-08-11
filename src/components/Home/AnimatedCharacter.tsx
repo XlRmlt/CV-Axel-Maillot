@@ -1,6 +1,7 @@
 // src/components/Avatar/AnimatedPerson.tsx
 import React, { useState, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
+import Mouth from "./Mouth";
 
 type Props = {
   size?: number;        // largeur en px
@@ -106,6 +107,8 @@ const AnimatedCharacter: React.FC<Props> = ({
             transition={{ repeat: Infinity, duration: speed * 5, ease: "easeInOut", delay: 0.2 }}
             opacity="0"
           />
+          {/* Bouche parlante */}
+          <Mouth cx={60} cy={36} color="#fff" speed={speed} talking smile={0.8} intensity={0.95} />
         </g>
 
         {/* Jambe gauche */}
