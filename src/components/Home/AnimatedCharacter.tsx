@@ -107,8 +107,65 @@ const AnimatedCharacter: React.FC<Props> = ({
             transition={{ repeat: Infinity, duration: speed * 5, ease: "easeInOut", delay: 0.2 }}
             opacity="0"
           />
+
+          {/* Dégradés poils */}
+          <defs>
+            {/* barbe et moustache partagent le même dégradé pour rester cohérents */}
+            <linearGradient id="barbeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#a0522d" />   {/* châtain */}
+              <stop offset="50%" stopColor="#b5651d" />  {/* reflets roux */}
+              <stop offset="100%" stopColor="#8b4513" /> {/* plus foncé en bas */}
+            </linearGradient>
+          </defs>
+
+          {/* Moustache large */}
+          {/* Deux lobes symétriques pour une forme naturelle au-dessus de la lèvre */}
+          <g style={{ pointerEvents: "none" }}>
+            {/* Lobe gauche : rotation négative autour d’un pivot proche du centre */}
+            <path
+              d={`
+                M60,31
+                Q56,29 49,33.2
+                Q56,36 60,31
+                Z
+              `}
+              transform="rotate(-9 56 31)"
+              fill="url(#barbeGradient)"
+              opacity="0.95"
+            />
+
+            {/* Lobe droit : rotation positive, miroir du gauche */}
+            <path
+              d={`
+                M60,31
+                Q64,29 71,33.2
+                Q64,36 60,31
+                Z
+              `}
+              transform="rotate(9 64 31)"
+              fill="url(#barbeGradient)"
+              opacity="0.95"
+            />
+
+            {/* petite fente centrale (philtrum) pour casser l’effet “barre” */}
+            <path d="M59.6,31 L60.4,31 L60,32.4 Z" fill="currentColor" opacity="0.35" />
+          </g>
+
           {/* Bouche parlante */}
           <Mouth cx={60} cy={36} color="#fff" speed={speed} talking smile={0.8} intensity={0.95} />
+
+          {/* Barbe courte sous la bouche */}
+          <path
+            d={`
+              M46,34
+              q14,11 28,0
+              q-1,11 -14,16
+              q-13,-5 -14,-16
+              Z
+            `}
+            fill="url(#barbeGradient)"
+            opacity="0.95"
+          />
         </g>
 
         {/* Jambe gauche */}
