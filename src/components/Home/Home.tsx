@@ -52,9 +52,9 @@ const Home: React.FC = () => {
             />
           </motion.div>
         </div>
-        
+
         <div className="min-h-screen flex flex-col items-center justify-center">
-          <AnimatedCharacter size={220} className="mb-6" />
+          <AnimatedCharacter size={550} className="mb-6" />
         </div>
       </div>
     </div>

@@ -34,7 +34,7 @@ const AnimatedCharacter: React.FC<Props> = ({
   return (
     <div
       className={className}
-      style={{ width: size, height: (size * 160) / 120, color: "var(--text-highlight)" }}
+      style={{ width: size, height: (size * 160) / 120, color: "var(--text-highlight)", position: "relative", left: "50%", transform: "translateX(-50%)" }}
       aria-label="Personnage qui salue"
     >
       <svg viewBox="0 0 120 160" width="100%" height="100%" role="img">
@@ -62,6 +62,37 @@ const AnimatedCharacter: React.FC<Props> = ({
             animate={{ rotate: [0, 2, 0] }}
             transition={{ repeat: Infinity, duration: speed * 3, ease: "easeInOut" }}
             style={{ transformOrigin: "60px 30px" }}
+          />
+          {/* Yeux (avec clignement animé) */}
+          <motion.ellipse
+            cx="54"
+            cy="28"
+            rx="2.2"
+            ry="2.2"
+            fill="#fff"
+            style={{ transformOrigin: "54px 30px" }}
+            animate={{ scaleY: [1, 1, 0.1, 1] }}
+            transition={{
+              repeat: Infinity,
+              duration: speed * 8,
+              times: [0, 0.85, 0.9, 1],
+              ease: "easeInOut"
+            }}
+          />
+          <motion.ellipse
+            cx="66"
+            cy="28"
+            rx="2.2"
+            ry="2.2"
+            fill="#fff"
+            style={{ transformOrigin: "66px 30px" }}
+            animate={{ scaleY: [1, 1, 0.1, 1] }}
+            transition={{
+              repeat: Infinity,
+              duration: speed * 8,
+              times: [0, 0.85, 0.9, 1],
+              ease: "easeInOut"
+            }}
           />
           {/* clignement (léger écrasement vertical) */}
           <motion.ellipse
