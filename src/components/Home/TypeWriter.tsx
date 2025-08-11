@@ -53,6 +53,7 @@ const TypeWriter: React.FC<TypeWriterProps> = ({
       className="inline-block"
     >
       {text}
+      {'\u00A0'}
       <span className="inline-block w-0.5 h-6 bg-primary ml-1 animate-blink"></span>
     </motion.span>
   );
