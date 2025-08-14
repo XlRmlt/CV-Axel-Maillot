@@ -50,7 +50,8 @@ const TypeWriter: React.FC<TypeWriterProps> = ({
     <motion.span
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="inline-block"
+      className="inline-block text-2xl font-bold text-text-muted"
+      style={{ fontSize: "1.5rem", fontWeight: 700 }} // <-- Ajouté pour forcer la taille et le gras
     >
       {text}
       {'\u00A0'}

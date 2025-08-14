@@ -146,10 +146,14 @@ const SpeechBubble: React.FC<PropsWithChildren<SpeechBubbleProps>> = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              boxSizing: "border-box",
               padding: "18px 26px",
               lineHeight: 1.35,
               color: "var(--text-primary)",
-              ...style // <-- Ajout pour fusionner le style custom
+              textAlign: "center",
+              fontSize: "inherit",      // <-- Ajouté
+              fontWeight: "inherit",    // <-- Ajouté
+              ...style
             }}
           >
             {children}

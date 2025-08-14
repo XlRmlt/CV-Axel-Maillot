@@ -55,11 +55,11 @@ const Home: React.FC = () => {
   }, [size]);
 
   // Centres des bulles autour de la bouche (px)
-  const leftCenter  = { x: mouth.x - 500, y: mouth.y - 75 };
-  const rightCenter = { x: mouth.x + 400, y: mouth.y + 100 };
+  const leftCenter  = { x: mouth.x - 500, y: mouth.y - 175 };
+  const rightCenter = { x: mouth.x + 400, y: mouth.y };
 
-  const leftTailTo  = { x: mouth.x - 100, y: mouth.y - 25 };
-  const rightTailTo = { x: mouth.x + 100, y: mouth.y - 25 };
+  const leftTailTo  = { x: mouth.x - 100, y: mouth.y - 100 };
+  const rightTailTo = { x: mouth.x + 100, y: mouth.y - 100 };
 
   return (
     <div className="h-[calc(100vh-64px)] flex items-center px-12">
@@ -105,8 +105,8 @@ const Home: React.FC = () => {
           <SpeechBubble
             cx={rightCenter.x}
             cy={rightCenter.y}
-            width={320}
-            height={200}
+            width={400}
+            height={180}
             tailTo={rightTailTo}
             className="rounded-[32px]"
           >
@@ -114,7 +114,7 @@ const Home: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl md:text-2xl text-text-muted mb-8"
+              className="mb-8"
             >
               <TypeWriter 
                 words={roles}

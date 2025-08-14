@@ -35,7 +35,7 @@ const AnimatedCharacter: React.FC<Props> = ({
   return (
     <div
       className={className}
-      style={{ width: size, height: (size * 160) / 120, color: "var(--character-color)", position: "relative", left: "50%", transform: "translateX(-50%)" }}
+      style={{ width: size, height: (size * 160) / 120, color: "var(--character-color)", position: "relative", left: "50%", transform: "translateX(-50%)", top: 40 }}
       aria-label="Personnage qui salue"
     >
       <svg viewBox="0 0 120 160" width="100%" height="100%" role="img">
