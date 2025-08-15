@@ -41,6 +41,7 @@ type TimelineItem = {
   fin: string;         // "MM-YYYY"
   title: string;
   organization: string;
+  organizationLink?: string;
   technologies?: string[];
 };
 
@@ -307,7 +308,21 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
               <div className="timeline-title-container">
                 <div className="timeline-title-text">
                   <h4 className="timeline-title">{p.title}</h4>
-                  <h4 className="timeline-organization">{p.organization}</h4>
+                  {/* Ajout du lien sur l'organisation si présent */}
+                  {p.organizationLink ? (
+                    <h4 className="timeline-organization">
+                      <a
+                        href={p.organizationLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ textDecoration: 'underline', color: 'inherit' }}
+                      >
+                        {p.organization}
+                      </a>
+                    </h4>
+                  ) : (
+                    <h4 className="timeline-organization">{p.organization}</h4>
+                  )}
                 </div>
               </div>
 

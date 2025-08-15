@@ -19,6 +19,7 @@ const About: React.FC = () => {
       fin: '08-2025',
       title: 'Stage développement web',
       organization: 'BioMérieux',
+      organizationLink: 'https://www.biomerieux.com/',
       technologies: ['R/Shiny', 'JavaScript', 'CSS', 'GitLab', 'Docker', 'Kubernetes']
     },
     {
@@ -28,6 +29,7 @@ const About: React.FC = () => {
       fin: '08-2024',
       title: 'Stage développement web et IA',
       organization: 'Efor Group',
+      organizationLink: 'https://www.efor-group.com/',
       technologies: ['Python', 'TypeScript', 'React', 'GitLab', 'Docker', 'Azure']
     },
     {
@@ -37,6 +39,7 @@ const About: React.FC = () => {
       fin: '08-2023',
       title: 'Stage développement d’application',
       organization: 'Schneider Electric',
+      organizationLink: 'https://www.se.com/',
       technologies: ['Python', 'VBA']
     },
     {
@@ -46,6 +49,7 @@ const About: React.FC = () => {
       fin: '08-2025',
       title: 'Ingénieur Informatique',
       organization: 'INSA Lyon',
+      organizationLink: 'https://www.insa-lyon.fr/',
       technologies: ['Python', 'TypeScript', 'JavaScript', 'CSS', 'C', 'Cpp', 'R', 'Git', 'SQL', 'Prolog', 'Matlab']
     },
     {
@@ -55,6 +59,7 @@ const About: React.FC = () => {
       fin: '01-2025',
       title: 'Erasmus',
       organization: 'Stockholms Universitet (DSV)',
+      organizationLink: 'https://www.su.se/',
       technologies: ['Python']
     },
     {
@@ -64,6 +69,7 @@ const About: React.FC = () => {
       fin: '07-2022',
       title: 'Prépa PT*',
       organization: 'Lycée la Martinière Monplaisir',
+      organizationLink: 'https://martiniere-monplaisir.ent.auvergnerhonealpes.fr/',
       technologies: ['Python', 'SolidWorks', 'SQL']
     },
     {
@@ -73,6 +79,7 @@ const About: React.FC = () => {
       fin: '07-2020',
       title: 'Bac S(SI) Mention TB Européenne',
       organization: 'Lycée Saint Marc',
+      organizationLink: 'https://www.st-marc.eu/',
       technologies: ['SolidWorks', 'C']
     }
   ];
