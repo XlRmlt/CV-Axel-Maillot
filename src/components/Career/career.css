@@ -43,11 +43,13 @@
   height: 22px;
   border-radius: 9999px;
   background: var(--background-primary);
-  border: 3px solid var(--text-highlight);
   display: grid;
   place-items: center;
   z-index: 2;
 }
+
+.career-dot.work { border: 3px solid var(--work-color); }
+.career-dot.education { border: 3px solid var(--education-color); }
 
 /* Cartes ancrées gauche/droite, en recyclant la présentation d’origine */
 .career-card-outer {
@@ -133,6 +135,7 @@
 
 .career-description {
   line-height: 0.85;
+  margin-bottom: 0.5rem;
 }
 .career-description p {
   margin-bottom: 0.2rem;

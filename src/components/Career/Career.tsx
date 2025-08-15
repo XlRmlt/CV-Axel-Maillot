@@ -62,10 +62,10 @@ const parseMonth = (mmYYYY: string) => {
 };
 const monthIndex = (d: Date) => d.getFullYear() * 12 + d.getMonth();
 
-const PX_PER_MONTH = 18;        // échelle verticale (≈ “3x plus long” → 6 mois = 108px)
+const PX_PER_MONTH = 25;      // échelle verticale
 const TOP_PADDING = 96;         // espace au-dessus de la première entrée
 const BOTTOM_PADDING = 96;      // espace en bas
-const MIN_GAP_PX = 28;          // anti-recouvrement vertical entre cartes d’un même côté
+const MIN_GAP_PX = 48;          // anti-recouvrement vertical entre cartes d’un même côté
 
 const Career: React.FC = () => {
   const items: TimelineItem[] = [
@@ -177,7 +177,7 @@ const Career: React.FC = () => {
     const getCardHeight = (item: TimelineItem) => {
       // Base: padding + header + description + techs
       let base = 32 + 44; // padding + header
-      base += (item.description.length * 20); // chaque ligne de description
+      base += (item.description.length * 30); // chaque ligne de description
       if (item.technologies && item.technologies.length > 0) {
         base += 32; // ligne de technologies
       }
@@ -185,34 +185,42 @@ const Career: React.FC = () => {
     };
 
     // Nouvelle logique d'empilement anti-recouvrement (par côté, du haut vers le bas)
-    const leftSide: { bottomPx: number }[] = [];
-    const rightSide: { bottomPx: number }[] = [];
+    let maxBottomLeft = -Infinity;
+    let maxBottomRight = -Infinity;
 
     const placed = sorted.map(it => {
       const topPx = toTopPx(it.midM);
       const side = it.type === 'work' ? 'left' : 'right';
 
       const CARD_HEIGHT = getCardHeight(it);
+      const half = CARD_HEIGHT / 2;
 
-      const arr = side === 'left' ? leftSide : rightSide;
-      let adjustedTop = topPx;
+      let adjustedCenter = topPx;
+      const currentMaxBottom = (side === 'left') ? maxBottomLeft : maxBottomRight;
 
-      // Si une carte précédente existe sur ce côté, on vérifie le recouvrement
-      if (arr.length > 0) {
-        const last = arr[arr.length - 1].bottomPx;
-        if (adjustedTop < last + MIN_GAP_PX) {
-          adjustedTop = last + MIN_GAP_PX;
-        }
+      // bord haut réel de la carte = centre - moitié de la hauteur
+      const topEdge = adjustedCenter - half;
+
+      // si le haut de la carte passe sous le bas max déjà placé + gap, on pousse
+      if (topEdge < currentMaxBottom + MIN_GAP_PX) {
+        const push = (currentMaxBottom + MIN_GAP_PX) - topEdge;
+        adjustedCenter += push;
       }
-      // On stocke la position basse de la carte pour la suivante
-      arr.push({ bottomPx: adjustedTop + CARD_HEIGHT });
 
-      return { ...it, topPx: adjustedTop, rawTopPx: topPx, side, cardHeight: CARD_HEIGHT };
+      // nouveau bas atteint par cette carte
+      const adjustedBottom = adjustedCenter + half;
+      if (side === 'left') {
+        maxBottomLeft = Math.max(maxBottomLeft, adjustedBottom);
+      } else {
+        maxBottomRight = Math.max(maxBottomRight, adjustedBottom);
+      }
+
+      return { ...it, topPx: adjustedCenter, rawTopPx: topPx, side, cardHeight: CARD_HEIGHT };
     });
 
     const totalHeight = Math.max(
       TOP_PADDING + (maxM - minM) * PX_PER_MONTH + BOTTOM_PADDING,
-      ...placed.map(p => p.topPx + p.cardHeight + 20) // 20 = marge de sécurité
+      ...placed.map(p => p.topPx + p.cardHeight / 2 + 20)
     );
 
     // Marqueurs d’années sur la colonne centrale
@@ -274,10 +282,10 @@ const Career: React.FC = () => {
             transition={{ duration: 0.4, delay: index * 0.05 }}
           >
             {/* Point sur la spine */}
-            <div className="career-dot" style={{ top: item.topPx }}>
+            <div className={`career-dot ${item.type}`} style={{ top: item.topPx }}>
               {item.type === 'work'
-                ? <FaBriefcase className="text-primary text-sm" />
-                : <FaGraduationCap className="text-primary text-sm" />
+              ? <FaBriefcase className="text-primary text-sm" />
+              : <FaGraduationCap className="text-primary text-sm" />
               }
             </div>
 
