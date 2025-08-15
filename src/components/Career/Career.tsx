@@ -39,6 +39,7 @@ interface TimelineItem {
   title: string;
   organization: string;
   organizationIcon?: string;
+  organizationLink?: string;
   debut: string; // "MM-YYYY"
   fin: string;   // "MM-YYYY"
   description: string[];
@@ -74,6 +75,7 @@ const Career: React.FC = () => {
       title: 'Stage PFE - Développement Web',
       organization: 'BioMérieux',
       organizationIcon: '/Logos/bioMerieux.png',
+      organizationLink: 'https://www.biomerieux.com/',
       debut: '02-2025',
       fin: '08-2025',
       description: [
@@ -88,6 +90,7 @@ const Career: React.FC = () => {
       title: 'Stage - Développement IA & Web',
       organization: 'Efor Group',
       organizationIcon: '/Logos/Efor.png',
+      organizationLink: 'https://www.efor-group.com/',
       debut: '05-2024',
       fin: '08-2024',
       description: [
@@ -102,6 +105,7 @@ const Career: React.FC = () => {
       title: 'Stage - Développement Python & VBA',
       organization: 'Schneider Electric',
       organizationIcon: '/Logos/SchneiderElectric.png',
+      organizationLink: 'https://www.se.com/',
       debut: '06-2023',
       fin: '08-2023',
       description: [
@@ -116,6 +120,7 @@ const Career: React.FC = () => {
       title: 'Ingénieur Informatique',
       organization: 'INSA Lyon',
       organizationIcon: '/Logos/INSA.png',
+      organizationLink: 'https://www.insa-lyon.fr/',
       debut: '09-2022',
       fin: '08-2025',
       description: ['Filière Informatique, projets IA avancés'],
@@ -126,6 +131,7 @@ const Career: React.FC = () => {
       title: 'Erasmus - Informatique',
       organization: 'Stockholms Universitet (DSV)',
       organizationIcon: '/Logos/SU.png',
+      organizationLink: 'https://www.su.se/',
       debut: '08-2024',
       fin: '01-2025',
       description: ['Semestre en Suède'],
@@ -136,6 +142,7 @@ const Career: React.FC = () => {
       title: 'Prépa PT*',
       organization: 'Lycée la Martinière Monplaisir',
       organizationIcon: '/Logos/Prepa.png',
+      organizationLink: 'https://martiniere-monplaisir.ent.auvergnerhonealpes.fr/',
       debut: '09-2020',
       fin: '07-2022',
       description: ['Prépa CPGE scientifique, spécialité Sciences de l’Ingénieur'],
@@ -146,6 +153,7 @@ const Career: React.FC = () => {
       title: 'Bac S(SI) Mention TB',
       organization: 'Lycée Saint Marc',
       organizationIcon: '/Logos/StMarc.gif',
+      organizationLink: 'https://www.st-marc.eu/',
       debut: '09-2017',
       fin: '07-2020',
       description: ['Mention Très Bien - Section Européenne'],
@@ -303,11 +311,25 @@ const Career: React.FC = () => {
                   <div className="career-title-row">
                     {/* Logo à gauche du bloc texte */}
                     {item.organizationIcon && (
-                      <img
-                        src={item.organizationIcon}
-                        alt={`${item.organization} logo`}
-                        className={`career-organization-icon ${item.organization.includes('Stockholm') ? 'white-bg-in-dark' : ''}`}
-                      />
+                      item.organizationLink ? (
+                        <a
+                          href={item.organizationLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <img
+                            src={item.organizationIcon}
+                            alt={`${item.organization} logo`}
+                            className={`career-organization-icon ${item.organization.includes('Stockholm') ? 'white-bg-in-dark' : ''}`}
+                          />
+                        </a>
+                      ) : (
+                        <img
+                          src={item.organizationIcon}
+                          alt={`${item.organization} logo`}
+                          className={`career-organization-icon ${item.organization.includes('Stockholm') ? 'white-bg-in-dark' : ''}`}
+                        />
+                      )
                     )}
 
                     {/* Bloc titre + organisation */}
