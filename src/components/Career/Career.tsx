@@ -1,19 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { motion } from 'framer-motion';
 import {
-  SiReact,
-  SiTypescript,
-  SiTailwindcss,
-  SiNodedotjs,
-  SiPython,
-  SiPostgresql,
-  SiR,
-  SiGit,
-  SiDocker,
-  SiC,
-  SiCplusplus,
-  SiJavascript,
-  SiKubernetes,
+  SiReact, SiTypescript, SiTailwindcss, SiNodedotjs, SiPython, SiPostgresql,
+  SiR, SiGit, SiDocker, SiC, SiCplusplus, SiJavascript, SiKubernetes,
 } from 'react-icons/si';
 import { TbMathFunction } from 'react-icons/tb';
 import { FaBriefcase, FaGraduationCap, FaMicrosoft, FaCss3Alt, FaCogs, FaCode } from 'react-icons/fa';
@@ -26,7 +15,7 @@ const techIcons: Record<string, JSX.Element> = {
   'Node.js': <SiNodedotjs className="career-tech-logo" title="Node.js" color="#339933" />,
   Python: <SiPython className="career-tech-logo" title="Python" color="#3776AB" />,
   SQL: <SiPostgresql className="career-tech-logo" title="SQL" color="#336791" />,
-  'R': <SiR className="career-tech-logo" title="R" color="#276DC3" />,
+  R: <SiR className="career-tech-logo" title="R" color="#276DC3" />,
   'R/Shiny': <SiR className="career-tech-logo" title="R/Shiny" color="#276DC3" />,
   Git: <SiGit className="career-tech-logo" title="Git" color="#F05032" />,
   GitLab: <SiGit className="career-tech-logo" title="GitLab" color="#FC6D26" />,
@@ -38,33 +27,59 @@ const techIcons: Record<string, JSX.Element> = {
   CSS: <FaCss3Alt className="career-tech-logo" title="CSS" color="#264de4" />,
   JavaScript: <SiJavascript className="career-tech-logo" title="JavaScript" color="#F7DF1E" />,
   Kubernetes: <SiKubernetes className="career-tech-logo" title="Kubernetes" color="#326CE5" />,
-  'SolidWorks': <FaCogs className="career-tech-logo" title="SolidWorks" color="#E22127" />,
-  'Prolog': <FaCode className="career-tech-logo" title="Prolog" color="#74283c" />,
-  'Matlab': <TbMathFunction className="career-tech-logo" title="Matlab" color="#E16737" />,
+  SolidWorks: <FaCogs className="career-tech-logo" title="SolidWorks" color="#E22127" />,
+  Prolog: <FaCode className="career-tech-logo" title="Prolog" color="#74283c" />,
+  Matlab: <TbMathFunction className="career-tech-logo" title="Matlab" color="#E16737" />,
 };
 
+type Side = 'work' | 'education';
+
 interface TimelineItem {
-  type: 'work' | 'education';
+  type: Side;
   title: string;
   organization: string;
   organizationIcon?: string;
-  period: string;
+  debut: string; // "MM-YYYY"
+  fin: string;   // "MM-YYYY"
   description: string[];
   technologies?: string[];
 }
 
+const monthsFr = [
+  'Janvier','Février','Mars','Avril','Mai','Juin',
+  'Juillet','Août','Septembre','Octobre','Novembre','Décembre'
+];
+
+const formatMonthYearFr = (mmYYYY: string) => {
+  const [mm, yyyy] = mmYYYY.split('-').map(Number);
+  const d = new Date(yyyy, (mm ?? 1) - 1, 1);
+  return `${monthsFr[d.getMonth()]} ${d.getFullYear()}`;
+};
+
+const parseMonth = (mmYYYY: string) => {
+  const [mm, yyyy] = mmYYYY.split('-').map(Number);
+  return new Date(yyyy, (mm ?? 1) - 1, 1);
+};
+const monthIndex = (d: Date) => d.getFullYear() * 12 + d.getMonth();
+
+const PX_PER_MONTH = 18;        // échelle verticale (≈ “3x plus long” → 6 mois = 108px)
+const TOP_PADDING = 96;         // espace au-dessus de la première entrée
+const BOTTOM_PADDING = 96;      // espace en bas
+const MIN_GAP_PX = 28;          // anti-recouvrement vertical entre cartes d’un même côté
+
 const Career: React.FC = () => {
-  const timelineItems: TimelineItem[] = [
+  const items: TimelineItem[] = [
     {
       type: 'work',
       title: 'Stage PFE - Développement Web',
       organization: 'BioMérieux',
       organizationIcon: '/Logos/bioMerieux.png',
-      period: '2025 (6 mois)',
+      debut: '02-2025',
+      fin: '08-2025',
       description: [
-        'Refonte d’une application web R&Ds interne',
+        'Refonte d’une application web R&D interne',
         'Amélioration de l’interface et l’expérience utilisateur',
-        'Approche Agile avec releases'
+        'Approche Agile avec releases',
       ],
       technologies: ['R/Shiny', 'JavaScript', 'CSS', 'GitLab', 'Docker', 'Kubernetes'],
     },
@@ -73,7 +88,8 @@ const Career: React.FC = () => {
       title: 'Stage - Développement IA & Web',
       organization: 'Efor Group',
       organizationIcon: '/Logos/Efor.png',
-      period: '2024 (3 mois)',
+      debut: '05-2024',
+      fin: '08-2024',
       description: [
         'Création d’un Chatbot d’entreprise IA personnalisé',
         'Intégration de fonctionnalités avancées d’IA au sein d’une équipe Agile',
@@ -86,7 +102,8 @@ const Career: React.FC = () => {
       title: 'Stage - Développement Python & VBA',
       organization: 'Schneider Electric',
       organizationIcon: '/Logos/SchneiderElectric.png',
-      period: '2023 (3 mois)',
+      debut: '06-2023',
+      fin: '08-2023',
       description: [
         'Création d’une application interne d’automatisation de création de documents clients',
         'Connexion aux bases de données PDM',
@@ -99,41 +116,119 @@ const Career: React.FC = () => {
       title: 'Ingénieur Informatique',
       organization: 'INSA Lyon',
       organizationIcon: '/Logos/INSA.png',
-      period: '2022 - 2025',
-      description: ['Filière Informatique, projets avancés IA'],
-      technologies: ['Python', 'TypeScript', 'JavaScript', 'CSS', 'C', 'Cpp', 'R', 'Git', 'SQL', 'Prolog', 'Matlab']
+      debut: '09-2022',
+      fin: '08-2025',
+      description: ['Filière Informatique, projets IA avancés'],
+      technologies: ['Python', 'TypeScript', 'JavaScript', 'CSS', 'C', 'Cpp', 'R', 'Git', 'SQL', 'Prolog', 'Matlab'],
     },
     {
       type: 'education',
       title: 'Erasmus - Informatique',
       organization: 'Stockholms Universitet (DSV)',
       organizationIcon: '/Logos/SU.png',
-      period: '2024',
+      debut: '08-2024',
+      fin: '01-2025',
       description: ['Semestre en Suède'],
-      technologies: ['Python']
+      technologies: ['Python'],
     },
     {
       type: 'education',
       title: 'Prépa PT*',
       organization: 'Lycée la Martinière Monplaisir',
       organizationIcon: '/Logos/Prepa.png',
-      period: '2020 - 2022',
+      debut: '09-2020',
+      fin: '07-2022',
       description: ['Prépa CPGE scientifique, spécialité Sciences de l’Ingénieur'],
-      technologies: ['Python', 'SolidWorks', 'SQL']
+      technologies: ['Python', 'SolidWorks', 'SQL'],
     },
     {
       type: 'education',
       title: 'Bac S(SI) Mention TB',
       organization: 'Lycée Saint Marc',
       organizationIcon: '/Logos/StMarc.gif',
-      period: '2020',
-      description: ['Bac S(SI) Mention Très Bien Mention Européenne'],
-      technologies: ['SolidWorks', 'C']
-    }
+      debut: '09-2017',
+      fin: '07-2020',
+      description: ['Mention Très Bien - Section Européenne'],
+      technologies: ['SolidWorks', 'C'],
+    },
   ];
 
+  // Pré-calculs temporels
+  const enriched = useMemo(() => {
+    const withDates = items.map(it => {
+      const start = parseMonth(it.debut);
+      const end = parseMonth(it.fin);
+      const startM = monthIndex(start);
+      const endM = monthIndex(end);
+      const midM = (startM + endM) / 2;
+      return { ...it, start, end, startM, endM, midM };
+    });
+
+    const minM = Math.min(...withDates.map(i => i.startM));
+    const maxM = Math.max(...withDates.map(i => i.endM));
+
+    // Position verticale (0 en haut = le plus récent)
+    const toTopPx = (m: number) => TOP_PADDING + (maxM - m) * PX_PER_MONTH;
+
+    // Layout : tri du plus récent (haut) au plus ancien (bas)
+    const sorted = [...withDates].sort((a, b) => b.midM - a.midM);
+
+    // Mesure réelle des hauteurs de cartes (environ, via le contenu)
+    const getCardHeight = (item: TimelineItem) => {
+      // Base: padding + header + description + techs
+      let base = 32 + 44; // padding + header
+      base += (item.description.length * 20); // chaque ligne de description
+      if (item.technologies && item.technologies.length > 0) {
+        base += 32; // ligne de technologies
+      }
+      return base;
+    };
+
+    // Nouvelle logique d'empilement anti-recouvrement (par côté, du haut vers le bas)
+    const leftSide: { bottomPx: number }[] = [];
+    const rightSide: { bottomPx: number }[] = [];
+
+    const placed = sorted.map(it => {
+      const topPx = toTopPx(it.midM);
+      const side = it.type === 'work' ? 'left' : 'right';
+
+      const CARD_HEIGHT = getCardHeight(it);
+
+      const arr = side === 'left' ? leftSide : rightSide;
+      let adjustedTop = topPx;
+
+      // Si une carte précédente existe sur ce côté, on vérifie le recouvrement
+      if (arr.length > 0) {
+        const last = arr[arr.length - 1].bottomPx;
+        if (adjustedTop < last + MIN_GAP_PX) {
+          adjustedTop = last + MIN_GAP_PX;
+        }
+      }
+      // On stocke la position basse de la carte pour la suivante
+      arr.push({ bottomPx: adjustedTop + CARD_HEIGHT });
+
+      return { ...it, topPx: adjustedTop, rawTopPx: topPx, side, cardHeight: CARD_HEIGHT };
+    });
+
+    const totalHeight = Math.max(
+      TOP_PADDING + (maxM - minM) * PX_PER_MONTH + BOTTOM_PADDING,
+      ...placed.map(p => p.topPx + p.cardHeight + 20) // 20 = marge de sécurité
+    );
+
+    // Marqueurs d’années sur la colonne centrale
+    const startYear = Math.floor(minM / 12);
+    const endYear = Math.floor(maxM / 12);
+    const yearMarks = [];
+    for (let y = endYear; y >= startYear; y--) {
+      const january = y * 12; // Janvier de l’année y
+      yearMarks.push({ year: y, top: toTopPx(january) });
+    }
+
+    return { placed, minM, maxM, totalHeight, toTopPx, yearMarks };
+  }, [items]);
+
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
+    <div className="max-w-5xl mx-auto px-4 py-16">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -142,69 +237,94 @@ const Career: React.FC = () => {
         Mon Parcours
       </motion.h2>
 
-      <div className="relative">
-        {/* Ligne verticale */}
-        <div className="absolute left-0 md:left-1/2 h-full w-0.5 bg-primary/20" />
+      <div className="career-vtl-wrapper" style={{ height: enriched.totalHeight }}>
+        {/* Colonne centrale (spine) */}
+        <div className="career-spine" />
 
-        {/* Timeline items */}
-        {timelineItems.map((item, index) => (
+        {/* Marqueurs d’années */}
+        {enriched.yearMarks.map(m => (
+          <div key={m.year} className="career-year" style={{ top: m.top }}>
+            <div className="career-year-tick" />
+            <span className="career-year-label">{m.year}</span>
+          </div>
+        ))}
+
+        {/* Segments de durée */}
+        {enriched.placed.map((it, i) => {
+          const topStart = enriched.toTopPx(it.endM);   // fin → plus bas
+          const topEnd = enriched.toTopPx(it.startM);   // début → plus haut
+          const height = Math.max(4, Math.abs(topEnd - topStart));
+          const offset = it.side === 'left' ? -6 : 6;   // petit décalage à gauche/droite de la spine
+          return (
+            <div
+              key={`${it.title}-range`}
+              className={`career-duration ${it.type === 'work' ? 'work' : 'education'}`}
+              style={{ top: Math.min(topStart, topEnd), height, transform: `translateX(${offset}px)` }}
+            />
+          );
+        })}
+
+        {/* Points + Cartes (présentation d’origine) */}
+        {enriched.placed.map((item, index) => (
           <motion.div
-            key={index}
-            initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+            key={`${item.title}-${index}`}
+            initial={{ opacity: 0, x: item.side === 'left' ? -24 : 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className={`relative flex flex-col md:flex-row ${
-              index % 2 === 0 ? 'md:flex-row-reverse' : ''
-            } mb-12`}
+            transition={{ duration: 0.4, delay: index * 0.05 }}
           >
-            {/* Point sur la timeline */}
-            <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full transform -translate-x-1/2 mt-6">
-              <div className="w-8 h-8 bg-primary/20 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animate-ping" />
+            {/* Point sur la spine */}
+            <div className="career-dot" style={{ top: item.topPx }}>
+              {item.type === 'work'
+                ? <FaBriefcase className="text-primary text-sm" />
+                : <FaGraduationCap className="text-primary text-sm" />
+              }
             </div>
 
-            <div className={`flex-1 md:w-1/2 ${
-              index % 2 === 0 ? 'md:pl-12' : 'md:pr-12'
-            }`}>
+            {/* Carte ancrée à gauche/droite avec le style d’origine */}
+            <div
+              className={`career-card-outer ${item.side}`}
+              style={{ top: item.topPx }}
+            >
               <div className="career-container bg-background-popup p-6 rounded-xl hover:shadow-lg transition-shadow">
-                <div className="career-titles-container flex items-center gap-3 mb-4">
-                  {item.type === 'work' ? (
-                    <FaBriefcase className="career-icon text-primary text-xl" />
-                  ) : (
-                    <FaGraduationCap className="career-icon text-primary text-xl" />
-                  )}
-                  <h3 className="career-title text-xl font-bold mb-2">{item.title}</h3>
-                  <span className="career-period text-primary font-medium">{item.period}</span>
-                </div>
-                
-                <div className="career-organization-container">
-                  {item.organizationIcon && (
-                    <img
-                      src={item.organizationIcon}
-                      alt={`${item.organization} logo`}
-                      className={`career-organization-icon w-6 h-6 object-contain mr-2 
-                        ${item.organization.includes('Stockholm') ? 'white-bg-in-dark' : ''}
-                      `}
-                    />
-                  )}
-                  <p className="career-organization-name text-text-muted mb-4">{item.organization}</p>
+                {/* LIGNE TITRE/ORGA + LOGO, avec la DATE AU-DESSUS */}
+                <div className="career-header">
+                  {/* Date au format About, en bleu, au-dessus */}
+                  <span className="career-date-fr">{formatMonthYearFr(item.debut)} – {formatMonthYearFr(item.fin)}</span>
+
+                  <div className="career-title-row">
+                    {/* Logo à gauche du bloc texte */}
+                    {item.organizationIcon && (
+                      <img
+                        src={item.organizationIcon}
+                        alt={`${item.organization} logo`}
+                        className={`career-organization-icon ${item.organization.includes('Stockholm') ? 'white-bg-in-dark' : ''}`}
+                      />
+                    )}
+
+                    {/* Bloc titre + organisation */}
+                    <div className="career-title-text">
+                      <h3 className="career-title">{item.title}</h3>
+                      <h4 className="career-organization-name">{item.organization}</h4>
+                    </div>
+                  </div>
                 </div>
 
-                <div className="career-description space-y-2 mb-4">
+                {/* Description */}
+                <div className="career-description">
                   {item.description.map((desc, i) => (
                     <p key={i} className="text-base">{desc}</p>
                   ))}
                 </div>
 
-                {item.technologies && item.technologies.map((tech, i) => (
+                {/* Techs */}
+                {item.technologies?.map((tech, i) => (
                   <span
                     key={i}
-                    className="bg-background-primary text-primary rounded-full p-1 flex items-center justify-center"
+                    className="bg-background-primary text-primary rounded-full p-1 inline-flex items-center justify-center mr-1"
                     title={tech}
                   >
-                    {techIcons[tech] || (
-                      <span className="text-xs font-mono px-2">{tech}</span>
-                    )}
+                    {techIcons[tech] || <span className="text-xs font-mono px-2">{tech}</span>}
                   </span>
                 ))}
               </div>

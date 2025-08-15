@@ -2,51 +2,163 @@
     --career-icon-size: 1.75rem;
 }
 
-.career-titles-container {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem; /* 3 */
+/* --- Timeline verticale --- */
+.career-vtl-wrapper {
+  position: relative;
+  margin: 0 auto;
+  /* on laisse la largeur au container parent; cartes gèrent la place */
 }
 
-.career-title {
-    font-size: 1.25rem; /* 5 */
-    font-weight: 700; /* bold */
+.career-spine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--text-grey);
+  opacity: 0.35;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  z-index: 0;
 }
 
-.career-icon {
-    color: var(--text-primary);
-    font-size: 1.25rem; /* 5 */
+/* Durées (barres verticales colorées de part et d'autre de la spine) */
+.career-duration {
+  position: absolute;
+  left: 50%;
+  width: 4px;
+  border-radius: 9999px;
+  z-index: 1;
+  opacity: 0.95;
+}
+.career-duration.work { background: var(--work-color); }
+.career-duration.education { background: var(--education-color); }
+
+/* Point sur la spine (without ping) */
+.career-dot {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: var(--background-primary);
+  border: 3px solid var(--text-highlight);
+  display: grid;
+  place-items: center;
+  z-index: 2;
 }
 
-.career-period {
-    color: var(--text-grey);
-    font-style: italic;
+/* Cartes ancrées gauche/droite, en recyclant la présentation d’origine */
+.career-card-outer {
+  position: absolute;
+  width: min(680px, 48vw);
+  transform: translateY(-50%);
+  z-index: 2;
 }
+.career-card-outer.left  { right: calc(50% + 36px); text-align: left; }
+.career-card-outer.right { left:  calc(50% + 36px); text-align: left; }
 
-.career-organization-container {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+/* Marqueurs d'années */
+.career-year {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+.career-year-tick {
+  width: 2px;
+  height: 12px;
+  background: var(--text-grey);
+  margin: 0 auto 2px auto;
+  border-radius: 1px;
+}
+.career-year-label {
+  font-size: 0.85rem;
+  color: var(--text-grey);
+  background: var(--background-primary);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.35rem;
 }
 
 .career-organization-icon {
-  height: 3rem;
+  height: 2.25rem;
   object-fit: contain;
-  margin-right: 0.5rem;
-}
-
-.white-bg-in-dark {
-  border-radius: 4px;
-  padding: 2px;
-  background-color: transparent;
-}
-
-.dark .white-bg-in-dark {
-  background-color: white;
+  border-radius: 6px;
 }
 
 .career-tech-logo {
     width: var(--career-icon-size);
     height: var(--career-icon-size);
     padding: 0.5rem;
+}
+
+.career-date-fr {
+  font-weight: 700;
+  color: var(--text-highlight);
+  line-height: 0.85;
+}
+
+.career-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: -1rem; /* rapproche le header de la description */
+}
+
+.career-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.career-title-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem; /* rapproche le titre et l'organisation */
+}
+
+.career-title {
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 0; /* supprime tout espace sous le titre */
+}
+
+.career-organization-name {
+  color: var(--text-grey);
+  font-weight: 500;
+  line-height: 1;
+  margin-top: 0; /* supprime tout espace au-dessus de l'organisation */
+}
+
+.career-description {
+  line-height: 0.85;
+}
+.career-description p {
+  margin-bottom: 0.2rem;
+}
+
+.white-bg-in-dark {
+  background: #fff;
+  /* Optionnel : pour éviter que le fond blanc déborde du logo */
+  padding: 0.15rem;
+  border-radius: 6px;
+}
+
+/* Active le fond blanc uniquement en dark mode si vous avez un body.dark ou [data-theme="dark"] */
+@media (prefers-color-scheme: dark) {
+  .white-bg-in-dark {
+    background: #fff;
+  }
+}
+
+/* Petits écrans: on passe en une colonne (cartes à droite) */
+@media (max-width: 900px) {
+  .career-card-outer {
+    width: min(640px, 92vw);
+  }
+  .career-card-outer.left {
+    right: auto;
+    left: calc(50% + 20px);
+  }
 }
