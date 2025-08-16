@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, color } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
   SiReact, 
@@ -161,9 +161,9 @@ const SkillsSection = () => {
   ];
 
   const languages = [
-    { lang: 'Français', icon: '/flags/Francais.png', levelText: 'Langue natale', percent: 100 },
-    { lang: 'Anglais', icon: '/flags/English.png', levelText: 'C1+', percent: 95 },
-    { lang: 'Espagnol', icon: '/flags/Espanol.png', levelText: 'B2', percent: 90 },
+    { lang: 'Français', icon: '/flags/FR.png', levelText: 'Langue natale', percent: 100, color: '#0055A4' },
+    { lang: 'Anglais', icon: '/flags/UK.png', levelText: 'C1+', percent: 95, color: '#00247D' },
+    { lang: 'Espagnol', icon: '/flags/ES.png', levelText: 'B2', percent: 90, color: '#AA151B' },
   ];
 
   return (
@@ -181,21 +181,31 @@ const SkillsSection = () => {
           {languages.map((l) => (
             <div key={l.lang} className="w-64 flex-shrink-0">
               {/* Drapeau + libellé */}
-              <div className="flex items-center gap-2 mb-2 skills-flag">
-                <img src={l.icon} alt={l.lang} className="w-7 h-7 rounded shadow" />
-              </div>
-                <div key={l.lang} className="lang-progress relative flex-1">
-                  <motion.div
-                    className="lang-fill flex items-center justify-center"
-                    initial={{ width: 0 }}
-                    animate={inView ? { width: `${l.percent}%` } : { width: 0 }}
-                    transition={{ duration: 1.1, ease: "easeOut" }}
+              <div
+                key={l.lang}
+                className="lang-progress relative flex-1"
+                style={{ borderColor: l.color, borderWidth: 2, borderStyle: 'solid' }}
+                >
+                <motion.div
+                  className="lang-fill flex items-center justify-center"
+                  style={{
+                    backgroundImage: `url(${l.icon})`,
+                    backgroundSize: '100% 100%',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                  }}
+                  initial={{ width: 0 }}
+                  animate={inView ? { width: `${l.percent}%` } : { width: 0 }}
+                  transition={{ duration: 1.1, ease: "easeOut" }}
+                >
+                  <span 
+                    className="text-xs text-white font-semibold drop-shadow-md"
+                    style={{ color: l.color }}
                   >
-                    <span className="text-xs text-white font-semibold">
-                      {l.levelText}
-                    </span>
-                  </motion.div>
-                </div>
+                    {l.levelText}
+                  </span>
+                </motion.div>
+              </div>
             </div>
           ))}
         </div>
