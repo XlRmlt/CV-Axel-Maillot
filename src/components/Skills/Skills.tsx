@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
@@ -160,73 +160,118 @@ const SkillsSection = () => {
     },
   ];
 
+  const languages = [
+    { lang: 'Français', icon: '/flags/Francais.png', levelText: 'Langue natale', percent: 100 },
+    { lang: 'Anglais', icon: '/flags/English.png', levelText: 'C1+', percent: 95 },
+    { lang: 'Espagnol', icon: '/flags/Espanol.png', levelText: 'B2', percent: 90 },
+  ];
+
   return (
     <div ref={ref} className="py-12">
-      <motion.h2
+      <motion.div>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          className="title text-3xl font-bold mb-8 text-center"
+        >
+          Langues vivantes
+        </motion.h2>
+
+        <div className="flex flex-row gap-6 justify-center items-start">
+          {languages.map((l) => (
+            <div key={l.lang} className="w-64 flex-shrink-0">
+              {/* Drapeau + libellé */}
+              <div className="flex items-center gap-2 mb-2 skills-flag">
+                <img src={l.icon} alt={l.lang} className="w-7 h-7 rounded shadow" />
+              </div>
+                <div key={l.lang} className="lang-progress relative flex-1">
+                  <motion.div
+                    className="lang-fill flex items-center justify-center"
+                    initial={{ width: 0 }}
+                    animate={inView ? { width: `${l.percent}%` } : { width: 0 }}
+                    transition={{ duration: 1.1, ease: "easeOut" }}
+                  >
+                    <span className="text-xs text-white font-semibold">
+                      {l.levelText}
+                    </span>
+                  </motion.div>
+                </div>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
-        className="title text-3xl font-bold mb-8 text-center"
+        className="prose dark:prose-invert mb-12"
       >
-        Compétences Techniques
-      </motion.h2>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          className="title text-3xl font-bold mb-8 text-center"
+        >
+          Compétences Techniques
+        </motion.h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {categories.map((skill, index) => (
-          <motion.div
-            key={skill.title}
-            onMouseEnter={() => {
-              setHoveredIndex(index);
-              setFirstTypewriterComplete(prev => ({ ...prev, [index]: false }));
-            }}
-            onMouseLeave={() => setHoveredIndex(null)}
-            className="bg-background-popup rounded-xl p-6 relative"
-          >
-            <div className="skills flex items-center">
-              <div className="mr-4 w-8 h-8 flex items-center justify-center rounded-full">
-                {skill.icon}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categories.map((skill, index) => (
+            <motion.div
+              key={skill.title}
+              onMouseEnter={() => {
+                setHoveredIndex(index);
+                setFirstTypewriterComplete(prev => ({ ...prev, [index]: false }));
+              }}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="bg-background-popup rounded-xl p-6 relative"
+            >
+              <div className="skills flex items-center">
+                <div className="mr-4 w-8 h-8 flex items-center justify-center rounded-full">
+                  {skill.icon}
+                </div>
+                <div className="skills-info">
+                  <span className="skills-title block font-medium text-lg">{skill.title}</span>
+                </div>
               </div>
-              <div className="skills-info">
-                <span className="skills-title block font-medium text-lg">{skill.title}</span>
-              </div>
-            </div>
 
-            {/* Zone d'affichage du code et du rendu */}
-            <AnimatePresence>
-              {hoveredIndex === index && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.3 }}
-                  className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 items-start h-full"
-                >
-                  <div className="skills-code-render-container">
-                    {/* Fenêtre de code */}
-                    <div className="h-full flex flex-col">
-                      <pre className="p-3 bg-black text-green-400 text-xs rounded-md font-mono overflow-auto shadow-md min-h-[100px]">
-                        <TypeWriterCode 
-                          code={skill.codeSnippet ?? ""} 
-                          typingSpeed={30} 
-                          onComplete={() => setFirstTypewriterComplete(prev => ({ ...prev, [index]: true }))}
-                        />
-                      </pre>
+              {/* Zone d'affichage du code et du rendu */}
+              <AnimatePresence>
+                {hoveredIndex === index && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.3 }}
+                    className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 items-start h-full"
+                  >
+                    <div className="skills-code-render-container">
+                      {/* Fenêtre de code */}
+                      <div className="h-full flex flex-col">
+                        <pre className="p-3 bg-black text-green-400 text-xs rounded-md font-mono overflow-auto shadow-md min-h-[100px]">
+                          <TypeWriterCode 
+                            code={skill.codeSnippet ?? ""} 
+                            typingSpeed={30} 
+                            onComplete={() => setFirstTypewriterComplete(prev => ({ ...prev, [index]: true }))}
+                          />
+                        </pre>
+                      </div>
+                      
+                      {/* Fenêtre de rendu */}
+                      <div className="h-full flex flex-col">
+                        <pre className="p-3 bg-black text-green-400 text-xs rounded-md font-mono overflow-auto shadow-md min-h-[100px]">
+                          {firstTypewriterComplete[index] && (
+                            <TypeWriterCode code={skill.codeAnswer ?? ""} typingSpeed={10} />
+                          )}
+                        </pre>
+                      </div>
                     </div>
-                    
-                    {/* Fenêtre de rendu */}
-                    <div className="h-full flex flex-col">
-                      <pre className="p-3 bg-black text-green-400 text-xs rounded-md font-mono overflow-auto shadow-md min-h-[100px]">
-                        {firstTypewriterComplete[index] && (
-                          <TypeWriterCode code={skill.codeAnswer ?? ""} typingSpeed={10} />
-                        )}
-                      </pre>
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        ))}
-      </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   );
 };

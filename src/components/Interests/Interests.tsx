@@ -58,7 +58,7 @@ const Interests: React.FC = () => {
     {
       icon: <GiCompass />,
       title: "Voyages",
-      description: "J'aime beaucoup voyager, m'enrichir de nouvelles cultures et pouvoir admirer les paysages.",
+      description: "Voyager m'a permis d'élargir mon ouverture d'esprit, de m'adapter à de nouveaux environnements et de découvrir d'autres modes de pensée.",
       color: "bg-teal-500"
     },
     {

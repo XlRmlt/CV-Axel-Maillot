@@ -131,7 +131,7 @@ const Career: React.FC = () => {
       title: 'Erasmus - Informatique',
       organization: 'Stockholms Universitet (DSV)',
       organizationIcon: '/Logos/SU.png',
-      organizationLink: 'https://www.su.se/',
+      organizationLink: 'https://www.su.se/department-of-computer-and-systems-sciences/',
       debut: '08-2024',
       fin: '01-2025',
       description: ['Semestre en Suède'],

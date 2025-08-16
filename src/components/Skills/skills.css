@@ -48,3 +48,29 @@
     flex-direction: column;
     justify-content: center;
 }
+
+.skills-flag img {
+  width: 60px;
+  object-fit: cover;
+  background: transparent;
+}
+
+/* Progress bars (langues) */
+.lang-progress {
+  width: 20%;
+  height: 1.5rem;
+  border: 2px solid #ffffff;    /* contour blanc comme sur ton visuel */
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08); /* track */
+  overflow: hidden;
+}
+
+.lang-fill {
+  height: 100%;
+  border-radius: inherit;
+  /* dégradé discret, reste lisible en dark comme en light */
+  background: linear-gradient(90deg, #60a5fa, #a78bfa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

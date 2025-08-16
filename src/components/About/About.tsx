@@ -59,7 +59,7 @@ const About: React.FC = () => {
       fin: '01-2025',
       title: 'Erasmus',
       organization: 'Stockholms Universitet (DSV)',
-      organizationLink: 'https://www.su.se/',
+      organizationLink: 'https://www.su.se/department-of-computer-and-systems-sciences/',
       technologies: ['Python']
     },
     {
