@@ -1,50 +1,47 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { translations, Lang } from './translation';
 
-export type Language = "fr" | "en" | "es";
-
-type LanguageContextType = {
-  lang: Language;
-  setLang: (l: Language) => void;
+type Ctx = {
+  lang: Lang;
+  setLang: (l: Lang) => void;
+  t: (key: string) => string;
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext = createContext<Ctx | undefined>(undefined);
 
-const STORAGE_KEY = "site-lang";
-
-function detectInitial(): Language {
-  // 1) localStorage si présent
-  const saved = (typeof window !== "undefined" && localStorage.getItem(STORAGE_KEY)) as Language | null;
-  if (saved === "fr" || saved === "en" || saved === "es") return saved;
-
-  // 2) navigateur → défaut: fr
-  const nav = typeof navigator !== "undefined" ? navigator.language.toLowerCase() : "fr";
-  if (nav.startsWith("en")) return "en";
-  if (nav.startsWith("es")) return "es";
-  return "fr";
-}
+const detectInitial = (): Lang => {
+  const saved = localStorage.getItem('lang') as Lang | null;
+  if (saved) return saved;
+  const nav = navigator.language?.slice(0, 2).toLowerCase();
+  if (nav === 'fr') return 'fr';
+  if (nav === 'es') return 'es';
+  return 'en';
+};
 
 export const LanguageProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [lang, setLangState] = useState<Language>(detectInitial());
+  const [lang, setLangState] = useState<Lang>(detectInitial);
 
-  const setLang = (l: Language) => {
+  const setLang = (l: Lang) => {
     setLangState(l);
-    try { localStorage.setItem(STORAGE_KEY, l); } catch {}
-    // Optionnel : attribut lang sur <html> pour l’accessibilité
-    try { document.documentElement.setAttribute("lang", l === "fr" ? "fr" : l === "en" ? "en" : "es"); } catch {}
+    localStorage.setItem('lang', l);
   };
 
   useEffect(() => {
-    // s’assure que l’attribut est initialisé au premier rendu
-    document.documentElement.setAttribute("lang", lang);
+    document.documentElement.lang = lang;
   }, [lang]);
 
-  const value = useMemo(() => ({ lang, setLang }), [lang]);
+  const t = useMemo(() => {
+    const dict = translations[lang] ?? translations.en;
+    return (key: string) => dict[key] ?? key;
+  }, [lang]);
+
+  const value = useMemo(() => ({ lang, setLang, t }), [lang]);
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 };
 
-export function useLanguage() {
+export const useLanguage = () => {
   const ctx = useContext(LanguageContext);
-  if (!ctx) throw new Error("useLanguage must be used within a LanguageProvider");
+  if (!ctx) throw new Error('useLanguage must be used within LanguageProvider');
   return ctx;
-}
+};

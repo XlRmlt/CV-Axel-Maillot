@@ -5,7 +5,7 @@ import ThemeToggle from '../Theme/ThemeToggle';
 import { useLanguage } from '../../i18n/LanguageContext';
 
 const SocialSidebar = () => {
-  const { lang, setLang } = useLanguage();
+  const { lang, setLang, t } = useLanguage();
 
   const socialLinks = [
     { icon: <FaTwitter />, href: '#', label: 'Twitter' },
@@ -22,8 +22,7 @@ const SocialSidebar = () => {
 
   return (
     <aside className="social-sidebar">
-      <div
-      >
+      <div>
         <ThemeToggle />
       </div>
       <div
@@ -42,7 +41,7 @@ const SocialSidebar = () => {
               <motion.button
                 key={f.code}
                 onClick={() => setLang(f.code)}
-                aria-label={`Changer la langue : ${f.label}`}
+                aria-label={`${t('changeLanguage')} : ${f.label}`}
                 className={`rounded-lg overflow-hidden border border-white/15 bg-background-popup hover:translate-x-1 transition 
                             ${lang === f.code ? 'ring-2 ring-primary' : ''}`}
                 whileHover={{ scale: 1.05, x: 4 }}
@@ -75,7 +74,7 @@ const SocialSidebar = () => {
         </div>
 
         <span className="follow-me">
-          FOLLOW ME
+          {t('followMe')}
         </span>
       </div>
     </aside>

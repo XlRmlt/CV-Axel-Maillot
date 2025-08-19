@@ -35,36 +35,34 @@ const App: React.FC = () => {
   };
 
   return (
-    <LanguageProvider>
-      <div className="relative min-h-screen bg-background-dark">
-        {/* Background */}
-        <div className="fixed inset-0">
-          <ParticlesContainer />
-        </div>
+    <div className="relative min-h-screen bg-background-dark">
+      {/* Background */}
+      <div className="fixed inset-0">
+        <ParticlesContainer />
+      </div>
+      
+      {/* Structure principale */}
+      <div className="relative">
+        {/* Éléments fixes */}
+        <SocialSidebar />
+        <NavBar activeSection={activeSection} setActiveSection={setActiveSection} />
         
-        {/* Structure principale */}
-        <div className="relative">
-          {/* Éléments fixes */}
-          <SocialSidebar />
-          <NavBar activeSection={activeSection} setActiveSection={setActiveSection} />
-          
-          {/* Zone de contenu avec marge pour navbar et sidebar */}
-          <div style={{ paddingLeft: '69px', paddingTop: '50px' }}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeSection}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                {renderSection()}
-              </motion.div>
-            </AnimatePresence>
-          </div>
+        {/* Zone de contenu avec marge pour navbar et sidebar */}
+        <div style={{ paddingLeft: '69px', paddingTop: '50px' }}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeSection}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {renderSection()}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </div>
-    </LanguageProvider>
+    </div>
   );
 };
 
