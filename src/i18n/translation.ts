@@ -31,6 +31,12 @@ export const translations: Record<Lang, Record<string, string>> = {
     timeline_prepa_desc1: "Prépa CPGE scientifique, spécialité Sciences de l’Ingénieur",
     timeline_bac_title: 'Bac S(SI) Mention TB Européenne',
     timeline_bac_desc1: "Mention Très Bien - Section Européenne",
+    home_hello: "Bonjour et bienvenu.e,",
+    home_im: "je suis",
+    home_role1: "Développeur Full Stack",
+    home_role2: "Recherche un projet dans l'IA",
+    home_role3: "Ingénieur Informatique",
+    home_role4: "Recherche un projet dans la Cyber",
   },
   en: {
     followMe: 'FOLLOW ME',
@@ -62,6 +68,12 @@ export const translations: Record<Lang, Record<string, string>> = {
     timeline_prepa_desc1: "Science preparatory class, Engineering Sciences specialty",
     timeline_bac_title: 'Baccalaureate S(SI) with Honors European Section',
     timeline_bac_desc1: "High honors - European section",
+    home_hello: "Hello and welcome,",
+    home_im: "I am",
+    home_role1: "Full Stack Developer",
+    home_role2: "Looking for a project in AI",
+    home_role3: "Computer Science Engineer",
+    home_role4: "Looking for a project in Cybersecurity",
   },
   es: {
     followMe: 'SÍGUEME',
@@ -93,6 +105,12 @@ export const translations: Record<Lang, Record<string, string>> = {
     timeline_prepa_desc1: "Clase preparatoria científica, especialidad en Ingeniería",
     timeline_bac_title: 'Bachillerato S(SI) Mención TB Europea',
     timeline_bac_desc1: "Mención de honor - Sección Europea",
+    home_hello: "Hola y bienvenid@,",
+    home_im: "soy",
+    home_role1: "Desarrollador Full Stack",
+    home_role2: "Buscando un proyecto en IA",
+    home_role3: "Ingeniero Informático",
+    home_role4: "Buscando un proyecto en Ciberseguridad",
   },
 };
 

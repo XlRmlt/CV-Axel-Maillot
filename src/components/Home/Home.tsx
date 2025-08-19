@@ -3,15 +3,17 @@ import { motion } from 'framer-motion';
 import AnimatedCharacter from "./AnimatedCharacter";
 import SpeechBubble from './SpeechBubble';
 import TypeWriter from './TypeWriter';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 type Pt = { x: number; y: number };
 
 const Home: React.FC = () => {
+  const { t } = useLanguage();
   const roles = [
-    "Développeur Full Stack",
-    "Recherche un projet dans l'IA",
-    "Ingénieur Informatique",
-    "Recherche un projet dans la Cyber"
+    t('home_role1'),
+    t('home_role2'),
+    t('home_role3'),
+    t('home_role4'),
   ];
 
   // Taille dessinée du personnage (dans son propre repère 120x160)
@@ -87,7 +89,7 @@ const Home: React.FC = () => {
                   transition={{ duration: 0.5 }}
                   className="title text-4xl md:text-6xl font-bold mb-6"
                   >
-                  Bonjour et bienvenu.e,<br />je suis{' '}
+                  {t('home_hello')}<br />{t('home_im')}{' '}
                   <motion.span 
                     className="nom"
                     data-text="Axel Maillot"
