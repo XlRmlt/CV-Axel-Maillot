@@ -1,6 +1,8 @@
 import React, { useRef, useLayoutEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import './timeline.css';
+import { useLanguage } from '../../i18n/LanguageContext';
+import { monthsByLang } from '../../i18n/translation';
 
 // ==== Icônes (même mapping que Career) ====
 import {
@@ -49,11 +51,6 @@ type TimelineProps = {
   items: TimelineItem[];
 };
 
-const monthsFr = [
-  'Janvier','Février','Mars','Avril','Mai','Juin',
-  'Juillet','Août','Septembre','Octobre','Novembre','Décembre'
-];
-
 const parseMonthYear = (mmYYYY: string) => {
   // attendu "MM-YYYY"
   const [mm, yyyy] = mmYYYY.split('-').map(Number);
@@ -63,14 +60,16 @@ const parseMonthYear = (mmYYYY: string) => {
 
 const monthIndex = (d: Date) => d.getFullYear() * 12 + d.getMonth();
 
-const formatRangeFr = (start: Date, end: Date) => {
-  const s = `${monthsFr[start.getMonth()]} ${start.getFullYear()}`;
-  const e = `${monthsFr[end.getMonth()]} ${end.getFullYear()}`;
-  return `${s} – ${e}`;
-};
-
 const Timeline: React.FC<TimelineProps> = ({ items }) => {
+  const { lang } = useLanguage();
   if (!items.length) return null;
+
+  const months = monthsByLang[lang];
+  const formatRange = (start: Date, end: Date) => {
+    const s = `${months[start.getMonth()]} ${start.getFullYear()}`;
+    const e = `${months[end.getMonth()]} ${end.getFullYear()}`;
+    return `${s} – ${e}`;
+  };
 
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -304,7 +303,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
             transition={{ duration: 0.5, delay: index * 0.08 }}
           >
             <div className="timeline-card" ref={index === 0 ? cardRef : undefined}>
-              <span className="timeline-dates">{formatRangeFr(p.start, p.end)}</span>
+              <span className="timeline-dates">{formatRange(p.start, p.end)}</span>
               <div className="timeline-title-container">
                 <div className="timeline-title-text">
                   <h4 className="timeline-title">{p.title}</h4>

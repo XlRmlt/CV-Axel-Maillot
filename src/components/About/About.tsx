@@ -4,8 +4,11 @@ import { useInView } from 'react-intersection-observer';
 import SkillsIcons from './SkillsIcons';
 import { TypeAnimation } from 'react-type-animation';
 import Timeline from './Timeline';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 const About: React.FC = () => {
+  const { lang, setLang, t } = useLanguage();
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -17,7 +20,7 @@ const About: React.FC = () => {
       type: 'work',
       debut: '02-2025',
       fin: '08-2025',
-      title: 'Stage développement web',
+      title: t('timeline_biomerieux_title'),
       organization: 'BioMérieux',
       organizationLink: 'https://www.biomerieux.com/',
       technologies: ['R/Shiny', 'JavaScript', 'CSS', 'GitLab', 'Docker', 'Kubernetes']
@@ -27,7 +30,7 @@ const About: React.FC = () => {
       type: 'work',
       debut: '05-2024',
       fin: '08-2024',
-      title: 'Stage développement web et IA',
+      title: t('timeline_efor_title'),
       organization: 'Efor Group',
       organizationLink: 'https://www.efor-group.com/',
       technologies: ['Python', 'TypeScript', 'React', 'GitLab', 'Docker', 'Azure']
@@ -37,7 +40,7 @@ const About: React.FC = () => {
       type: 'work',
       debut: '06-2023',
       fin: '08-2023',
-      title: 'Stage développement d’application',
+      title: t('timeline_schneider_title'),
       organization: 'Schneider Electric',
       organizationLink: 'https://www.se.com/',
       technologies: ['Python', 'VBA']
@@ -47,7 +50,7 @@ const About: React.FC = () => {
       type: 'education',
       debut: '09-2022',
       fin: '08-2025',
-      title: 'Ingénieur Informatique',
+      title: t('timeline_insa_title'),
       organization: 'INSA Lyon',
       organizationLink: 'https://www.insa-lyon.fr/',
       technologies: ['Python', 'TypeScript', 'JavaScript', 'CSS', 'C', 'Cpp', 'R', 'Git', 'SQL', 'Prolog', 'Matlab']
@@ -57,7 +60,7 @@ const About: React.FC = () => {
       type: 'education',
       debut: '08-2024',
       fin: '01-2025',
-      title: 'Erasmus',
+      title: t('timeline_suede_title'),
       organization: 'Stockholms Universitet (DSV)',
       organizationLink: 'https://www.su.se/department-of-computer-and-systems-sciences/',
       technologies: ['Python']
@@ -67,7 +70,7 @@ const About: React.FC = () => {
       type: 'education',
       debut: '09-2020',
       fin: '07-2022',
-      title: 'Prépa PT*',
+      title: t('timeline_prepa_title'),
       organization: 'Lycée la Martinière Monplaisir',
       organizationLink: 'https://martiniere-monplaisir.ent.auvergnerhonealpes.fr/',
       technologies: ['Python', 'SolidWorks', 'SQL']
@@ -77,7 +80,7 @@ const About: React.FC = () => {
       type: 'education',
       debut: '09-2017',
       fin: '07-2020',
-      title: 'Bac S(SI) Mention TB Européenne',
+      title: t('timeline_bac_title'),
       organization: 'Lycée Saint Marc',
       organizationLink: 'https://www.st-marc.eu/',
       technologies: ['SolidWorks', 'C']
@@ -91,7 +94,7 @@ const About: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="title text-3xl font-bold mb-8"
       >
-        À propos de moi
+        {t('aboutTitle')}
       </motion.h2>
 
       <motion.div
@@ -102,32 +105,34 @@ const About: React.FC = () => {
         className="prose dark:prose-invert mb-12"
       >
         <p>
-          Je suis récemment diplômé de L'INSA Lyon en Informatique
+          {t('aboutDesc1')}
         </p>
         <p>
-          Je suis un jeune ingénieur recherchant un projet stimulant dans le domaine de <TypeAnimation
+          {t('aboutDesc2')}{' '}
+          <TypeAnimation
             sequence={[
-              'l’Intelligence Artificielle',
+              t('aboutIA'),
               1000,
-              'la Cybersécurité',
+              t('aboutCyber'),
               1000
             ]}
             wrapper="span"
             speed={50}
             repeat={Infinity}
-          />.
+          />
+          .
         </p>
       </motion.div>
 
       <div className="mb-16">
         <br />
-        <h2 className="text-3xl font-bold mb-6">Parcours</h2>
+        <h2 className="text-3xl font-bold mb-6">{t('aboutTimeline')}</h2>
         <Timeline items={timelineItems} />
       </div>
 
       <div className="mb-16">
         <br />
-        <h2 className="text-3xl font-bold mb-6">Compétences techniques</h2>
+        <h2 className="text-3xl font-bold mb-6">{t('aboutSkills')}</h2>
         <SkillsIcons />
         <br />
       </div>

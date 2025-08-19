@@ -9,11 +9,10 @@ import Career from './components/Career/Career';
 import Skills from './components/Skills/Skills';
 import Interests from './components/Interests/Interests';
 import Resume from './components/Resume/Resume';
-import { LanguageProvider } from './i18n/LanguageContext';
 import './index.css';
 
 const App: React.FC = () => {
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState('about');
 
   const renderSection = () => {
     switch (activeSection) {
