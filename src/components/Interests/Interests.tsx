@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaCamera, FaHeadphones, FaDice, FaGlassCheers, FaLanguage } from 'react-icons/fa';
 import './interests.css';
 import { GiGamepad, GiSoccerBall, GiChessKnight, GiBoxingGlove, GiCompass } from 'react-icons/gi';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface Interest {
   icon: React.ReactNode;
@@ -12,59 +13,60 @@ interface Interest {
 }
 
 const Interests: React.FC = () => {
+  const { t } = useLanguage();
   const interests: Interest[] = [
     {
       icon: <GiSoccerBall />,
-      title: "Football",
-      description: "J'ai pu faire du football en club pendant 10 ans, je continue la pratique dans différentes équipes selon ma localisation.",
+      title: t('interests_football_title'),
+      description: t('interests_football_desc'),
       color: "bg-blue-500"
     },
     {
       icon: <GiGamepad />,
-      title: "Jeux Vidéo",
-      description: "Je profite des différents jeux vidéo pour me détendre et rencontrer de nouvelles personnes.",
+      title: t('interests_games_title'),
+      description: t('interests_games_desc'),
       color: "bg-purple-500"
     },
     {
       icon: <FaHeadphones />,
-      title: "Musique",
-      description: "Je passe un grande partie de mon temps à écouter de la musique, que ce soit pour me concentrer ou pour me détendre.",
+      title: t('interests_music_title'),
+      description: t('interests_music_desc'),
       color: "bg-green-500"
     },
     {
       icon: <FaDice />,
-      title: "Jeux de Société",
-      description: "Dès que j'en ai l'occasion, je joue à des jeux de société avec ma famille et mes amis.",
+      title: t('interests_boardgames_title'),
+      description: t('interests_boardgames_desc'),
       color: "bg-yellow-500"
     },
     {
       icon: <GiChessKnight />,
-      title: "Échecs",
-      description: "Je joue occasionnellement aux échecs car j'apprécie le challenge intellectuel qu'ils représentent.",
+      title: t('interests_chess_title'),
+      description: t('interests_chess_desc'),
       color: "bg-red-500"
     },
     {
       icon: <GiBoxingGlove />,
-      title: "Boxe",
-      description: "J'ai pour l'instant une petite année de pratique de la boxe, mais j'espère bientôt pouvoir en faire plus régulièrement.",
+      title: t('interests_boxing_title'),
+      description: t('interests_boxing_desc'),
       color: "bg-indigo-500"
     },
     {
       icon: <FaGlassCheers />,
-      title: "Sorties",
-      description: "J'aime beaucoup les sorties entre amis, notamment pour se retrouver dans un bar à jeux",
+      title: t('interests_outings_title'),
+      description: t('interests_outings_desc'),
       color: "bg-pink-500"
     },
     {
       icon: <GiCompass />,
-      title: "Voyages",
-      description: "Voyager m'a permis d'élargir mon ouverture d'esprit, de m'adapter à de nouveaux environnements et de découvrir d'autres modes de pensée.",
+      title: t('interests_travel_title'),
+      description: t('interests_travel_desc'),
       color: "bg-teal-500"
     },
     {
       icon: <FaLanguage />,
-      title: "Nouvelles langues",
-      description: "J'apprécie grandement apprendre de nouvelles langues, que ce soit pour le plaisir ou pour des voyages.",
+      title: t('interests_languages_title'),
+      description: t('interests_languages_desc'),
       color: "bg-gray-500"
     }
   ];
@@ -76,7 +78,7 @@ const Interests: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="title text-3xl font-bold mb-12 text-center"
       >
-        Mes Centres d'Intérêt
+        {t('interests_title')}
       </motion.h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
