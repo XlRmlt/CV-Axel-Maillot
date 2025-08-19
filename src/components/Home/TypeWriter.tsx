@@ -6,13 +6,15 @@ interface TypeWriterProps {
   typingSpeed?: number;
   deletingSpeed?: number;
   delayBetweenWords?: number;
+  style?: React.CSSProperties;
 }
 
 const TypeWriter: React.FC<TypeWriterProps> = ({
   words,
   typingSpeed = 100,
   deletingSpeed = 50,
-  delayBetweenWords = 1000
+  delayBetweenWords = 1000,
+  style
 }) => {
   const [text, setText] = useState('');
   const [wordIndex, setWordIndex] = useState(0);
@@ -51,7 +53,7 @@ const TypeWriter: React.FC<TypeWriterProps> = ({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="inline-block text-2xl font-bold text-text-muted"
-      style={{ fontSize: "1.5rem", fontWeight: 700 }} // <-- Ajouté pour forcer la taille et le gras
+      style={style ? style : { fontSize: "1.5rem", fontWeight: 700 }}
     >
       {text}
       {'\u00A0'}

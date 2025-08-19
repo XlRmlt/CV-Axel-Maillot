@@ -21,6 +21,7 @@ import { TbMathFunction } from 'react-icons/tb';
 import './skills.css';
 import TypeWriterCode from './TypeWriterCode';
 import UkFlagStretch from './UKFlagStretch';
+import TypeWriter from '../Home/TypeWriter';
 
 interface Skills {
   icon: React.ReactNode;
@@ -201,6 +202,27 @@ const SkillsSection = () => {
 
   return (
     <div ref={ref} className="py-12">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+      >
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          className="title text-3xl font-bold mb-8 text-center"
+        >
+          Permis de conduire
+        </motion.h2>
+
+        <motion.div
+          className="text-center text-lg font-semibold mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+        >
+          <TypeWriter words={['Permis B']} style={{ fontSize: "1rem", fontWeight: 500, color: "var(--text-highlight)" }} typingSpeed={150} />
+        </motion.div>
+      </motion.div>
+
       <motion.div>
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
