@@ -62,6 +62,10 @@ export const translations: Record<Lang, Record<string, string>> = {
     nav_skills: "Compétences",
     nav_interests: "Centres d'intérêt",
     nav_resume: "CV",
+    resume_title: "Mon CV",
+    resume_download_label: "Télécharger le CV ",
+    resume_show_label: "Afficher le CV ",
+    resume_iframe_title: "CV ",
   },
   en: {
     followMe: 'FOLLOW ME',
@@ -124,6 +128,10 @@ export const translations: Record<Lang, Record<string, string>> = {
     nav_skills: "Skills",
     nav_interests: "Interests",
     nav_resume: "Resume",
+    resume_title: "My Resume",
+    resume_download_label: "Download CV ",
+    resume_show_label: "Show CV ",
+    resume_iframe_title: "CV ",
   },
   es: {
     followMe: 'SÍGUEME',
@@ -186,6 +194,10 @@ export const translations: Record<Lang, Record<string, string>> = {
     nav_skills: "Competencias",
     nav_interests: "Intereses",
     nav_resume: "CV",
+    resume_title: "Mi CV",
+    resume_download_label: "Descargar CV ",
+    resume_show_label: "Mostrar CV ",
+    resume_iframe_title: "CV ",
   },
 };
 
