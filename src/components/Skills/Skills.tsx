@@ -20,6 +20,7 @@ import { FaCode, FaMicrosoft } from 'react-icons/fa';
 import { TbMathFunction } from 'react-icons/tb';
 import './skills.css';
 import TypeWriterCode from './TypeWriterCode';
+import UkFlagStretch from './UKFlagStretch';
 
 interface Skills {
   icon: React.ReactNode;
@@ -162,9 +163,41 @@ const SkillsSection = () => {
 
   const languages = [
     { lang: 'Français', icon: '/flags/FR.png', levelText: 'Langue natale', percent: 100, color: '#0055A4' },
-    { lang: 'Anglais', icon: '/flags/UK.png', levelText: 'C1+', percent: 95, color: '#00247D' },
+    { lang: 'Anglais', icon: '/flags/UK.png', levelText: 'C1+', percent: 95, color: '#012169' },
     { lang: 'Espagnol', icon: '/flags/ES.png', levelText: 'B2', percent: 90, color: '#AA151B' },
   ];
+
+  // ...
+  const flagBgStyle = (l: { lang: string; icon: string }) => {
+    switch (l.lang) {
+      case 'Français':
+        return {
+          backgroundImage:
+            'linear-gradient(90deg,#0055A4 0 33.33%,#FFFFFF 33.33% 66.66%,#EF4135 66.66% 100%)',
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+        };
+
+      case 'Espagnol':
+        // Seulement les 3 bandes, l’écusson arrive en overlay <img>
+        return {
+          backgroundImage:
+            'linear-gradient(0deg,#AA151B 0 25%,#F1BF00 25% 75%,#AA151B 75% 100%)',
+          backgroundSize: '100% 100%',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+        };
+
+      default:
+        return {
+          backgroundImage: `url(${l.icon})`,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+        };
+    }
+  };
 
   return (
     <div ref={ref} className="py-12">
@@ -177,35 +210,53 @@ const SkillsSection = () => {
           Langues vivantes
         </motion.h2>
 
-        <div className="flex flex-row gap-6 justify-center items-start">
+        <div className="flex flex-row flex-nowrap gap-6 justify-center items-start overflow-x-auto md:overflow-visible">
           {languages.map((l) => (
-            <div key={l.lang} className="w-64 flex-shrink-0">
-              {/* Drapeau + libellé */}
-              <div
-                key={l.lang}
-                className="lang-progress relative flex-1"
-                style={{ borderColor: l.color, borderWidth: 2, borderStyle: 'solid' }}
-                >
-                <motion.div
-                  className="lang-fill flex items-center justify-center"
-                  style={{
-                    backgroundImage: `url(${l.icon})`,
-                    backgroundSize: '100% 100%',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
+            <div
+              key={l.lang}
+              className="lang-progress relative flex-1"
+              style={{ borderColor: l.color, borderWidth: 2, borderStyle: 'solid' }}
+              >
+              <motion.div
+                className="lang-fill flex items-center justify-center"
+                style={{
+                  ...(l.lang !== 'Anglais' ? flagBgStyle(l) : {}),
+                  height: '2rem',
+                  position: 'relative',
+                }}
+                initial={{ width: 0 }}
+                animate={inView ? { width: `${l.percent}%` } : { width: 0 }}
+                transition={{ duration: 1.1, ease: "easeOut" }}
+              >
+                {l.lang === 'Anglais' && (
+                  <UkFlagStretch
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      width: '100%',
+                      height: '100%',
+                      zIndex: 0,
+                    }}
+                    aria-hidden
+                  />
+                )}
+
+                {l.lang === 'Espagnol' && (
+                  <img src="/flags/ES-icon.png" alt="" className="es-coa" aria-hidden />
+                )}
+
+                <span 
+                  className="text-xs text-white font-semibold drop-shadow-md"
+                  style={{ 
+                    color: l.color,
+                    position: 'relative',
+                    zIndex: 1,
+                    textAlign: 'center'
                   }}
-                  initial={{ width: 0 }}
-                  animate={inView ? { width: `${l.percent}%` } : { width: 0 }}
-                  transition={{ duration: 1.1, ease: "easeOut" }}
                 >
-                  <span 
-                    className="text-xs text-white font-semibold drop-shadow-md"
-                    style={{ color: l.color }}
-                  >
-                    {l.levelText}
-                  </span>
-                </motion.div>
-              </div>
+                  {l.levelText}
+                </span>
+              </motion.div>
             </div>
           ))}
         </div>
