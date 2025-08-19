@@ -9,10 +9,11 @@ import Career from './components/Career/Career';
 import Skills from './components/Skills/Skills';
 import Interests from './components/Interests/Interests';
 import Resume from './components/Resume/Resume';
+import { LanguageProvider } from './i18n/LanguageContext';
 import './index.css';
 
 const App: React.FC = () => {
-  const [activeSection, setActiveSection] = useState('skills');
+  const [activeSection, setActiveSection] = useState('home');
 
   const renderSection = () => {
     switch (activeSection) {
@@ -34,34 +35,36 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-background-dark">
-      {/* Background */}
-      <div className="fixed inset-0">
-        <ParticlesContainer />
-      </div>
-      
-      {/* Structure principale */}
-      <div className="relative">
-        {/* Éléments fixes */}
-        <SocialSidebar />
-        <NavBar activeSection={activeSection} setActiveSection={setActiveSection} />
+    <LanguageProvider>
+      <div className="relative min-h-screen bg-background-dark">
+        {/* Background */}
+        <div className="fixed inset-0">
+          <ParticlesContainer />
+        </div>
         
-        {/* Zone de contenu avec marge pour navbar et sidebar */}
-        <div style={{ paddingLeft: '69px', paddingTop: '50px' }}>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeSection}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              {renderSection()}
-            </motion.div>
-          </AnimatePresence>
+        {/* Structure principale */}
+        <div className="relative">
+          {/* Éléments fixes */}
+          <SocialSidebar />
+          <NavBar activeSection={activeSection} setActiveSection={setActiveSection} />
+          
+          {/* Zone de contenu avec marge pour navbar et sidebar */}
+          <div style={{ paddingLeft: '69px', paddingTop: '50px' }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeSection}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                {renderSection()}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
-    </div>
+    </LanguageProvider>
   );
 };
 
