@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface NavBarProps {
   activeSection: string;
@@ -6,13 +7,14 @@ interface NavBarProps {
 }
 
 const NavBar: React.FC<NavBarProps> = ({ activeSection, setActiveSection }) => {
+  const { t } = useLanguage();
   const navItems = [
-    { id: 'home', label: 'Accueil' },
-    { id: 'about', label: 'À propos' },
-    { id: 'career', label: 'Parcours' },
-    { id: 'skills', label: 'Compétences' },
-    { id: 'interests', label: 'Centres d\'intérêt' },
-    { id: 'resume', label: 'CV' },
+    { id: 'home', label: t('nav_home') },
+    { id: 'about', label: t('nav_about') },
+    { id: 'career', label: t('nav_career') },
+    { id: 'skills', label: t('nav_skills') },
+    { id: 'interests', label: t('nav_interests') },
+    { id: 'resume', label: t('nav_resume') },
   ];
 
   return (
