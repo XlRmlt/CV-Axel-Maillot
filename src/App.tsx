@@ -12,7 +12,7 @@ import Resume from './components/Resume/Resume';
 import './index.css';
 
 const App: React.FC = () => {
-  const [activeSection, setActiveSection] = useState('skills');
+  const [activeSection, setActiveSection] = useState('home');
 
   // Reset le scroll en haut à chaque changement d’onglet
   useEffect(() => {

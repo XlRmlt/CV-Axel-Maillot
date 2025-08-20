@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaTwitter, FaGithub, FaFacebook, FaLinkedin } from 'react-icons/fa';
+import { FaLinkedin } from 'react-icons/fa';
+import { SiCachet, SiGmail } from 'react-icons/si';
 import ThemeToggle from '../Theme/ThemeToggle';
 import { useLanguage } from '../../i18n/LanguageContext';
 
@@ -8,9 +9,7 @@ const SocialSidebar = () => {
   const { lang, setLang, t } = useLanguage();
 
   const socialLinks = [
-    { icon: <FaTwitter />, href: '#', label: 'Twitter' },
-    { icon: <FaGithub />, href: '#', label: 'GitHub' },
-    { icon: <FaFacebook />, href: '#', label: 'Facebook' },
+    { icon: <SiGmail />, href: 'mailto:axel.maillot.pro@gmail.com', label: 'Gmail' },
     { icon: <FaLinkedin />, href: 'https://www.linkedin.com/in/axel-maillot/', label: 'LinkedIn' }
   ];
 
@@ -72,8 +71,10 @@ const SocialSidebar = () => {
               href={link.href}
               className="social-icon"
               aria-label={link.label}
-              whileHover={{ x: 5 }}
+              whileHover={{ scale: 1.1 }}
               transition={{ type: "spring", stiffness: 300 }}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {link.icon}
             </motion.a>
