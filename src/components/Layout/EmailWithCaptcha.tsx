@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { SiGmail } from 'react-icons/si';
 import { createPortal } from 'react-dom';
+import { motion } from 'framer-motion';
 
 const SITE_KEY = '1x00000000000000000000AA'; // <- remplace par ta vraie clé
 
@@ -195,13 +196,16 @@ const EmailWithCaptcha: React.FC<Props> = ({
 
   return (
     <>
-      <button
+      <motion.button
         onClick={() => setOpen(true)}
         className={className}
         aria-label={label}
+        style={{ color: 'var(--text-grey)' }}
+        whileHover={{ scale: 1.1, color: 'var(--text-primary)' }}
+        transition={{ type: "spring", stiffness: 300 }}
       >
         <SiGmail />
-      </button>
+      </motion.button>
 
       {mounted ? createPortal(overlay as React.ReactNode, document.body) : null}
     </>
