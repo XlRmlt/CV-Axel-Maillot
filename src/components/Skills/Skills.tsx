@@ -22,6 +22,7 @@ import './skills.css';
 import TypeWriterCode from './TypeWriterCode';
 import UkFlagStretch from './UKFlagStretch';
 import TypeWriter from '../Home/TypeWriter';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 interface Skills {
   icon: React.ReactNode;
@@ -39,136 +40,136 @@ const SkillsSection = () => {
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [firstTypewriterComplete, setFirstTypewriterComplete] = useState<{[key: number]: boolean}>({});
+  const { t } = useLanguage();
 
   const categories: Skills[] = [
     {
       icon: <SiPython color="#3776AB" size={28} />,
       title: "Python - OpenCV",
       color: "#3776AB",
-      codeSnippet: `def greet(name):\n    return f"Hello world ! Je m'appelle {name}!"\n\nprint(greet("Axel"))`,
-      codeAnswer: `>>> Hello world ! Je m'appelle Axel!`
+      codeSnippet: t('skills_python_code'),
+      codeAnswer: t('skills_python_answer')
     },
     {
       icon: <SiReact color="#61DAFB" size={28} />,
       title: "React",
       color: "#61DAFB",
-      codeSnippet: `const App = () => <h1>Bienvenue sur mon CV interactif !</h1>;`,
-      codeAnswer: `> Bienvenue sur mon CV interactif !`
+      codeSnippet: t('skills_react_code'),
+      codeAnswer: t('skills_react_answer')
     },
     {
       icon: <SiTypescript color="#3178C6" size={28} />,
       title: "TypeScript",
       color: "#3178C6",
-      codeSnippet: `type Projet = { nom: string; annee: number };\nconst projet: Projet = { nom: "site CV", annee: 2025 };`,
-      codeAnswer: `> { nom: "site CV", annee: 2025 }`
+      codeSnippet: t('skills_typescript_code'),
+      codeAnswer: t('skills_typescript_answer')
     },
     {
       icon: <SiJavascript color="#F7DF1E" size={28} />,
       title: "JavaScript",
       color: "#F7DF1E",
-      codeSnippet: `const message = "Je cherche un emploi en Intelligence Artificielle ou en CyberSécurité";\nconsole.log(message);`,
-      codeAnswer: `>>> Je cherche un emploi en Intelligence Artificielle ou en CyberSécurité`
+      codeSnippet: t('skills_javascript_code'),
+      codeAnswer: t('skills_javascript_answer')
     },
     {
       icon: <SiCss3 color="#06B6D4" size={28} />,
       title: "CSS / Tailwind",
       color: "#06B6D4",
-      codeSnippet: `<div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-4 rounded">\n  Petit extrait de ce que je sais faire\n</div>`,
-      codeAnswer: `> Petit extrait de ce que je sais faire`
+      codeSnippet: t('skills_css_code'),
+      codeAnswer: t('skills_css_answer')
     },
     {
       icon: <SiNodedotjs color="#339933" size={28} />,
       title: "Node.js",
       color: "#339933",
-      codeSnippet: `const http = require('http');\n\nhttp.createServer((req, res) => {\n  res.writeHead(200, {'Content-Type': 'text/plain'});\n  res.end("Dans un site codé en Typescript");\n}).listen(3000);`,
-      codeAnswer: `> Dans un site codé en Typescript`
+      codeSnippet: t('skills_node_code'),
+      codeAnswer: t('skills_node_answer')
     },
     {
       icon: <SiPostgresql color="#4479A1" size={28} />,
       title: "SQL",
       color: "#4479A1",
-      codeSnippet: `SELECT library FROM this_site;`,
-      codeAnswer: `> library\n--------\nReact`
+      codeSnippet: t('skills_sql_code'),
+      codeAnswer: t('skills_sql_answer')
     },
     {
       icon: <SiR color="#276DC3" size={28} />,
       title: "R / Shiny",
       color: "#276DC3",
-      codeSnippet: `ui <- fluidPage(\n  titlePanel("Mon stage à bioMérieux"),\n  sidebarLayout(\n    sidebarPanel(),\n    mainPanel("Apprentissage")\n  )\n)\nserver <- function(input, output) {}\nshinyApp(ui, server)`,
-      codeAnswer: `> Mon stage à bioMérieux\n Apprentissage`
+      codeSnippet: t('skills_r_code'),
+      codeAnswer: t('skills_r_answer')
     },
     {
       icon: <SiGit color="#F1502F" size={28} />,
       title: "Git / GitLab",
       color: "#F1502F",
-      codeSnippet: `git checkout -b "Ce que j'ai appris"\n# Travail...\ngit commit -am "La CI/CD"\ngit push origin "Ce que j'ai appris"`,
-      codeAnswer: `> Branche "Ce que j'ai appris" créée, commit "La CI/CD"`
+      codeSnippet: t('skills_git_code'),
+      codeAnswer: t('skills_git_answer')
     },
     {
       icon: <SiDocker color="#2496ED" size={28} />,
       title: "Docker",
       color: "#2496ED",
-      codeSnippet: `ARG description="Le déploiement via Docker"\nFROM node:18-alpine\nWORKDIR /app\nCOPY . .\nRUN npm install\nCMD ["npm", "start"]`,
-      codeAnswer: `> Application Node.js démarrée dans un conteneur Docker`
+      codeSnippet: t('skills_docker_code'),
+      codeAnswer: t('skills_docker_answer')
     },
     {
       icon: <FaMicrosoft color="#007FFF" size={28} />,
       title: "Azure",
       color: "#007FFF",
-      codeSnippet: `az login\naz webapp up --name mon-stage --context chez-efor --used azure`,
-      codeAnswer: `> Déploiement de l'application "mon-stage" sur Azure`
+      codeSnippet: t('skills_azure_code'),
+      codeAnswer: t('skills_azure_answer')
     },
     {
       icon: <SiC color="#00599C" size={28} />,
       title: "C",
       color: "#00599C",
-      codeSnippet: `#include <stdio.h>\n\nint main() {\n    printf("Et évidemment, quel ingénieur informatique n'a pas commencé par du C ?\\n");\n    return 0;\n}`,
-      codeAnswer: `> Et évidemment, quel ingénieur informatique n'a pas commencé par du C ?`
+      codeSnippet: t('skills_c_code'),
+      codeAnswer: t('skills_c_answer')
     },
     {
       icon: <SiCplusplus color="#F34B7D" size={28} />,
       title: "C++",
       color: "#F34B7D",
-      codeSnippet: `#include <iostream>\n\nint main() {\n    std::cout << "Et le C++ est quand même plus intéressant de nos jours, surtout pour apprendre la Programmation Orientée Objet" << std::endl;\n    return 0;\n}`,
-      codeAnswer: `> Et le C++ est quand même plus intéressant de nos jours, surtout pour apprendre la Programmation Orientée Objet`
+      codeSnippet: t('skills_cpp_code'),
+      codeAnswer: t('skills_cpp_answer')
     },
     {
       icon: <FaCode color="#9D4EDD" size={28} />,
       title: "Prolog",
       color: "#9D4EDD",
-      codeSnippet: `parent(autonomie, axel).\nparent(efficacite, axel).\n\n% Capacité d’analyse\nanalyse(X) :- parent(X, axel), X \\= axel.\n\n% Esprit critique\nesprit_critique(axel) :- analyse(autonomie), analyse(efficacite).`,
-      codeAnswer: `% Déclare que l'autonomie et l'efficacité sont mes "parents" (i.e. me constituent)\nparent(autonomie, axel).\nparent(efficacite, axel).\n\n% Déclare que j’analyse tout ce qui me constitue\nanalyse(X) :- parent(X, axel), X \\= axel.\n\n% Je base mon esprit critique sur mon analyse de l'autonomie et de l'efficacité\nesprit_critique(axel) :- analyse(autonomie), analyse(efficacite).`
+      codeSnippet: t('skills_prolog_code'),
+      codeAnswer: t('skills_prolog_answer')
     },
     {
       icon: <TbMathFunction color="#FFB000" size={28} />,
       title: "Matlab",
       color: "#FFB000",
-      codeSnippet: `% Perseverance et apprentissage rapide\nfor i = 1:5\n    disp("J'apprends vite et je ne lâche rien !")\nend`,
-      codeAnswer: `>> J'apprends vite et je ne lâche rien !\n>> J'apprends vite et je ne lâche rien !\n>> J'apprends vite et je ne lâche rien !\n>> J'apprends vite et je ne lâche rien !\n>> J'apprends vite et je ne lâche rien !`
+      codeSnippet: t('skills_matlab_code'),
+      codeAnswer: t('skills_matlab_answer')
     },
     {
       icon: <FaCode color="#185ABD" size={28} />,
       title: "Office / VBA",
       color: "#185ABD",
-      codeSnippet: `Sub Bonjour()\n    MsgBox "Je sais aussi utiliser la suite Office." & vbCrLf & "Et j'ai même fait ce langage du démon!"\nEnd Sub`,
-      codeAnswer: `> Je sais aussi utiliser la suite Office.\n> Et j'ai même fait ce langage du démon!`
+      codeSnippet: t('skills_vba_code'),
+      codeAnswer: t('skills_vba_answer')
     },
     {
       icon: <FaCogs color="#E22127" size={28} />,
       title: "SolidWorks",
       color: "#E22127",
-      codeSnippet: `// J'ai pu également faire du SolidWorks\n// durant le lycée et la prépa.`,
-      codeAnswer: `Expérience avec SolidWorks au lycée et en prépa`
+      codeSnippet: t('skills_solidworks_code'),
+      codeAnswer: t('skills_solidworks_answer')
     },
   ];
 
   const languages = [
-    { lang: 'Français', icon: '/flags/FR.png', levelText: 'Langue natale', percent: 100, color: '#0055A4' },
-    { lang: 'Anglais', icon: '/flags/UK.png', levelText: 'C1+', percent: 95, color: '#012169' },
-    { lang: 'Espagnol', icon: '/flags/ES.png', levelText: 'B2', percent: 90, color: '#AA151B' },
+    { lang: 'Français', icon: '/flags/FR.png', levelText: t('skills_lang_native'), percent: 100, color: '#0055A4' },
+    { lang: 'Anglais', icon: '/flags/UK.png', levelText: t('skills_lang_english_level'), percent: 95, color: '#012169' },
+    { lang: 'Espagnol', icon: '/flags/ES.png', levelText: t('skills_lang_spanish_level'), percent: 90, color: '#AA151B' },
   ];
 
-  // ...
   const flagBgStyle = (l: { lang: string; icon: string }) => {
     switch (l.lang) {
       case 'Français':
@@ -211,7 +212,7 @@ const SkillsSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           className="title text-3xl font-bold mb-8 text-center"
         >
-          Permis de conduire
+          {t('skills_license')}
         </motion.h2>
 
         <motion.div
@@ -219,7 +220,7 @@ const SkillsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
         >
-          <TypeWriter words={['Permis B']} style={{ fontSize: "1rem", fontWeight: 500, color: "var(--text-highlight)" }} typingSpeed={150} />
+          <TypeWriter words={[t('skills_license_b')]} style={{ fontSize: "1rem", fontWeight: 500, color: "var(--text-highlight)" }} typingSpeed={150} />
         </motion.div>
       </motion.div>
 
@@ -229,7 +230,7 @@ const SkillsSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           className="title text-3xl font-bold mb-8 text-center"
         >
-          Langues vivantes
+          {t('skills_languages')}
         </motion.h2>
 
         <div className="flex flex-row flex-nowrap gap-6 justify-center items-start overflow-x-auto md:overflow-visible">
@@ -294,7 +295,7 @@ const SkillsSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           className="title text-3xl font-bold mb-8 text-center"
         >
-          Compétences Techniques
+          {t('aboutSkills')}
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
