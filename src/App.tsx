@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import NavBar from './components/Layout/Navbar';
 import SocialSidebar from './components/Layout/SocialSidebar';
@@ -13,6 +13,11 @@ import './index.css';
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('skills');
+
+  // Reset le scroll en haut à chaque changement d’onglet
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activeSection]);
 
   const renderSection = () => {
     switch (activeSection) {
