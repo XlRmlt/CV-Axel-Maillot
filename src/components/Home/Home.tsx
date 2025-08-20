@@ -10,10 +10,10 @@ type Pt = { x: number; y: number };
 const Home: React.FC = () => {
   const { t } = useLanguage();
   const roles = [
-    t('home_role1'),
-    t('home_role2'),
-    t('home_role3'),
-    t('home_role4'),
+    t('home.home_role1'),
+    t('home.home_role2'),
+    t('home.home_role3'),
+    t('home.home_role4'),
   ];
 
   // Taille dessinée du personnage (dans son propre repère 120x160)
@@ -89,7 +89,7 @@ const Home: React.FC = () => {
                   transition={{ duration: 0.5 }}
                   className="title text-4xl md:text-6xl font-bold mb-6"
                   >
-                  {t('home_hello')}<br />{t('home_im')}{' '}
+                  {t('home.home_hello')}<br />{t('home.home_im')}{' '}
                   <motion.span 
                     className="nom"
                     data-text="Axel Maillot"

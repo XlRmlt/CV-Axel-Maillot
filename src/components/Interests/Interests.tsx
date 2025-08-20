@@ -17,56 +17,56 @@ const Interests: React.FC = () => {
   const interests: Interest[] = [
     {
       icon: <GiSoccerBall />,
-      title: t('interests_football_title'),
-      description: t('interests_football_desc'),
+      title: t('interests.interests_football_title'),
+      description: t('interests.interests_football_desc'),
       color: "bg-blue-500"
     },
     {
       icon: <GiGamepad />,
-      title: t('interests_games_title'),
-      description: t('interests_games_desc'),
+      title: t('interests.interests_games_title'),
+      description: t('interests.interests_games_desc'),
       color: "bg-purple-500"
     },
     {
       icon: <FaHeadphones />,
-      title: t('interests_music_title'),
-      description: t('interests_music_desc'),
+      title: t('interests.interests_music_title'),
+      description: t('interests.interests_music_desc'),
       color: "bg-green-500"
     },
     {
       icon: <FaDice />,
-      title: t('interests_boardgames_title'),
-      description: t('interests_boardgames_desc'),
+      title: t('interests.interests_boardgames_title'),
+      description: t('interests.interests_boardgames_desc'),
       color: "bg-yellow-500"
     },
     {
       icon: <GiChessKnight />,
-      title: t('interests_chess_title'),
-      description: t('interests_chess_desc'),
+      title: t('interests.interests_chess_title'),
+      description: t('interests.interests_chess_desc'),
       color: "bg-red-500"
     },
     {
       icon: <GiBoxingGlove />,
-      title: t('interests_boxing_title'),
-      description: t('interests_boxing_desc'),
+      title: t('interests.interests_boxing_title'),
+      description: t('interests.interests_boxing_desc'),
       color: "bg-indigo-500"
     },
     {
       icon: <FaGlassCheers />,
-      title: t('interests_outings_title'),
-      description: t('interests_outings_desc'),
+      title: t('interests.interests_outings_title'),
+      description: t('interests.interests_outings_desc'),
       color: "bg-pink-500"
     },
     {
       icon: <GiCompass />,
-      title: t('interests_travel_title'),
-      description: t('interests_travel_desc'),
+      title: t('interests.interests_travel_title'),
+      description: t('interests.interests_travel_desc'),
       color: "bg-teal-500"
     },
     {
       icon: <FaLanguage />,
-      title: t('interests_languages_title'),
-      description: t('interests_languages_desc'),
+      title: t('interests.interests_languages_title'),
+      description: t('interests.interests_languages_desc'),
       color: "bg-gray-500"
     }
   ];
@@ -78,7 +78,7 @@ const Interests: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="title text-3xl font-bold mb-12 text-center"
       >
-        {t('interests_title')}
+        {t('interests.interests_title')}
       </motion.h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

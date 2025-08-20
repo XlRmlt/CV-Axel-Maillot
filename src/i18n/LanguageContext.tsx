@@ -32,7 +32,11 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({ children }
 
   const t = useMemo(() => {
     const dict = translations[lang] ?? translations.en;
-    return (key: string) => dict[key] ?? key;
+    return (key: string) => {
+      // Support nested keys: "about.aboutTitle"
+      const value = key.split('.').reduce((acc, k) => (acc && acc[k] !== undefined ? acc[k] : undefined), dict);
+      return typeof value === 'string' ? value : key;
+    };
   }, [lang]);
 
   const value = useMemo(() => ({ lang, setLang, t }), [lang]);

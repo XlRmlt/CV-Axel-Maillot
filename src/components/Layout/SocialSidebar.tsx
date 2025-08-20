@@ -41,7 +41,7 @@ const SocialSidebar = () => {
               <motion.button
                 key={f.code}
                 onClick={() => setLang(f.code)}
-                aria-label={`${t('changeLanguage')} : ${f.label}`}
+                aria-label={`${t('global.changeLanguage')} : ${f.label}`}
                 className={`rounded-lg overflow-hidden border border-white/15 bg-background-popup hover:translate-x-1 transition 
                             ${lang === f.code ? 'ring-2 ring-primary' : ''}`}
                 whileHover={{ scale: 1.05, x: 4 }}
@@ -74,7 +74,7 @@ const SocialSidebar = () => {
         </div>
 
         <span className="follow-me">
-          {t('followMe')}
+          {t('global.followMe')}
         </span>
       </div>
     </aside>

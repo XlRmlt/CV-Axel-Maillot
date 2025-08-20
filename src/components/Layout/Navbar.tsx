@@ -9,12 +9,12 @@ interface NavBarProps {
 const NavBar: React.FC<NavBarProps> = ({ activeSection, setActiveSection }) => {
   const { t } = useLanguage();
   const navItems = [
-    { id: 'home', label: t('nav_home') },
-    { id: 'about', label: t('nav_about') },
-    { id: 'career', label: t('nav_career') },
-    { id: 'skills', label: t('nav_skills') },
-    { id: 'interests', label: t('nav_interests') },
-    { id: 'resume', label: t('nav_resume') },
+    { id: 'home', label: t('global.nav_home') },
+    { id: 'about', label: t('global.nav_about') },
+    { id: 'career', label: t('global.nav_career') },
+    { id: 'skills', label: t('global.nav_skills') },
+    { id: 'interests', label: t('global.nav_interests') },
+    { id: 'resume', label: t('global.nav_resume') },
   ];
 
   return (

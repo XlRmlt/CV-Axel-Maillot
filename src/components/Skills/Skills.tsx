@@ -47,127 +47,127 @@ const SkillsSection = () => {
       icon: <SiPython color="#3776AB" size={28} />,
       title: "Python - OpenCV",
       color: "#3776AB",
-      codeSnippet: t('skills_python_code'),
-      codeAnswer: t('skills_python_answer')
+      codeSnippet: t('skills.skills_python_code'),
+      codeAnswer: t('skills.skills_python_answer')
     },
     {
       icon: <SiReact color="#61DAFB" size={28} />,
       title: "React",
       color: "#61DAFB",
-      codeSnippet: t('skills_react_code'),
-      codeAnswer: t('skills_react_answer')
+      codeSnippet: t('skills.skills_react_code'),
+      codeAnswer: t('skills.skills_react_answer')
     },
     {
       icon: <SiTypescript color="#3178C6" size={28} />,
       title: "TypeScript",
       color: "#3178C6",
-      codeSnippet: t('skills_typescript_code'),
-      codeAnswer: t('skills_typescript_answer')
+      codeSnippet: t('skills.skills_typescript_code'),
+      codeAnswer: t('skills.skills_typescript_answer')
     },
     {
       icon: <SiJavascript color="#F7DF1E" size={28} />,
       title: "JavaScript",
       color: "#F7DF1E",
-      codeSnippet: t('skills_javascript_code'),
-      codeAnswer: t('skills_javascript_answer')
+      codeSnippet: t('skills.skills_javascript_code'),
+      codeAnswer: t('skills.skills_javascript_answer')
     },
     {
       icon: <SiCss3 color="#06B6D4" size={28} />,
       title: "CSS / Tailwind",
       color: "#06B6D4",
-      codeSnippet: t('skills_css_code'),
-      codeAnswer: t('skills_css_answer')
+      codeSnippet: t('skills.skills_css_code'),
+      codeAnswer: t('skills.skills_css_answer')
     },
     {
       icon: <SiNodedotjs color="#339933" size={28} />,
       title: "Node.js",
       color: "#339933",
-      codeSnippet: t('skills_node_code'),
-      codeAnswer: t('skills_node_answer')
+      codeSnippet: t('skills.skills_node_code'),
+      codeAnswer: t('skills.skills_node_answer')
     },
     {
       icon: <SiPostgresql color="#4479A1" size={28} />,
       title: "SQL",
       color: "#4479A1",
-      codeSnippet: t('skills_sql_code'),
-      codeAnswer: t('skills_sql_answer')
+      codeSnippet: t('skills.skills_sql_code'),
+      codeAnswer: t('skills.skills_sql_answer')
     },
     {
       icon: <SiR color="#276DC3" size={28} />,
       title: "R / Shiny",
       color: "#276DC3",
-      codeSnippet: t('skills_r_code'),
-      codeAnswer: t('skills_r_answer')
+      codeSnippet: t('skills.skills_r_code'),
+      codeAnswer: t('skills.skills_r_answer')
     },
     {
       icon: <SiGit color="#F1502F" size={28} />,
       title: "Git / GitLab",
       color: "#F1502F",
-      codeSnippet: t('skills_git_code'),
-      codeAnswer: t('skills_git_answer')
+      codeSnippet: t('skills.skills_git_code'),
+      codeAnswer: t('skills.skills_git_answer')
     },
     {
       icon: <SiDocker color="#2496ED" size={28} />,
       title: "Docker",
       color: "#2496ED",
-      codeSnippet: t('skills_docker_code'),
-      codeAnswer: t('skills_docker_answer')
+      codeSnippet: t('skills.skills_docker_code'),
+      codeAnswer: t('skills.skills_docker_answer')
     },
     {
       icon: <FaMicrosoft color="#007FFF" size={28} />,
       title: "Azure",
       color: "#007FFF",
-      codeSnippet: t('skills_azure_code'),
-      codeAnswer: t('skills_azure_answer')
+      codeSnippet: t('skills.skills_azure_code'),
+      codeAnswer: t('skills.skills_azure_answer')
     },
     {
       icon: <SiC color="#00599C" size={28} />,
       title: "C",
       color: "#00599C",
-      codeSnippet: t('skills_c_code'),
-      codeAnswer: t('skills_c_answer')
+      codeSnippet: t('skills.skills_c_code'),
+      codeAnswer: t('skills.skills_c_answer')
     },
     {
       icon: <SiCplusplus color="#F34B7D" size={28} />,
       title: "C++",
       color: "#F34B7D",
-      codeSnippet: t('skills_cpp_code'),
-      codeAnswer: t('skills_cpp_answer')
+      codeSnippet: t('skills.skills_cpp_code'),
+      codeAnswer: t('skills.skills_cpp_answer')
     },
     {
       icon: <FaCode color="#9D4EDD" size={28} />,
       title: "Prolog",
       color: "#9D4EDD",
-      codeSnippet: t('skills_prolog_code'),
-      codeAnswer: t('skills_prolog_answer')
+      codeSnippet: t('skills.skills_prolog_code'),
+      codeAnswer: t('skills.skills_prolog_answer')
     },
     {
       icon: <TbMathFunction color="#FFB000" size={28} />,
       title: "Matlab",
       color: "#FFB000",
-      codeSnippet: t('skills_matlab_code'),
-      codeAnswer: t('skills_matlab_answer')
+      codeSnippet: t('skills.skills_matlab_code'),
+      codeAnswer: t('skills.skills_matlab_answer')
     },
     {
       icon: <FaCode color="#185ABD" size={28} />,
       title: "Office / VBA",
       color: "#185ABD",
-      codeSnippet: t('skills_vba_code'),
-      codeAnswer: t('skills_vba_answer')
+      codeSnippet: t('skills.skills_vba_code'),
+      codeAnswer: t('skills.skills_vba_answer')
     },
     {
       icon: <FaCogs color="#E22127" size={28} />,
       title: "SolidWorks",
       color: "#E22127",
-      codeSnippet: t('skills_solidworks_code'),
-      codeAnswer: t('skills_solidworks_answer')
+      codeSnippet: t('skills.skills_solidworks_code'),
+      codeAnswer: t('skills.skills_solidworks_answer')
     },
   ];
 
   const languages = [
-    { lang: 'Français', icon: '/flags/FR.png', levelText: t('skills_lang_native'), percent: 100, color: '#0055A4' },
-    { lang: 'Anglais', icon: '/flags/UK.png', levelText: t('skills_lang_english_level'), percent: 95, color: '#012169' },
-    { lang: 'Espagnol', icon: '/flags/ES.png', levelText: t('skills_lang_spanish_level'), percent: 90, color: '#AA151B' },
+    { lang: 'Français', icon: '/flags/FR.png', levelText: t('skills.skills_lang_native'), percent: 100, color: '#0055A4' },
+    { lang: 'Anglais', icon: '/flags/UK.png', levelText: t('skills.skills_lang_english_level'), percent: 95, color: '#012169' },
+    { lang: 'Espagnol', icon: '/flags/ES.png', levelText: t('skills.skills_lang_spanish_level'), percent: 90, color: '#AA151B' },
   ];
 
   const flagBgStyle = (l: { lang: string; icon: string }) => {
@@ -212,7 +212,7 @@ const SkillsSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           className="title text-3xl font-bold mb-8 text-center"
         >
-          {t('skills_license')}
+          {t('skills.skills_license')}
         </motion.h2>
 
         <motion.div
@@ -230,7 +230,7 @@ const SkillsSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           className="title text-3xl font-bold mb-8 text-center"
         >
-          {t('skills_languages')}
+          {t('skills.skills_languages')}
         </motion.h2>
 
         <div className="flex flex-row flex-nowrap gap-6 justify-center items-start overflow-x-auto md:overflow-visible">
@@ -295,7 +295,7 @@ const SkillsSection = () => {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           className="title text-3xl font-bold mb-8 text-center"
         >
-          {t('aboutSkills')}
+          {t('about.aboutSkills')}
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

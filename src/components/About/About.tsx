@@ -20,7 +20,7 @@ const About: React.FC = () => {
       type: 'work',
       debut: '02-2025',
       fin: '08-2025',
-      title: t('timeline_biomerieux_title'),
+      title: t('career.timeline_biomerieux_title'),
       organization: 'BioMérieux',
       organizationLink: 'https://www.biomerieux.com/',
       technologies: ['R/Shiny', 'JavaScript', 'CSS', 'GitLab', 'Docker', 'Kubernetes']
@@ -30,7 +30,7 @@ const About: React.FC = () => {
       type: 'work',
       debut: '05-2024',
       fin: '08-2024',
-      title: t('timeline_efor_title'),
+      title: t('career.timeline_efor_title'),
       organization: 'Efor Group',
       organizationLink: 'https://www.efor-group.com/',
       technologies: ['Python', 'TypeScript', 'React', 'GitLab', 'Docker', 'Azure']
@@ -40,7 +40,7 @@ const About: React.FC = () => {
       type: 'work',
       debut: '06-2023',
       fin: '08-2023',
-      title: t('timeline_schneider_title'),
+      title: t('career.timeline_schneider_title'),
       organization: 'Schneider Electric',
       organizationLink: 'https://www.se.com/',
       technologies: ['Python', 'VBA']
@@ -50,7 +50,7 @@ const About: React.FC = () => {
       type: 'education',
       debut: '09-2022',
       fin: '08-2025',
-      title: t('timeline_insa_title'),
+      title: t('career.timeline_insa_title'),
       organization: 'INSA Lyon',
       organizationLink: 'https://www.insa-lyon.fr/',
       technologies: ['Python', 'TypeScript', 'JavaScript', 'CSS', 'C', 'Cpp', 'R', 'Git', 'SQL', 'Prolog', 'Matlab']
@@ -60,7 +60,7 @@ const About: React.FC = () => {
       type: 'education',
       debut: '08-2024',
       fin: '01-2025',
-      title: t('timeline_suede_title'),
+      title: t('career.timeline_suede_title'),
       organization: 'Stockholms Universitet (DSV)',
       organizationLink: 'https://www.su.se/department-of-computer-and-systems-sciences/',
       technologies: ['Python']
@@ -70,7 +70,7 @@ const About: React.FC = () => {
       type: 'education',
       debut: '09-2020',
       fin: '07-2022',
-      title: t('timeline_prepa_title'),
+      title: t('career.timeline_prepa_title'),
       organization: 'Lycée la Martinière Monplaisir',
       organizationLink: 'https://martiniere-monplaisir.ent.auvergnerhonealpes.fr/',
       technologies: ['Python', 'SolidWorks', 'SQL']
@@ -80,7 +80,7 @@ const About: React.FC = () => {
       type: 'education',
       debut: '09-2017',
       fin: '07-2020',
-      title: t('timeline_bac_title'),
+      title: t('career.timeline_bac_title'),
       organization: 'Lycée Saint Marc',
       organizationLink: 'https://www.st-marc.eu/',
       technologies: ['SolidWorks', 'C']
@@ -94,7 +94,7 @@ const About: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         className="title text-3xl font-bold mb-8"
       >
-        {t('aboutTitle')}
+        {t('about.aboutTitle')}
       </motion.h2>
 
       <motion.div
@@ -105,15 +105,15 @@ const About: React.FC = () => {
         className="prose dark:prose-invert mb-12"
       >
         <p>
-          {t('aboutDesc1')}
+          {t('about.aboutDesc1')}
         </p>
         <p>
-          {t('aboutDesc2')}{' '}
+          {t('about.aboutDesc2')}{' '}
           <TypeAnimation
             sequence={[
-              t('aboutIA'),
+              t('about.aboutIA'),
               1000,
-              t('aboutCyber'),
+              t('about.aboutCyber'),
               1000
             ]}
             wrapper="span"
@@ -126,13 +126,13 @@ const About: React.FC = () => {
 
       <div className="mb-16">
         <br />
-        <h2 className="text-3xl font-bold mb-6">{t('aboutTimeline')}</h2>
+        <h2 className="text-3xl font-bold mb-6">{t('about.aboutTimeline')}</h2>
         <Timeline items={timelineItems} />
       </div>
 
       <div className="mb-16">
         <br />
-        <h2 className="text-3xl font-bold mb-6">{t('aboutSkills')}</h2>
+        <h2 className="text-3xl font-bold mb-6">{t('about.aboutSkills')}</h2>
         <SkillsIcons />
         <br />
       </div>
