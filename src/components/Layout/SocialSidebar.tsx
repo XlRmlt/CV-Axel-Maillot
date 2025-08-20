@@ -44,14 +44,21 @@ const SocialSidebar = () => {
                 aria-label={`${t('global.changeLanguage')} : ${f.label}`}
                 className={`rounded-lg overflow-hidden border border-white/15 bg-background-popup hover:translate-x-1 transition 
                             ${lang === f.code ? 'ring-2 ring-primary' : ''}`}
-                whileHover={{ scale: 1.05, x: 4 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                style={{ width: 50, height: 24, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: 20 }}
+                style={{
+                  width: 50,
+                  height: 25,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  paddingTop: 20,
+                }}
               >
                 <img
                   src={`/flags/${f.file}`}
                   alt={f.label}
-                  style={{ width: 69, objectFit: 'cover' }}
+                  style={{ width: lang === f.code ? 80 : 60, objectFit: 'cover', opacity: lang === f.code ? 1 : 0.5 }}
                 />
               </motion.button>
             ))}
