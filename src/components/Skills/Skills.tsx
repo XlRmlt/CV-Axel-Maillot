@@ -220,7 +220,7 @@ const SkillsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
         >
-          <TypeWriter words={[t('skills_license_b')]} style={{ fontSize: "1rem", fontWeight: 500, color: "var(--text-highlight)" }} typingSpeed={150} />
+          <TypeWriter words={[t('skills.skills_license_b')]} style={{ fontSize: "1rem", fontWeight: 500, color: "var(--text-highlight)" }} typingSpeed={150} />
         </motion.div>
       </motion.div>
 
