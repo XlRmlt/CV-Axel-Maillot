@@ -3,7 +3,7 @@ export type Lang = 'fr' | 'en' | 'es';
 export const translations: Record<Lang, Record<string, any>> = {
   fr: {
     global: {
-      followMe: 'ABONNEZ-VOUS',
+      followMe: 'CONTACTEZ-MOI',
       changeLanguage: 'Changer la langue',
       nav_home: "Accueil",
       nav_about: "À propos",
@@ -123,7 +123,7 @@ export const translations: Record<Lang, Record<string, any>> = {
   },
   en: {
     global: {
-      followMe: 'FOLLOW ME',
+      followMe: 'CONTACT ME',
       changeLanguage: 'Change language',
       nav_home: "Home",
       nav_about: "About",
@@ -243,7 +243,7 @@ export const translations: Record<Lang, Record<string, any>> = {
   },
   es: {
     global: {
-      followMe: 'SÍGUEME',
+      followMe: 'CONTÁCTAME',
       changeLanguage: 'Cambiar el idioma',
       nav_home: "Inicio",
       nav_about: "Sobre mí",
