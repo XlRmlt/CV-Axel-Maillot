@@ -143,6 +143,11 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
 }
 
+.cf-turnstile, .cf-turnstile iframe {
+  display: block !important;
+  margin: 0 auto !important;
+}
+
 .follow-me {
   transform: rotate(-90deg);
   text-transform: uppercase;

@@ -4,12 +4,12 @@ import { FaLinkedin } from 'react-icons/fa';
 import { SiCachet, SiGmail } from 'react-icons/si';
 import ThemeToggle from '../Theme/ThemeToggle';
 import { useLanguage } from '../../i18n/LanguageContext';
+import EmailWithCaptcha from './EmailWithCaptcha';
 
 const SocialSidebar = () => {
   const { lang, setLang, t } = useLanguage();
 
   const socialLinks = [
-    { icon: <SiGmail />, href: 'mailto:axel.maillot.pro@gmail.com', label: 'Gmail' },
     { icon: <FaLinkedin />, href: 'https://www.linkedin.com/in/axel-maillot/', label: 'LinkedIn' }
   ];
 
@@ -65,6 +65,10 @@ const SocialSidebar = () => {
         </div>
 
         <div className="social-icons">
+          {/* Email protégé par un captcha */}
+          <EmailWithCaptcha className="social-icon" label="Gmail" />
+
+          {/* Autres liens sociaux */}
           {socialLinks.map((link, index) => (
             <motion.a
               key={index}
