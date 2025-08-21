@@ -298,3 +298,30 @@ h1, h2, h3, h4, h5, h6 {
 .download-icon:hover {
   transform: scale(1.1);
 }
+
+/* ==== Footer ==== */
+.footer {
+  position: fixed;
+  left: 60px;        /* aligne avec la sidebar */
+  right: 0;
+  bottom: 0;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  z-index: 40;
+}
+
+.footer-text {
+  color: var(--navbar-text);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.footer:hover .footer-text {
+  color: var(--navbar-text-hover);
+}

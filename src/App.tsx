@@ -9,6 +9,7 @@ import Career from './components/Career/Career';
 import Skills from './components/Skills/Skills';
 import Interests from './components/Interests/Interests';
 import Resume from './components/Resume/Resume';
+import Footer from './components/Layout/Footer';
 import './index.css';
 
 const App: React.FC = () => {
@@ -65,6 +66,8 @@ const App: React.FC = () => {
             </motion.div>
           </AnimatePresence>
         </div>
+
+        <Footer />
       </div>
     </div>
   );

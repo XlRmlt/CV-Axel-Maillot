@@ -129,6 +129,10 @@ export const translations: Record<Lang, Record<string, any>> = {
       skills_solidworks_code: `// J'ai pu également faire du SolidWorks\n// durant le lycée et la prépa.`,
       skills_solidworks_answer: `Expérience avec SolidWorks au lycée et en prépa`,
     },
+    footer: {
+      siteName: "Site CV Axel Maillot",
+      rights: "Tous droits réservés"
+    },
   },
   en: {
     global: {
@@ -258,6 +262,10 @@ export const translations: Record<Lang, Record<string, any>> = {
       skills_solidworks_code: `// I also used SolidWorks\n// during high school and prep.`,
       skills_solidworks_answer: `Experience with SolidWorks in high school and prep`,
     },
+    footer: {
+      siteName: "Axel Maillot CV Site",
+      rights: "All rights reserved",
+    },
   },
   es: {
     global: {
@@ -386,6 +394,10 @@ export const translations: Record<Lang, Record<string, any>> = {
       skills_vba_answer: `> También sé usar la suite Office.\n> ¡Y hasta he usado este lenguaje del demonio!`,
       skills_solidworks_code: `// También he usado SolidWorks\n// durante el instituto y la preparatoria.`,
       skills_solidworks_answer: `Experiencia con SolidWorks en el instituto y la preparatoria`,
+    },
+    footer: {
+      siteName: "Sitio CV de Axel Maillot",
+      rights: "Todos los derechos reservados",
     },
   },
 };
