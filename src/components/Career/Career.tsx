@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   SiReact, SiTypescript, SiTailwindcss, SiNodedotjs, SiPython, SiPostgresql,
@@ -9,29 +9,30 @@ import { FaBriefcase, FaGraduationCap, FaMicrosoft, FaCss3Alt, FaCogs, FaCode } 
 import './career.css';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { monthsByLang } from '../../i18n/translation';
+import TypeWriter from '../Home/TypeWriter';
 
 const techIcons: Record<string, JSX.Element> = {
-  React: <SiReact className="career-tech-logo" title="React" color="#61DAFB" />,
-  TypeScript: <SiTypescript className="career-tech-logo" title="TypeScript" color="#3178C6" />,
-  TailwindCSS: <SiTailwindcss className="career-tech-logo" title="TailwindCSS" color="#06B6D4" />,
-  'Node.js': <SiNodedotjs className="career-tech-logo" title="Node.js" color="#339933" />,
-  Python: <SiPython className="career-tech-logo" title="Python" color="#3776AB" />,
-  SQL: <SiPostgresql className="career-tech-logo" title="SQL" color="#336791" />,
-  R: <SiR className="career-tech-logo" title="R" color="#276DC3" />,
-  'R/Shiny': <SiR className="career-tech-logo" title="R/Shiny" color="#276DC3" />,
-  Git: <SiGit className="career-tech-logo" title="Git" color="#F05032" />,
-  GitLab: <SiGit className="career-tech-logo" title="GitLab" color="#FC6D26" />,
-  Docker: <SiDocker className="career-tech-logo" title="Docker" color="#2496ED" />,
-  Azure: <FaMicrosoft className="career-tech-logo" title="Azure" color="#0078D4" />,
-  C: <SiC className="career-tech-logo" title="C" color="#A8B9CC" />,
-  Cpp: <SiCplusplus className="career-tech-logo" title="C++" color="#00599C" />,
-  VBA: <FaMicrosoft className="career-tech-logo" title="VBA" color="#185ABD" />,
-  CSS: <FaCss3Alt className="career-tech-logo" title="CSS" color="#264de4" />,
-  JavaScript: <SiJavascript className="career-tech-logo" title="JavaScript" color="#F7DF1E" />,
-  Kubernetes: <SiKubernetes className="career-tech-logo" title="Kubernetes" color="#326CE5" />,
-  SolidWorks: <FaCogs className="career-tech-logo" title="SolidWorks" color="#E22127" />,
-  Prolog: <FaCode className="career-tech-logo" title="Prolog" color="#74283c" />,
-  Matlab: <TbMathFunction className="career-tech-logo" title="Matlab" color="#E16737" />,
+  React: <SiReact className="career-tech-logo" name="React" color="#61DAFB" />,
+  TypeScript: <SiTypescript className="career-tech-logo" name="TypeScript" color="#3178C6" />,
+  TailwindCSS: <SiTailwindcss className="career-tech-logo" name="TailwindCSS" color="#06B6D4" />,
+  'Node.js': <SiNodedotjs className="career-tech-logo" name="Node.js" color="#339933" />,
+  Python: <SiPython className="career-tech-logo" name="Python" color="#3776AB" />,
+  SQL: <SiPostgresql className="career-tech-logo" name="SQL" color="#336791" />,
+  R: <SiR className="career-tech-logo" name="R" color="#276DC3" />,
+  'R/Shiny': <SiR className="career-tech-logo" name="R/Shiny" color="#276DC3" />,
+  Git: <SiGit className="career-tech-logo" name="Git" color="#F05032" />,
+  GitLab: <SiGit className="career-tech-logo" name="GitLab" color="#FC6D26" />,
+  Docker: <SiDocker className="career-tech-logo" name="Docker" color="#2496ED" />,
+  Azure: <FaMicrosoft className="career-tech-logo" name="Azure" color="#0078D4" />,
+  C: <SiC className="career-tech-logo" name="C" color="#A8B9CC" />,
+  Cpp: <SiCplusplus className="career-tech-logo" name="C++" color="#00599C" />,
+  VBA: <FaMicrosoft className="career-tech-logo" name="VBA" color="#185ABD" />,
+  CSS: <FaCss3Alt className="career-tech-logo" name="CSS" color="#264de4" />,
+  JavaScript: <SiJavascript className="career-tech-logo" name="JavaScript" color="#F7DF1E" />,
+  Kubernetes: <SiKubernetes className="career-tech-logo" name="Kubernetes" color="#326CE5" />,
+  SolidWorks: <FaCogs className="career-tech-logo" name="SolidWorks" color="#E22127" />,
+  Prolog: <FaCode className="career-tech-logo" name="Prolog" color="#74283c" />,
+  Matlab: <TbMathFunction className="career-tech-logo" name="Matlab" color="#E16737" />,
 };
 
 type Side = 'work' | 'education';
@@ -72,6 +73,7 @@ const MIN_GAP_PX = 48;          // anti-recouvrement vertical entre cartes d’u
 
 const Career: React.FC = () => {
   const { lang, t } = useLanguage();
+  const [hoveredTech, setHoveredTech] = useState<{cardIdx: number, techIdx: number} | null>(null);
   const items: TimelineItem[] = [
     {
       type: 'work',
@@ -367,15 +369,33 @@ const Career: React.FC = () => {
                 </div>
 
                 {/* Techs */}
-                {item.technologies?.map((tech, i) => (
-                  <span
-                    key={i}
-                    className="bg-background-primary text-primary rounded-full p-1 inline-flex items-center justify-center mr-1"
-                    title={tech}
-                  >
-                    {techIcons[tech] || <span className="text-xs font-mono px-2">{tech}</span>}
-                  </span>
-                ))}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "0.25rem" }}>
+                {item.technologies?.map((tech, i) => {
+                  // Récupère le composant JSX de l'icône
+                  const icon = techIcons[tech];
+                  // Récupère la prop "name" si elle existe
+                  let iconName = tech;
+                  if (icon && typeof icon === "object" && "props" in icon && icon.props.name) {
+                    iconName = icon.props.name;
+                  }
+                  return (
+                    <span
+                      key={i}
+                      className="bg-background-primary text-primary rounded-full p-1 inline-flex items-center justify-center mr-1"
+                      onMouseEnter={() => setHoveredTech({cardIdx: index, techIdx: i})}
+                      onMouseLeave={() => setHoveredTech(ht => ht && ht.cardIdx === index && ht.techIdx === i ? null : ht)}
+                      style={{ position: "relative" }}
+                    >
+                      {icon || <span className="text-xs font-mono px-2">{tech}</span>}
+                      {hoveredTech && hoveredTech.cardIdx === index && hoveredTech.techIdx === i && (
+                        <div className="character-tooltip career-tech-tooltip">
+                          <TypeWriter words={[iconName]} style={{}} />
+                        </div>
+                      )}
+                    </span>
+                  );
+                })}
+                </div>
               </div>
             </div>
           </motion.div>
