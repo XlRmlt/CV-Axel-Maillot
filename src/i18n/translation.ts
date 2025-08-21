@@ -79,6 +79,11 @@ export const translations: Record<Lang, Record<string, any>> = {
       resume_download_label: "Télécharger le CV ",
       resume_show_label: "Afficher le CV ",
       resume_iframe_title: "CV ",
+      captcha_title_preview: "Protection par captcha",
+      captcha_desc_preview: "Valide le captcha pour afficher le CV.",
+      captcha_action_show: "Afficher le CV",
+      captcha_title_download: "Dernière vérification",
+      captcha_desc_download: "Valide le captcha pour lancer le téléchargement."
     },
     skills: {
       skills_license: "Permis de conduire",
@@ -201,6 +206,11 @@ export const translations: Record<Lang, Record<string, any>> = {
       resume_download_label: "Download CV ",
       resume_show_label: "Show CV ",
       resume_iframe_title: "CV ",
+      captcha_title_preview: "Captcha protection",
+      captcha_desc_preview: "Please complete the captcha to view the resume.",
+      captcha_action_show: "Show CV",
+      captcha_title_download: "Final verification",
+      captcha_desc_download: "Complete the captcha to start the download."
     },
     skills: {
       skills_license: "Driver's license",
@@ -323,6 +333,11 @@ export const translations: Record<Lang, Record<string, any>> = {
       resume_download_label: "Descargar CV ",
       resume_show_label: "Mostrar CV ",
       resume_iframe_title: "CV ",
+      captcha_title_preview: "Protección por captcha",
+      captcha_desc_preview: "Valida el captcha para mostrar el CV.",
+      captcha_action_show: "Mostrar CV",
+      captcha_title_download: "Verificación final",
+      captcha_desc_download: "Valida el captcha para iniciar la descarga."
     },
     skills: {
       skills_license: "Permiso de conducir",

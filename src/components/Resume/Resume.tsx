@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FaDownload, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaDownload } from 'react-icons/fa';
 import './resume.css';
 import { useLanguage } from '../../i18n/LanguageContext';
+import { CaptchaReveal, CaptchaDownload } from '../Layout/CaptchaGate';
 
 const cvFiles = [
   { lang: 'Français', code: 'Francais', path: '/CVs/CV-Axel-Maillot-FR.pdf' },
@@ -18,16 +19,17 @@ const Resume: React.FC = () => {
     <div className="">
       <div className="first-line">
         <h2 className="title m-0">{t('resume.resume_title')}</h2>
-        <a
+        <CaptchaDownload
           href={selectedCV.path}
-          download
           className="download-button"
           aria-label={t('resume.resume_download_label') + ' ' + selectedCV.lang}
         >
-          <FaDownload />
-        </a>
+          <FaDownload className='download-icon' style={{
+            width: 20,
+            height: 20,
+          }} />
+        </CaptchaDownload>
       </div>
-
 
       {/* Sélecteurs de langue */}
       <div className="buttons-container">
@@ -49,22 +51,26 @@ const Resume: React.FC = () => {
             />
           </motion.button>
         ))}
-        
-        
       </div>
 
-      {/* Prévisualisation du PDF */}
-      <div className="visual flex justify-center">
-        <div className="w-full aspect-[1/1.414] rounded-xl overflow-hidden shadow-lg bg-transparent">
-          <iframe
-            src={`${selectedCV.path}#toolbar=0`}
-            title={t('resume.resume_iframe_title') + ' ' + selectedCV.lang}
-            className="w-full h-full bg-transparent"
-            style={{ aspectRatio: '1 / 1.414', width: 800, border: 'none', background: 'transparent' }}
-            loading="lazy"
-          />
+      <CaptchaReveal
+        rememberKey="cv-preview"
+        title={t('resume.captcha_title_preview')}
+        description={t('resume.captcha_desc_preview')}
+        actionLabel={t('resume.captcha_action_show')}
+      >
+        <div className="visual flex justify-center">
+          <div className="w-full aspect-[1/1.414] rounded-xl overflow-hidden shadow-lg bg-transparent">
+            <iframe
+              src={`${selectedCV.path}#toolbar=0`}
+              title={t('resume.resume_iframe_title') + ' ' + selectedCV.lang}
+              className="w-full h-full bg-transparent"
+              style={{ aspectRatio: '1 / 1.414', width: 800, border: 'none', background: 'transparent' }}
+              loading="lazy"
+            />
+          </div>
         </div>
-      </div>
+      </CaptchaReveal>
     </div>
   );
 };
