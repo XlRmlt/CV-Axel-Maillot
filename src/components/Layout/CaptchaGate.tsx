@@ -29,11 +29,15 @@ type CaptchaModalProps = {
   description?: string;
 };
 
-const CaptchaModal: React.FC<CaptchaModalProps> = ({
-  open, onClose, onSuccess,
-  title = 'Vérification rapide',
-  description = 'Confirme que tu n’es pas un robot.'
-}) => {
+const CaptchaModal: React.FC<CaptchaModalProps> = (props) => {
+  const { t } = useLanguage();
+  const {
+    open,
+    onClose,
+    onSuccess,
+    title = t('captcha_title_modal'),
+    description = t('captcha_desc_modal')
+  } = props;
   const [mounted, setMounted] = useState(false);
   const widgetRef = useRef<HTMLDivElement | null>(null);
   const widgetId = useRef<string | null>(null);

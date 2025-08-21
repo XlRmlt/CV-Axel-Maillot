@@ -12,7 +12,7 @@ export const translations: Record<Lang, Record<string, any>> = {
       nav_interests: "Centres d'intérêt",
       nav_resume: "CV",
       mail_captcha_title: 'Vérification rapide',
-      mail_captcha_desc: 'Confirme que tu n’es pas un robot pour révéler l’adresse.',
+      mail_captcha_desc: 'Confirme que vous n’êtes pas un robot pour révéler l’adresse.',
     },
     about: {
       aboutTitle: 'À propos de moi',
@@ -83,7 +83,9 @@ export const translations: Record<Lang, Record<string, any>> = {
       captcha_desc_preview: "Valide le captcha pour afficher le CV.",
       captcha_action_show: "Afficher le CV",
       captcha_title_download: "Dernière vérification",
-      captcha_desc_download: "Valide le captcha pour lancer le téléchargement."
+      captcha_desc_download: "Valide le captcha pour lancer le téléchargement.",
+      captcha_title_modal: "Vérification rapide",
+      captcha_desc_modal: 'Confirme que vous n’êtes pas un robot.'
     },
     skills: {
       skills_license: "Permis de conduire",
@@ -210,7 +212,9 @@ export const translations: Record<Lang, Record<string, any>> = {
       captcha_desc_preview: "Please complete the captcha to view the resume.",
       captcha_action_show: "Show CV",
       captcha_title_download: "Final verification",
-      captcha_desc_download: "Complete the captcha to start the download."
+      captcha_desc_download: "Complete the captcha to start the download.",
+      captcha_title_modal: "Quick verification",
+      captcha_desc_modal: 'Confirm you are not a robot.'
     },
     skills: {
       skills_license: "Driver's license",
@@ -266,7 +270,7 @@ export const translations: Record<Lang, Record<string, any>> = {
       nav_interests: "Intereses",
       nav_resume: "CV",
       mail_captcha_title: 'Verificación rápida',
-      mail_captcha_desc: 'Confirma que tu no eres un robot para revelar la dirección.',
+      mail_captcha_desc: 'Confirma que no es un robot para revelar la dirección.',
     },
     about: {
       aboutTitle: 'Sobre mí',
@@ -337,7 +341,9 @@ export const translations: Record<Lang, Record<string, any>> = {
       captcha_desc_preview: "Valida el captcha para mostrar el CV.",
       captcha_action_show: "Mostrar CV",
       captcha_title_download: "Verificación final",
-      captcha_desc_download: "Valida el captcha para iniciar la descarga."
+      captcha_desc_download: "Valida el captcha para iniciar la descarga.",
+      captcha_title_modal: "Verificación rápida",
+      captcha_desc_modal: 'Confirme que no es un robot.'
     },
     skills: {
       skills_license: "Permiso de conducir",
