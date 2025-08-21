@@ -11,6 +11,8 @@ export const translations: Record<Lang, Record<string, any>> = {
       nav_skills: "Compétences",
       nav_interests: "Centres d'intérêt",
       nav_resume: "CV",
+      mail_captcha_title: 'Vérification rapide',
+      mail_captcha_desc: 'Confirme que tu n’es pas un robot pour révéler l’adresse.',
     },
     about: {
       aboutTitle: 'À propos de moi',
@@ -131,6 +133,8 @@ export const translations: Record<Lang, Record<string, any>> = {
       nav_skills: "Skills",
       nav_interests: "Interests",
       nav_resume: "Resume",
+      mail_captcha_title: 'Quick verification',
+      mail_captcha_desc: 'Confirm that you are not a robot to reveal the address.',
     },
     about: {
       aboutTitle: 'About me',
@@ -251,6 +255,8 @@ export const translations: Record<Lang, Record<string, any>> = {
       nav_skills: "Competencias",
       nav_interests: "Intereses",
       nav_resume: "CV",
+      mail_captcha_title: 'Verificación rápida',
+      mail_captcha_desc: 'Confirma que tu no eres un robot para revelar la dirección.',
     },
     about: {
       aboutTitle: 'Sobre mí',

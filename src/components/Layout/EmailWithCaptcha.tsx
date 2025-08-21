@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SiGmail } from 'react-icons/si';
 import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../../i18n/LanguageContext';
 
 const SITE_KEY = '1x00000000000000000000AA'; // <- remplace par ta vraie clé
 
@@ -46,6 +47,7 @@ const EmailWithCaptcha: React.FC<Props> = ({
   const [loading, setLoading] = useState(false);
   const widgetRef = useRef<HTMLDivElement | null>(null);
   const widgetId = useRef<string | null>(null);
+  const { t } = useLanguage();
 
   useEffect(() => setMounted(true), []);
 
@@ -141,9 +143,9 @@ const EmailWithCaptcha: React.FC<Props> = ({
         }}
         onClick={e => e.stopPropagation()} // ne pas fermer en cliquant dans la boîte
       >
-        <div style={{ textAlign: 'center', marginBottom: 8, fontWeight: 600 }}>Vérification rapide</div>
+        <div style={{ textAlign: 'center', marginBottom: 8, fontWeight: 600 }}>{t('global.mail_captcha_title')}</div>
         <div style={{ textAlign: 'center', opacity: 0.75, fontSize: 14, marginBottom: 12 }}>
-          Confirme que tu n’es pas un robot pour révéler l’adresse.
+          {t('global.mail_captcha_desc')}
         </div>
 
         {/* Wrapper qui centre même si l’iframe interne est positionnée en absolute */}
