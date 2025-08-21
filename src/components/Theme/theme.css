@@ -236,3 +236,29 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
 }
+
+.character-tooltip {
+  position: absolute;
+  left: calc(50% - 15rem);
+  top: calc(50% + 7.5rem);
+  min-height: 2.5rem;
+  min-width: 2.5rem;
+  transform: translate(-50%, -50%);
+  background: var(--background-popup);
+  color: var(--text-primary);
+  border-radius: 50% / 50%;
+  padding: 0.25em 1.8em;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+  white-space: nowrap;
+  z-index: 10;
+  border: 1px solid var(--background-hover);
+  transition: opacity 0.2s, transform 0.2s;
+  opacity: 0.98;
+  pointer-events: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

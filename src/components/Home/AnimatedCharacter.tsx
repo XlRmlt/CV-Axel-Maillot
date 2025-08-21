@@ -1,7 +1,8 @@
 // src/components/Avatar/AnimatedPerson.tsx
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import Mouth from "./Mouth";
+import TypeWriter from "./TypeWriter";
 
 type Props = {
   size?: number;        // largeur en px
@@ -19,6 +20,7 @@ const AnimatedCharacter: React.FC<Props> = ({
   // État pour X et fonction pour le changer
   const [x, setX] = useState(() => Math.floor(Math.random() * 5) + 3);
   const [cycle, setCycle] = useState(0); // pour forcer le redémarrage de l’animation
+  const [hovered, setHovered] = useState(false);
 
   // Callback appelé à chaque fin de cycle d’animation du bras
   const handleArmCycle = useCallback(() => {
@@ -36,11 +38,17 @@ const AnimatedCharacter: React.FC<Props> = ({
     <div
       className={className}
       style={{ width: size, height: (size * 160) / 120, color: "var(--character-color)", position: "relative", left: "50%", transform: "translateX(-50%)", top: 40 }}
-      aria-label="Personnage qui salue"
+      aria-label="C'est moi !"
     >
+      {/* Etiquette de survol */}
+      {hovered && (
+        <div className="character-tooltip">
+          <TypeWriter words={["C'est moi ! (mais je ne suis pas bleu en vrai)"]} typingSpeed={10} style={{ color : "var(--text-highlight)"}}/>
+        </div>
+      )}
       <svg viewBox="0 0 120 160" width="100%" height="100%" role="img">
         {/* Ombre au sol */}
-        <ellipse cx="60" cy="148" rx="28" ry="6" fill="currentColor" opacity="0.18" />
+        <ellipse cx="60" cy="148" rx="28" ry="6" fill="currentColor" opacity="0.18" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}/>
 
         {/* Corps (buste) */}
         <path
@@ -50,13 +58,15 @@ const AnimatedCharacter: React.FC<Props> = ({
              q-20,10 -40,0
              q-6,-20 0,-40Z"
           fill="currentColor"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
         />
 
         {/* Cou */}
-        <rect x="56" y="44" width="8" height="8" rx="3" fill="currentColor" />
+        <rect x="56" y="44" width="8" height="8" rx="3" fill="currentColor" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} />
 
         {/* Tête */}
-        <g>
+        <g onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
           <circle cx="60" cy="30" r="15" fill="currentColor" />
           {/* micro oscillation de la tête */}
           <motion.g
@@ -197,6 +207,8 @@ const AnimatedCharacter: React.FC<Props> = ({
           stroke="currentColor"
           strokeWidth="8"
           strokeLinecap="round"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
         />
         {/* Jambe droite */}
         <path
@@ -204,6 +216,8 @@ const AnimatedCharacter: React.FC<Props> = ({
           stroke="currentColor"
           strokeWidth="8"
           strokeLinecap="round"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
         />
 
         {/* Bras gauche (posé) */}
@@ -213,6 +227,8 @@ const AnimatedCharacter: React.FC<Props> = ({
           strokeWidth="8"
           strokeLinecap="round"
           fill="none"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
         />
 
         {/* Épaule droite (pivot) */}
@@ -232,6 +248,8 @@ const AnimatedCharacter: React.FC<Props> = ({
             ease: "easeInOut",
             onComplete: handleArmCycle, // appelé à la fin de chaque cycle
           }}
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
         >
           {/* Haut du bras */}
           <path
