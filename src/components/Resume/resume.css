@@ -75,3 +75,7 @@
   object-fit: cover;
   background: transparent;
 }
+
+.resume-root {
+  isolation: isolate;
+}

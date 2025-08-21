@@ -16,7 +16,7 @@ const Resume: React.FC = () => {
   const [selectedCV, setSelectedCV] = useState(cvFiles[0]);
 
   return (
-    <div className="">
+    <div className="resume-root">
       <div className="first-line">
         <h2 className="title m-0">{t('resume.resume_title')}</h2>
         <CaptchaDownload
