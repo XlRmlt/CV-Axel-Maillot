@@ -14,6 +14,7 @@ const BRANCH = git('git rev-parse --abbrev-ref HEAD', 'dev');
 const COMMITHASH = git('git rev-parse --short HEAD', '');
 
 const isProd = process.env.NODE_ENV === 'production';
+const repo = 'CV-Axel-Maillot';
 
 module.exports = {
   entry: './src/index.tsx',
@@ -21,7 +22,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: isProd ? 'assets/[name].[contenthash].js' : 'assets/[name].js',
     chunkFilename: isProd ? 'assets/[name].[contenthash].js' : 'assets/[name].js',
-    publicPath: '/',   // site servi à la racine du domaine
+    publicPath: isProd ? `/${repo}/` : '/',
     clean: true
   },
   mode: isProd ? 'production' : 'development',
