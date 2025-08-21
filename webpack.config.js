@@ -1,9 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { execSync } = require('child_process');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
+// Helpers : lit la sortie d'une commande Git, sinon renvoie un fallback
 const git = (cmd, fallback = '') => {
   try { return execSync(cmd, { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim(); }
   catch { return fallback; }
@@ -20,7 +21,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: isProd ? 'assets/[name].[contenthash].js' : 'assets/[name].js',
     chunkFilename: isProd ? 'assets/[name].[contenthash].js' : 'assets/[name].js',
-    publicPath: '/',          // user site => racine du domaine
+    publicPath: '/',   // site servi à la racine du domaine
     clean: true
   },
   mode: isProd ? 'production' : 'development',
@@ -30,12 +31,14 @@ module.exports = {
       { test: /\.css$/, use: ['style-loader', 'css-loader', 'postcss-loader'] },
     ],
   },
-  resolve: { extensions: ['.tsx', '.ts', '.js', '.css'] },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js', '.css'],
+  },
   plugins: [
     new HtmlWebpackPlugin({ template: './public/index.html' }),
     new CopyWebpackPlugin({
       patterns: [
-        { from: 'public', to: '.' } // copie flags/, CVs/, Logos/, favicon, etc.
+        { from: 'public', to: '.', globOptions: { ignore: ['**/index.html'] } }
       ]
     }),
     new webpack.DefinePlugin({
