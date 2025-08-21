@@ -30,7 +30,6 @@ jobs:
 
       - run: npm ci
       - run: NODE_ENV=production npm run build
-      - run: npm run postbuild
 
       - uses: actions/upload-pages-artifact@v3
         with:

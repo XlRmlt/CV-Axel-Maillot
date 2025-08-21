@@ -40,7 +40,6 @@
     "html-webpack-plugin": "^5.6.0",
     "postcss": "^8.4.35",
     "postcss-loader": "^8.1.0",
-    "serve": "^14.2.4",
     "style-loader": "^3.3.4",
     "tailwindcss": "^3.4.1",
     "webpack": "^5.90.1",
