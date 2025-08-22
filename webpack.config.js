@@ -4,7 +4,6 @@ const webpack = require('webpack');
 const { execSync } = require('child_process');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-// Helpers : lit la sortie d'une commande Git, sinon renvoie un fallback
 const git = (cmd, fallback = '') => {
   try { return execSync(cmd, { stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim(); }
   catch { return fallback; }
@@ -12,9 +11,10 @@ const git = (cmd, fallback = '') => {
 
 const BRANCH = git('git rev-parse --abbrev-ref HEAD', 'dev');
 const COMMITHASH = git('git rev-parse --short HEAD', '');
-
 const isProd = process.env.NODE_ENV === 'production';
-const repo = 'CV-Axel-Maillot';
+
+// 👉 nom EXACT de ton repo GitHub
+const repoName = 'axel-cv';
 
 module.exports = {
   entry: './src/index.tsx',
@@ -22,7 +22,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: isProd ? 'assets/[name].[contenthash].js' : 'assets/[name].js',
     chunkFilename: isProd ? 'assets/[name].[contenthash].js' : 'assets/[name].js',
-    publicPath: isProd ? `/${repo}/` : '/',
+    publicPath: isProd ? `/${repoName}/` : '/', // ✅ clé pour Pages project site
     clean: true
   },
   mode: isProd ? 'production' : 'development',
@@ -32,9 +32,7 @@ module.exports = {
       { test: /\.css$/, use: ['style-loader', 'css-loader', 'postcss-loader'] },
     ],
   },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.css'],
-  },
+  resolve: { extensions: ['.tsx', '.ts', '.js', '.css'] },
   plugins: [
     new HtmlWebpackPlugin({ template: './public/index.html' }),
     new CopyWebpackPlugin({
@@ -48,10 +46,7 @@ module.exports = {
       'process.env.TURNSTILE_SITE_KEY': JSON.stringify(process.env.TURNSTILE_SITE_KEY || '')
     }),
   ],
-  optimization: {
-    splitChunks: { chunks: 'all' },
-    runtimeChunk: 'single'
-  },
+  optimization: { splitChunks: { chunks: 'all' }, runtimeChunk: 'single' },
   devServer: {
     static: { directory: path.join(__dirname, 'public') },
     historyApiFallback: true,
