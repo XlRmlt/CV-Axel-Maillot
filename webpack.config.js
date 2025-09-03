@@ -21,7 +21,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: isProd ? 'assets/[name].[contenthash].js' : 'assets/[name].js',
     chunkFilename: isProd ? 'assets/[name].[contenthash].js' : 'assets/[name].js',
-    publicPath: isProd ? 'auto' : '/',
+    publicPath: 'auto',
     clean: true
   },
   mode: isProd ? 'production' : 'development',
