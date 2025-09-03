@@ -52,6 +52,7 @@ export const translations: Record<Lang, Record<string, any>> = {
       home_role2: "Recherche un projet dans l'IA",
       home_role3: "Ingénieur Informatique",
       home_role4: "Recherche un projet dans la Cyber",
+      home_character_tooltip: "C'est moi ! (mais je ne suis pas bleu en vrai)",
     },
     interests: {
       interests_title: "Mes Centres d'Intérêt",
@@ -185,6 +186,7 @@ export const translations: Record<Lang, Record<string, any>> = {
       home_role2: "Looking for a project in AI",
       home_role3: "Computer Science Engineer",
       home_role4: "Looking for a project in Cybersecurity",
+      home_character_tooltip: "That's me! (but I'm not actually blue)",
     },
     interests: {
       interests_title: "My Interests",
@@ -318,6 +320,7 @@ export const translations: Record<Lang, Record<string, any>> = {
       home_role2: "Buscando un proyecto en IA",
       home_role3: "Ingeniero Informático",
       home_role4: "Buscando un proyecto en Ciberseguridad",
+      home_character_tooltip: "¡Soy yo! (pero en realidad no soy azul)",
     },
     interests: {
       interests_title: "Mis Intereses",

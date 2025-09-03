@@ -3,6 +3,7 @@ import React, { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import Mouth from "./Mouth";
 import TypeWriter from "./TypeWriter";
+import { useLanguage } from "../../i18n/LanguageContext";
 
 type Props = {
   size?: number;        // largeur en px
@@ -21,6 +22,7 @@ const AnimatedCharacter: React.FC<Props> = ({
   const [x, setX] = useState(() => Math.floor(Math.random() * 5) + 3);
   const [cycle, setCycle] = useState(0); // pour forcer le redémarrage de l’animation
   const [hovered, setHovered] = useState(false);
+  const { t } = useLanguage();
 
   // Callback appelé à chaque fin de cycle d’animation du bras
   const handleArmCycle = useCallback(() => {
@@ -43,7 +45,11 @@ const AnimatedCharacter: React.FC<Props> = ({
       {/* Etiquette de survol */}
       {hovered && (
         <div className="character-tooltip">
-          <TypeWriter words={["C'est moi ! (mais je ne suis pas bleu en vrai)"]} typingSpeed={10} style={{ color : "var(--text-highlight)"}}/>
+          <TypeWriter
+            words={[t("home.home_character_tooltip")]}
+            typingSpeed={10}
+            style={{ color: "var(--text-highlight)" }}
+          />
         </div>
       )}
       <svg viewBox="0 0 120 160" width="100%" height="100%" role="img">
