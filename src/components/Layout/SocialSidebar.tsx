@@ -5,6 +5,7 @@ import { SiCachet, SiGmail } from 'react-icons/si';
 import ThemeToggle from '../Theme/ThemeToggle';
 import { useLanguage } from '../../i18n/LanguageContext';
 import EmailWithCaptcha from './EmailWithCaptcha';
+import { asset } from '../../utils/asset';
 
 const SocialSidebar = () => {
   const { lang, setLang, t } = useLanguage();
@@ -55,7 +56,7 @@ const SocialSidebar = () => {
                 }}
               >
                 <img
-                  src={`/flags/${f.file}`}
+                  src={asset(`flags/${f.file}`)}
                   alt={f.label}
                   style={{ width: lang === f.code ? 80 : 60, objectFit: 'cover', opacity: lang === f.code ? 1 : 0.5 }}
                 />

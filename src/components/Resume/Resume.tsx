@@ -4,11 +4,12 @@ import { FaDownload } from 'react-icons/fa';
 import './resume.css';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { CaptchaReveal, CaptchaDownload } from '../Layout/CaptchaGate';
+import { asset } from '../../utils/asset';
 
 const cvFiles = [
-  { lang: 'Français', code: 'Francais', path: '/CVs/CV-Axel-Maillot-FR.pdf' },
-  { lang: 'English', code: 'English', path: '/CVs/CV-Axel-Maillot-EN.pdf' },
-  { lang: 'Español', code: 'Espanol', path: '/CVs/CV-Axel-Maillot-ES.pdf' }
+  { lang: 'Français', code: 'Francais', path: 'CVs/CV-Axel-Maillot-FR.pdf' },
+  { lang: 'English', code: 'English', path: 'CVs/CV-Axel-Maillot-EN.pdf' },
+  { lang: 'Español', code: 'Espanol', path: 'CVs/CV-Axel-Maillot-ES.pdf' }
 ];
 
 const Resume: React.FC = () => {
@@ -20,7 +21,7 @@ const Resume: React.FC = () => {
       <div className="first-line">
         <h2 className="title m-0">{t('resume.resume_title')}</h2>
         <CaptchaDownload
-          href={selectedCV.path}
+          href={asset(selectedCV.path)}
           className="download-button"
           aria-label={t('resume.resume_download_label') + ' ' + selectedCV.lang}
         >
@@ -46,7 +47,7 @@ const Resume: React.FC = () => {
           >
             <img
               className="flag-icon"
-              src={`/flags/${file.code}.png`}
+              src={asset(`flags/${file.code}.png`)}
               alt={file.lang}
             />
           </motion.button>
@@ -62,7 +63,7 @@ const Resume: React.FC = () => {
         <div className="visual flex justify-center">
           <div className="w-full aspect-[1/1.414] rounded-xl overflow-hidden shadow-lg bg-transparent">
             <iframe
-              src={`${selectedCV.path}#toolbar=0`}
+              src={`${asset(selectedCV.path)}#toolbar=0`}
               title={t('resume.resume_iframe_title') + ' ' + selectedCV.lang}
               className="w-full h-full bg-transparent"
               style={{ aspectRatio: '1 / 1.414', width: 800, border: 'none', background: 'transparent' }}
