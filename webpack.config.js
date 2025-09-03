@@ -14,7 +14,7 @@ const COMMITHASH = git('git rev-parse --short HEAD', '');
 const isProd = process.env.NODE_ENV === 'production';
 
 // 👉 nom EXACT de ton repo GitHub
-const repoName = 'axel-cv';
+const repoName = 'CV-Axel-Maillot';
 
 module.exports = {
   entry: './src/index.tsx',
