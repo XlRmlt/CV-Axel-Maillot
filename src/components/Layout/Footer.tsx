@@ -8,7 +8,11 @@ const Footer: React.FC = () => {
   const { t } = useLanguage();
   const year = new Date().getFullYear();
 
-  const release = `${BRANCH} - ${COMMITHASH.slice(0,7)}`;
+  const branch = typeof BRANCH !== 'undefined' && BRANCH ? BRANCH : 'local';
+  const shaRaw = typeof COMMITHASH !== 'undefined' && COMMITHASH ? COMMITHASH : '';
+  const sha = shaRaw ? shaRaw.slice(0, 7) : 'dev';
+
+  const release = `${branch} - ${sha}`;
 
   return (
     <footer className="footer" role="contentinfo" aria-label="Site footer">
