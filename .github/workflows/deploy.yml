@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]   # adapte si ta branche par défaut n'est pas 'main'
+    branches: [ main ]   # ou la branche que tu utilises
 
 permissions:
   contents: read
@@ -18,23 +18,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-
-      # (Optionnel) Clé Turnstile si tu la stockes en secret
-      - name: Export Turnstile key
-        run: echo "TURNSTILE_SITE_KEY=${{ secrets.TURNSTILE_SITE_KEY }}" >> $GITHUB_ENV
-
+          cache: npm
       - run: npm ci
-      - run: NODE_ENV=production npm run build
-
+      - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
-
+          path: ./dist
   deploy:
     needs: build
     runs-on: ubuntu-latest

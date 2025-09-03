@@ -22,7 +22,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: isProd ? 'assets/[name].[contenthash].js' : 'assets/[name].js',
     chunkFilename: isProd ? 'assets/[name].[contenthash].js' : 'assets/[name].js',
-    publicPath: isProd ? `/${repoName}/` : '/', // ✅ clé pour Pages project site
+    publicPath: isProd ? `/${repoName}/` : '/',
     clean: true
   },
   mode: isProd ? 'production' : 'development',
