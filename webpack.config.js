@@ -13,7 +13,6 @@ const BRANCH = git('git rev-parse --abbrev-ref HEAD', 'dev');
 const COMMITHASH = git('git rev-parse --short HEAD', '');
 const isProd = process.env.NODE_ENV === 'production';
 
-// 👉 nom EXACT de ton repo GitHub
 const repoName = 'CV-Axel-Maillot';
 
 module.exports = {
@@ -22,7 +21,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: isProd ? 'assets/[name].[contenthash].js' : 'assets/[name].js',
     chunkFilename: isProd ? 'assets/[name].[contenthash].js' : 'assets/[name].js',
-    publicPath: isProd ? `/${repoName}/` : '/',
+    publicPath: isProd ? `./` : '/',
     clean: true
   },
   mode: isProd ? 'production' : 'development',
