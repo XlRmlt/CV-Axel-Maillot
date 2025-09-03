@@ -1,6 +1,7 @@
 {
   "name": "axel-cv",
   "version": "1.0.0",
+  "homepage": "https://xlrmlt.github.io/CV-Axel-Maillot/",
   "description": "",
   "main": "index.js",
   "scripts": {
