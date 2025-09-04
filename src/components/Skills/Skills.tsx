@@ -6,7 +6,6 @@ import {
   SiTypescript,
   SiJavascript,
   SiCss3,
-  SiNodedotjs,
   SiPython,
   SiPostgresql,
   SiR,
@@ -77,13 +76,6 @@ const SkillsSection = () => {
       color: "#06B6D4",
       codeSnippet: t('skills.skills_css_code'),
       codeAnswer: t('skills.skills_css_answer')
-    },
-    {
-      icon: <SiNodedotjs color="#339933" size={28} />,
-      title: "Node.js",
-      color: "#339933",
-      codeSnippet: t('skills.skills_node_code'),
-      codeAnswer: t('skills.skills_node_answer')
     },
     {
       icon: <SiPostgresql color="#4479A1" size={28} />,

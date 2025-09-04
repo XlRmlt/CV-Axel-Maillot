@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  SiReact, SiTypescript, SiJavascript, SiCss3, SiNodedotjs, SiPython,
+  SiReact, SiTypescript, SiJavascript, SiCss3, SiPython,
   SiPostgresql, SiR, SiGit, SiDocker, SiC, SiCplusplus
 } from 'react-icons/si';
 import { FaCogs, FaCode, FaMicrosoft } from 'react-icons/fa';
@@ -14,7 +14,6 @@ const skills = [
   { icon: SiTypescript, title: "TypeScript", color: "#3178C6" },
   { icon: SiJavascript, title: "JavaScript", color: "#F7DF1E" },
   { icon: SiCss3, title: "CSS", color: "#06B6D4" },
-  { icon: SiNodedotjs, title: "Node.js", color: "#339933" },
   { icon: SiPostgresql, title: "SQL", color: "#4479A1" },
   { icon: SiR, title: "R", color: "#276DC3" },
   { icon: SiGit, title: "Git", color: "#F1502F" },
