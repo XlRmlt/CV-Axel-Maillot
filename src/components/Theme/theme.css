@@ -24,6 +24,8 @@
 
   --character-color: #7228f1;
   --font-family-base: 'Philosopher', sans-serif;
+
+  --footer-height: 44px;
 }
 
 .dark {
@@ -305,7 +307,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 60px;        /* aligne avec la sidebar */
   right: 0;
   bottom: 0;
-  height: 44px;
+  height: var(--footer-height);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -320,8 +322,4 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--navbar-text);
   font-size: 0.9rem;
   line-height: 1;
-}
-
-.footer:hover .footer-text {
-  color: var(--navbar-text-hover);
 }

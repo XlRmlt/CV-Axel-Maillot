@@ -356,6 +356,9 @@ const SkillsSection = () => {
           ))}
         </div>
       </motion.div>
+
+      {/* Spacer to avoid content being hidden behind the footer */}
+      <div style={{ height: 'var(--footer-height)' }} />
     </div>
   );
 };

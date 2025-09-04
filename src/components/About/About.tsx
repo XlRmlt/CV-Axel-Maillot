@@ -136,6 +136,9 @@ const About: React.FC = () => {
         <SkillsIcons />
         <br />
       </div>
+
+      {/* Spacer to avoid content being hidden behind the footer */}
+      <div style={{ height: 'var(--footer-height)' }} />
     </div>
   );
 };

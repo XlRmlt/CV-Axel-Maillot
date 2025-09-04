@@ -72,6 +72,9 @@ const Resume: React.FC = () => {
           </div>
         </div>
       </CaptchaReveal>
+
+      {/* Spacer to avoid content being hidden behind the footer */}
+      <div style={{ height: 'var(--footer-height)' }} />
     </div>
   );
 };
