@@ -44,6 +44,9 @@ interface TimelineItem {
   organization: string;
   organizationIcon?: string;
   organizationLink?: string;
+  contractor?: string;
+  contractorIcon?: string;
+  contractorLink?: string;
   debut: string; // "MM-YYYY" ou "DD-MM-YYYY"
   fin: string;   // "MM-YYYY", "DD-MM-YYYY" ou "today"
   description: string[];
@@ -94,16 +97,18 @@ const Career: React.FC = () => {
   const items: TimelineItem[] = [
     {
       type: 'work',
-      title: t('career.timeline_biomerieux_title'),
+      title: t('career.timeline_astek_title'),
       organization: 'BioMérieux',
       organizationIcon: 'Logos/bioMerieux.png',
       organizationLink: 'https://www.biomerieux.com/',
+      contractor: 'Astek',
+      contractorLink: 'https://astekgroup.fr/',
       debut: '08-10-2025',
       fin: 'today',
       description: [
-        t('career.timeline_biomerieux_desc1'),
-        t('career.timeline_biomerieux_desc2'),
-        t('career.timeline_biomerieux_desc3'),
+        t('career.timeline_astek_desc1'),
+        t('career.timeline_astek_desc2'),
+        t('career.timeline_astek_desc3'),
       ],
       technologies: ['R/Shiny', 'JavaScript', 'CSS', 'GitLab', 'Docker', 'Kubernetes'],
     },
@@ -386,33 +391,88 @@ const Career: React.FC = () => {
                   <span className="career-date-fr">{formatMonthYear(item.debut)} – {formatMonthYear(item.fin)}</span>
 
                   <div className="career-title-row">
-                    {/* Logo à gauche du bloc texte */}
-                    {item.organizationIcon && (
-                      item.organizationLink ? (
-                        <a
-                          href={item.organizationLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
+                    {/* Logos a gauche du bloc texte */}
+                    <div className="career-logos">
+                      {item.organizationIcon && (
+                        item.organizationLink ? (
+                          <a
+                            href={item.organizationLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <img
+                              src={asset(item.organizationIcon)}
+                              alt={`${item.organization} logo`}
+                              className={`career-organization-icon ${item.organization.includes('Stockholm') ? 'white-bg-in-dark' : ''}`}
+                            />
+                          </a>
+                        ) : (
                           <img
                             src={asset(item.organizationIcon)}
                             alt={`${item.organization} logo`}
                             className={`career-organization-icon ${item.organization.includes('Stockholm') ? 'white-bg-in-dark' : ''}`}
                           />
-                        </a>
-                      ) : (
-                        <img
-                          src={asset(item.organizationIcon)}
-                          alt={`${item.organization} logo`}
-                          className={`career-organization-icon ${item.organization.includes('Stockholm') ? 'white-bg-in-dark' : ''}`}
-                        />
-                      )
-                    )}
+                        )
+                      )}
+
+                      {item.contractorIcon && (
+                        item.contractorLink ? (
+                          <a
+                            href={item.contractorLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <img
+                              src={asset(item.contractorIcon)}
+                              alt={`${item.contractor ?? 'Contractor'} logo`}
+                              className={`career-organization-icon ${item.contractor?.includes('Stockholm') ? 'white-bg-in-dark' : ''}`}
+                            />
+                          </a>
+                        ) : (
+                          <img
+                            src={asset(item.contractorIcon)}
+                            alt={`${item.contractor ?? 'Contractor'} logo`}
+                            className={`career-organization-icon ${item.contractor?.includes('Stockholm') ? 'white-bg-in-dark' : ''}`}
+                          />
+                        )
+                      )}
+                    </div>
 
                     {/* Bloc titre + organisation */}
                     <div className="career-title-text">
                       <h3 className="career-title">{item.title}</h3>
-                      <h4 className="career-organization-name">{item.organization}</h4>
+                      <h4 className="career-organization-name">
+                        {item.organizationLink ? (
+                          <a
+                            className="career-organization-link"
+                            href={item.organizationLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {item.organization}
+                          </a>
+                        ) : (
+                          <span>{item.organization}</span>
+                        )}
+
+                        {item.contractor && (
+                          <>
+                            <span className="career-organization-linker">{t('career.contractor_joiner')}</span>
+                            {item.contractorLink ? (
+                              <a
+                                className="career-organization-link"
+                                href={item.contractorLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {item.contractor}
+                              </a>
+                            ) : (
+                              <span>{item.contractor}</span>
+                            )}
+                          </>
+                        )}
+                      </h4>
                     </div>
                   </div>
                 </div>

@@ -44,6 +44,7 @@ export const translations: Record<Lang, Record<string, any>> = {
       timeline_prepa_desc1: "Prépa CPGE scientifique, spécialité Sciences de l’Ingénieur",
       timeline_bac_title: 'Bac S(SI) Mention TB Européenne',
       timeline_bac_desc1: "Mention Très Bien - Section Européenne",
+      contractor_joiner: 'via',
     },
     home: {
       home_hello: "Bonjour et bienvenu.e,",
@@ -178,6 +179,7 @@ export const translations: Record<Lang, Record<string, any>> = {
       timeline_prepa_desc1: "Science preparatory class, Engineering Sciences specialty",
       timeline_bac_title: 'Baccalaureate S(SI) with Honors European Section',
       timeline_bac_desc1: "High honors - European section",
+      contractor_joiner: 'via',
     },
     home: {
       home_hello: "Hello and welcome,",
@@ -312,6 +314,7 @@ export const translations: Record<Lang, Record<string, any>> = {
       timeline_prepa_desc1: "Clase preparatoria científica, especialidad en Ingeniería",
       timeline_bac_title: 'Bachillerato S(SI) Mención TB Europea',
       timeline_bac_desc1: "Mención de honor - Sección Europea",
+      contractor_joiner: 'via',
     },
     home: {
       home_hello: "Hola y bienvenid@,",

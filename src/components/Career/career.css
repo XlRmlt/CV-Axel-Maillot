@@ -114,6 +114,13 @@
   gap: 0.65rem;
 }
 
+.career-logos {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
 .career-title-text {
   display: flex;
   flex-direction: column;
@@ -127,10 +134,28 @@
 }
 
 .career-organization-name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
   color: var(--text-grey);
   font-weight: 500;
   line-height: 1;
   margin-top: 0; /* supprime tout espace au-dessus de l'organisation */
+}
+
+.career-organization-linker {
+  color: var(--text-highlight);
+  font-weight: 600;
+}
+
+.career-organization-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.career-organization-link:hover {
+  text-decoration: underline;
 }
 
 .career-description {
