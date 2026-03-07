@@ -44,8 +44,8 @@ interface TimelineItem {
   organization: string;
   organizationIcon?: string;
   organizationLink?: string;
-  debut: string; // "MM-YYYY"
-  fin: string;   // "MM-YYYY"
+  debut: string; // "MM-YYYY" ou "DD-MM-YYYY"
+  fin: string;   // "MM-YYYY", "DD-MM-YYYY" ou "today"
   description: string[];
   technologies?: string[];
 }
@@ -61,11 +61,27 @@ const formatMonthYearFr = (mmYYYY: string) => {
   return `${monthsFr[d.getMonth()]} ${d.getFullYear()}`;
 };
 
-const parseMonth = (mmYYYY: string) => {
-  const [mm, yyyy] = mmYYYY.split('-').map(Number);
+const parseMonth = (dateStr: string) => {
+  if (dateStr.toLowerCase() === 'today') {
+    return new Date();
+  }
+
+  const parts = dateStr.split('-').map(Number);
+  if (parts.length === 3) {
+    const [dd, mm, yyyy] = parts;
+    return new Date(yyyy, (mm ?? 1) - 1, dd ?? 1);
+  }
+
+  const [mm, yyyy] = parts;
   return new Date(yyyy, (mm ?? 1) - 1, 1);
 };
-const monthIndex = (d: Date) => d.getFullYear() * 12 + d.getMonth();
+const monthIndex = (d: Date) => {
+  const year = d.getFullYear();
+  const month = d.getMonth();
+  const day = d.getDate();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  return year * 12 + month + (day - 1) / daysInMonth;
+};
 
 const PX_PER_MONTH = 25;      // échelle verticale
 const TOP_PADDING = 96;         // espace au-dessus de la première entrée
@@ -76,6 +92,21 @@ const Career: React.FC = () => {
   const { lang, t } = useLanguage();
   const [hoveredTech, setHoveredTech] = useState<{cardIdx: number, techIdx: number} | null>(null);
   const items: TimelineItem[] = [
+    {
+      type: 'work',
+      title: t('career.timeline_biomerieux_title'),
+      organization: 'BioMérieux',
+      organizationIcon: 'Logos/bioMerieux.png',
+      organizationLink: 'https://www.biomerieux.com/',
+      debut: '08-10-2025',
+      fin: 'today',
+      description: [
+        t('career.timeline_biomerieux_desc1'),
+        t('career.timeline_biomerieux_desc2'),
+        t('career.timeline_biomerieux_desc3'),
+      ],
+      technologies: ['R/Shiny', 'JavaScript', 'CSS', 'GitLab', 'Docker', 'Kubernetes'],
+    },
     {
       type: 'work',
       title: t('career.timeline_biomerieux_title'),
@@ -259,9 +290,25 @@ const Career: React.FC = () => {
 
   // Remplace la fonction de formatage par une version multilingue
   const formatMonthYear = (mmYYYY: string) => {
-    const [mm, yyyy] = mmYYYY.split('-').map(Number);
-    const d = new Date(yyyy, (mm ?? 1) - 1, 1);
+    if (mmYYYY.toLowerCase() === 'today') {
+      const labels: Record<string, string> = {
+        fr: "Aujourd'hui",
+        en: 'Today',
+      };
+      return labels[lang] || labels.fr;
+    }
+
+    const parts = mmYYYY.split('-').map(Number);
+    const hasDay = parts.length === 3;
+    const dd = hasDay ? parts[0] : 1;
+    const mm = hasDay ? parts[1] : parts[0];
+    const yyyy = hasDay ? parts[2] : parts[1];
+    const d = new Date(yyyy, (mm ?? 1) - 1, dd ?? 1);
     const months = monthsByLang[lang] || monthsByLang['fr'];
+    if (hasDay) {
+      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+    }
+
     return `${months[d.getMonth()]} ${d.getFullYear()}`;
   };
 
