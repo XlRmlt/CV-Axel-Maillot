@@ -218,7 +218,9 @@ const Career: React.FC = () => {
     });
 
     const minM = Math.min(...withDates.map(i => i.startM));
-    const maxM = Math.max(...withDates.map(i => i.endM));
+    const nowM = monthIndex(new Date());
+    const maxExperienceM = Math.max(...withDates.map(i => i.endM));
+    const maxM = Math.max(maxExperienceM, nowM);
 
     // Position verticale (0 en haut = le plus récent)
     const toTopPx = (m: number) => TOP_PADDING + (maxM - m) * PX_PER_MONTH;
