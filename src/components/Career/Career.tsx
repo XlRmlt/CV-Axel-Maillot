@@ -276,6 +276,9 @@ const Career: React.FC = () => {
       ...placed.map(p => p.topPx + p.cardHeight / 2 + 20)
     );
 
+    const spineTop = toTopPx(maxM);
+    const spineHeight = Math.max(4, Math.abs(toTopPx(minM) - toTopPx(maxM)));
+
     // Marqueurs d’années sur la colonne centrale
     const startYear = Math.floor(minM / 12);
     const endYear = Math.floor(maxM / 12);
@@ -285,7 +288,7 @@ const Career: React.FC = () => {
       yearMarks.push({ year: y, top: toTopPx(january) });
     }
 
-    return { placed, minM, maxM, totalHeight, toTopPx, yearMarks };
+    return { placed, minM, maxM, totalHeight, toTopPx, yearMarks, spineTop, spineHeight };
   }, [items]);
 
   // Remplace la fonction de formatage par une version multilingue
@@ -324,7 +327,10 @@ const Career: React.FC = () => {
 
       <div className="career-vtl-wrapper" style={{ height: enriched.totalHeight }}>
         {/* Colonne centrale (spine) */}
-        <div className="career-spine" />
+        <div
+          className="career-spine"
+          style={{ top: enriched.spineTop, height: enriched.spineHeight, bottom: 'auto' }}
+        />
 
         {/* Marqueurs d’années */}
         {enriched.yearMarks.map(m => (
