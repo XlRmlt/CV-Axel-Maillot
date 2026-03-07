@@ -102,8 +102,9 @@ const Career: React.FC = () => {
       organizationIcon: 'Logos/bioMerieux.png',
       organizationLink: 'https://www.biomerieux.com/',
       contractor: 'Astek',
+      contractorIcon: 'Logos/Astek.png',
       contractorLink: 'https://astekgroup.fr/',
-      debut: '08-10-2025',
+      debut: '10-2025',
       fin: 'today',
       description: [
         t('career.timeline_astek_desc1'),
@@ -301,11 +302,7 @@ const Career: React.FC = () => {
   // Remplace la fonction de formatage par une version multilingue
   const formatMonthYear = (mmYYYY: string) => {
     if (mmYYYY.toLowerCase() === 'today') {
-      const labels: Record<string, string> = {
-        fr: "Aujourd'hui",
-        en: 'Today',
-      };
-      return labels[lang] || labels.fr;
+      return t('career.today_label');
     }
 
     const parts = mmYYYY.split('-').map(Number);

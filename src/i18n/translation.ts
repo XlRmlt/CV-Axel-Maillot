@@ -24,6 +24,10 @@ export const translations: Record<Lang, Record<string, any>> = {
       aboutSkills: 'Compétences techniques',
     },
     career: {
+      timeline_astek_title: 'Premier emploi, développement web',
+      timeline_astek_desc1: 'Poursuite de la refonte du stage',
+      timeline_astek_desc2: 'Création d\'une autre application de démonstration',
+      timeline_astek_desc3: 'Approfondissement de l\'approche Agile',
       timeline_biomerieux_title: 'Stage développement web',
       timeline_biomerieux_desc1: "Refonte d’une application web R&D interne",
       timeline_biomerieux_desc2: "Amélioration de l’interface et l’expérience utilisateur",
@@ -45,6 +49,7 @@ export const translations: Record<Lang, Record<string, any>> = {
       timeline_bac_title: 'Bac S(SI) Mention TB Européenne',
       timeline_bac_desc1: "Mention Très Bien - Section Européenne",
       contractor_joiner: 'via',
+      today_label: "Aujourd'hui",
     },
     home: {
       home_hello: "Bonjour et bienvenu.e,",
@@ -159,6 +164,10 @@ export const translations: Record<Lang, Record<string, any>> = {
       aboutSkills: 'Technical skills',
     },
     career: {
+      timeline_astek_title: 'First job, web development',
+      timeline_astek_desc1: 'Continuation of the internship redesign work',
+      timeline_astek_desc2: 'Creation of another demonstration application',
+      timeline_astek_desc3: 'Further development of the Agile approach',
       timeline_biomerieux_title: 'Web Development Internship',
       timeline_biomerieux_desc1: "Redesign of an internal R&D web application",
       timeline_biomerieux_desc2: "Improved interface and user experience",
@@ -180,6 +189,7 @@ export const translations: Record<Lang, Record<string, any>> = {
       timeline_bac_title: 'Baccalaureate S(SI) with Honors European Section',
       timeline_bac_desc1: "High honors - European section",
       contractor_joiner: 'via',
+      today_label: 'Today',
     },
     home: {
       home_hello: "Hello and welcome,",
@@ -294,6 +304,10 @@ export const translations: Record<Lang, Record<string, any>> = {
       aboutSkills: 'Competencias técnicas',
     },
     career: {
+      timeline_astek_title: 'Primer empleo, desarrollo web',
+      timeline_astek_desc1: 'Continuación de la refactorización de las prácticas',
+      timeline_astek_desc2: 'Creación de otra aplicación de demostración',
+      timeline_astek_desc3: 'Profundización del enfoque Agile',
       timeline_biomerieux_title: 'Prácticas desarrollo web',
       timeline_biomerieux_desc1: "Rediseño de una aplicación web interna de I+D",
       timeline_biomerieux_desc2: "Mejora de la interfaz y la experiencia de usuario",
@@ -315,6 +329,7 @@ export const translations: Record<Lang, Record<string, any>> = {
       timeline_bac_title: 'Bachillerato S(SI) Mención TB Europea',
       timeline_bac_desc1: "Mención de honor - Sección Europea",
       contractor_joiner: 'via',
+      today_label: 'Hoy',
     },
     home: {
       home_hello: "Hola y bienvenid@,",
