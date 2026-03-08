@@ -142,11 +142,17 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
       const endM = monthIndex(p.end);
       const mid = (startM + endM) / 2;
       const left = toPct(mid);
-      return { ...p, left, offset: 0 };
+      return { ...p, left, adjustedLeft: left, offset: 0 };
     });
 
     // Calcul de la largeur réelle d'une carte en pourcentage de la timeline
     const cardWidthPct = (dimensions.cardWidth / dimensions.containerWidth) * 100;
+    const horizontalGapPct = 1.4;
+    const minDistancePct = cardWidthPct + horizontalGapPct;
+    const halfCardPct = cardWidthPct / 2;
+    const minAllowedLeft = halfCardPct + 1;
+    const maxAllowedLeft = 100 - halfCardPct - 1;
+    const clampLeft = (value: number) => Math.min(maxAllowedLeft, Math.max(minAllowedLeft, value));
 
     // Séparer par type pour détecter les collisions au sein du même groupe
     const workItems = positions.filter((p) => p.type === 'work').sort((a, b) => a.left - b.left);
@@ -155,6 +161,77 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
     // Fonction pour détecter et résoudre les collisions avec algorithme itératif
     const resolveCollisions = (layerItems: typeof positions) => {
       const layers: { [offset: number]: typeof positions } = {};
+      const hasCollision = (candidateLeft: number, layer: typeof positions) =>
+        layer.some((placedItem) => Math.abs(candidateLeft - placedItem.adjustedLeft) < minDistancePct);
+
+      const findFirstCollision = (candidateLeft: number, layer: typeof positions) =>
+        layer.find((placedItem) => Math.abs(candidateLeft - placedItem.adjustedLeft) < minDistancePct);
+
+      // Plus la carte est large, plus l'amplitude de decalage testee est grande.
+      const SHIFT_STEP = Math.max(1, cardWidthPct * 0.12);
+      const MAX_SHIFT = cardWidthPct * 0.45;
+
+      const findHorizontalNudge = (item: (typeof positions)[number], layer: typeof positions) => {
+        const origin = clampLeft(item.left);
+        const attempts = Math.max(1, Math.floor(MAX_SHIFT / SHIFT_STEP));
+
+        for (let i = 1; i <= attempts; i++) {
+          const shift = i * SHIFT_STEP;
+          const rightCandidate = clampLeft(origin + shift);
+          if (!hasCollision(rightCandidate, layer)) {
+            return rightCandidate;
+          }
+
+          const leftCandidate = clampLeft(origin - shift);
+          if (!hasCollision(leftCandidate, layer)) {
+            return leftCandidate;
+          }
+        }
+
+        return null;
+      };
+
+      const canPlaceAt = (
+        targetItem: (typeof positions)[number],
+        candidateLeft: number,
+        layer: typeof positions,
+        excludedItem?: (typeof positions)[number]
+      ) => {
+        return !layer.some((placedItem) => {
+          if (placedItem === targetItem || placedItem === excludedItem) {
+            return false;
+          }
+          return Math.abs(candidateLeft - placedItem.adjustedLeft) < minDistancePct;
+        });
+      };
+
+      const tryPairShift = (item: (typeof positions)[number], layer: typeof positions, baseLeft: number) => {
+        const colliding = findFirstCollision(baseLeft, layer);
+        if (!colliding) {
+          return null;
+        }
+
+        const desiredGap = minDistancePct;
+        const middle = (baseLeft + colliding.adjustedLeft) / 2;
+        const leftCandidate = clampLeft(middle - desiredGap / 2);
+        const rightCandidate = clampLeft(middle + desiredGap / 2);
+
+        // Conserve l'ordre visuel gauche/droite des cartes selon leur position d'origine.
+        const itemShouldBeLeft = item.left <= colliding.left;
+        const itemCandidate = itemShouldBeLeft ? leftCandidate : rightCandidate;
+        const collidingCandidate = itemShouldBeLeft ? rightCandidate : leftCandidate;
+
+        if (!canPlaceAt(colliding, collidingCandidate, layer, item)) {
+          return null;
+        }
+        if (!canPlaceAt(item, itemCandidate, layer, colliding)) {
+          return null;
+        }
+
+        colliding.adjustedLeft = collidingCandidate;
+        return itemCandidate;
+      };
+
       layerItems.sort((a, b) => a.left - b.left);
 
       for (const item of layerItems) {
@@ -166,14 +243,37 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
             layers[currentOffset] = [];
           }
 
-          const hasCollisionInLayer = layers[currentOffset].some(
-            (placedItem) => Math.abs(item.left - placedItem.left) < cardWidthPct
-          );
+          const currentLayer = layers[currentOffset];
+          const baseLeft = clampLeft(item.left);
+          const hasCollisionInLayer = hasCollision(baseLeft, currentLayer);
 
           if (!hasCollisionInLayer) {
             item.offset = currentOffset;
-            layers[currentOffset].push(item);
+            item.adjustedLeft = baseLeft;
+            currentLayer.push(item);
             placementFound = true;
+          } else if (currentOffset > 0) {
+            // D'abord, essayer de deplacer les 2 cartes en conflit sur cette couche.
+            const pairShiftCandidate = tryPairShift(item, currentLayer, baseLeft);
+            if (pairShiftCandidate !== null) {
+              item.offset = currentOffset;
+              item.adjustedLeft = pairShiftCandidate;
+              currentLayer.push(item);
+              placementFound = true;
+              continue;
+            }
+
+            // Sur les couches deja decalees verticalement, on prefere un decalage horizontal
+            // avant de monter encore d'une couche.
+            const nudgedLeft = findHorizontalNudge(item, currentLayer);
+            if (nudgedLeft !== null) {
+              item.offset = currentOffset;
+              item.adjustedLeft = nudgedLeft;
+              currentLayer.push(item);
+              placementFound = true;
+            } else {
+              currentOffset++;
+            }
           } else {
             currentOffset++;
           }
@@ -198,7 +298,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
     .reduce((max, p) => Math.max(max, p.offset), 0);
 
   const cardHeight = dimensions.cardHeight || 180;
-  const cardMargin = 12;
+  const cardMargin = 18;
   const baseOffset = 24;
 
   const totalHeight =
@@ -269,6 +369,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
         <motion.div
           key={p.id}
           className="timeline-icon-container"
+          // Le logo reste ancre sur la timeline, seule la carte peut se decaler.
           style={{ left: `${p.left}%` }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -303,7 +404,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
             key={p.id}
             className={`timeline-event ${p.type === 'work' ? 'work' : 'education'}`}
             style={{
-              left: `${p.left}%`,
+              left: `${p.adjustedLeft}%`,
               transform: finalTransform,
             }}
             initial={{ opacity: 0 }}
