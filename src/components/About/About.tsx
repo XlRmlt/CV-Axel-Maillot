@@ -16,6 +16,19 @@ const About: React.FC = () => {
 
   const timelineItems = [
     {
+      id: '2025-astek-biomerieux',
+      type: 'work',
+      debut: '10-2025',
+      fin: 'today',
+      title: t('career.timeline_astek_title'),
+      organization: 'BioMérieux',
+      organizationLink: 'https://www.biomerieux.com/',
+      contractor: 'Astek',
+      contractorIcon: 'Logos/Astek.png',
+      contractorLink: 'https://astekgroup.fr/',
+      technologies: ['R/Shiny', 'JavaScript', 'CSS', 'GitLab', 'Docker', 'Kubernetes']
+    },
+    {
       id: '2025-biomérieux',
       type: 'work',
       debut: '02-2025',
