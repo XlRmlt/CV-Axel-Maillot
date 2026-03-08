@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../../i18n/LanguageContext';
 
-const SITE_KEY = '1x00000000000000000000AA'; // <- remplace par ta vraie clé
+const SITE_KEY = '0x4AAAAAACn1rtllQTJkrFso';
 
 declare global {
   interface Window {
