@@ -174,7 +174,6 @@ const SkillsSection = () => {
         };
 
       case 'Espagnol':
-        // Seulement les 3 bandes, l’écusson arrive en overlay <img>
         return {
           backgroundImage:
             'linear-gradient(0deg,#AA151B 0 25%,#F1BF00 25% 75%,#AA151B 75% 100%)',
@@ -310,7 +309,6 @@ const SkillsSection = () => {
                 </div>
               </div>
 
-              {/* Zone d'affichage du code et du rendu */}
               <AnimatePresence>
                 {hoveredIndex === index && (
                   <motion.div
@@ -321,7 +319,6 @@ const SkillsSection = () => {
                     className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 items-start h-full"
                   >
                     <div className="skills-code-render-container">
-                      {/* Fenêtre de code */}
                       <div className="h-full flex flex-col">
                         <pre className="p-3 bg-black text-green-400 text-xs rounded-md font-mono overflow-auto shadow-md min-h-[100px]">
                           <TypeWriterCode 
@@ -332,7 +329,6 @@ const SkillsSection = () => {
                         </pre>
                       </div>
                       
-                      {/* Fenêtre de rendu */}
                       <div className="h-full flex flex-col">
                         <pre className="p-3 bg-black text-green-400 text-xs rounded-md font-mono overflow-auto shadow-md min-h-[100px]">
                           {firstTypewriterComplete[index] && (
@@ -349,7 +345,6 @@ const SkillsSection = () => {
         </div>
       </motion.div>
 
-      {/* Spacer to avoid content being hidden behind the footer */}
       <div style={{ height: 'var(--footer-height)' }} />
     </div>
   );

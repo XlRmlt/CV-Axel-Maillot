@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Styles personnalisés */
 @layer base {
   body {
     @apply bg-background-dark text-text-primary;
@@ -38,7 +37,6 @@
   animation: blink 1s step-end infinite;
 }
 
-/* Animation classes */
 .fade-enter {
   opacity: 0;
   transform: translateY(20px);

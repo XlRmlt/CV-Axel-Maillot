@@ -1,8 +1,8 @@
 .timeline-container {
   position: relative;
   padding: 6rem 2rem;
-  min-height: 40rem;            /* espace élargi pour cartes décalées */
-  overflow-x: auto;             /* scroll si besoin */
+  min-height: 40rem;
+  overflow-x: auto;
 }
 
 .timeline-horizontal-line {
@@ -11,12 +11,11 @@
   left: 0;
   height: 4px;
   width: 100%;
-  background: var(--text-grey); /* slate-400/25 */
+  background: var(--text-grey);
   border-radius: 9999px;
   z-index: 0;
 }
 
-/* Segment représentant la durée */
 .timeline-duration {
   position: absolute;
   top: 50%;
@@ -27,16 +26,15 @@
 }
 
 .timeline-duration.work {
-  background: var(--work-color); /* Couleur des segments de travail */
+  background: var(--work-color);
   transform: translateY(-2px);
 }
 
 .timeline-duration.education {
-  background: var(--education-color); /* Couleur des projets */
+  background: var(--education-color);
   transform: translateY(2px);
 }
 
-/* Point et carte */
 .timeline-event {
   position: absolute;
   top: 50%;
@@ -47,15 +45,12 @@
 
 .timeline-event.work {
   flex-direction: column;
-  /* transform maintenant géré dynamiquement dans le JSX */
 }
 
 .timeline-event.education {
   flex-direction: column-reverse;
-  /* transform maintenant géré dynamiquement dans le JSX */
 }
 
-/* Icone */
 .timeline-icon-container {
   position: absolute;
   top: 50%;
@@ -66,7 +61,6 @@
   transform: translate(-50%, -50%);
 }
 
-/* Carte */
 .timeline-card {
   background: var(--background-popup);
   padding: 1.25rem 1.5rem;
@@ -135,12 +129,10 @@
   color: var(--text-primary);
 }
 
-/* Petits écrans : cartes un peu plus compactes */
 @media (max-width: 640px) {
   .timeline-card { min-width: 220px; padding: 0.75rem; }
 }
 
-/* Marqueurs d'années */
 .timeline-year-marker {
   position: absolute;
   top: 50%;

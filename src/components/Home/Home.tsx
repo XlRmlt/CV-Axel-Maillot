@@ -16,14 +16,11 @@ const Home: React.FC = () => {
     t('home.home_role4'),
   ];
 
-  // Taille dessinée du personnage (dans son propre repère 120x160)
   const size = 600;
   const viewW = 120, viewH = 160;
 
-  // Réf du conteneur qui englobe perso + bulles
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Centre exact de la bouche en px relatif au conteneur
   const [mouth, setMouth] = useState<Pt>({ x: 0, y: 0 });
 
   useLayoutEffect(() => {
@@ -33,19 +30,15 @@ const Home: React.FC = () => {
 
       const pr = parent.getBoundingClientRect();
 
-      // Personnage centré horizontalement dans le conteneur
       const charW = size;
       const charH = (size * viewH) / viewW;
 
-      // Décalage vertical car on centre le perso dans un conteneur min-h-screen
       const offsetTop = (pr.height - charH) / 2;
 
       const centerX = pr.left + pr.width / 2;
 
-      // x = 50% du conteneur (comme left: 50%)
       const x = centerX - size / 2;
 
-      // y = top du perso + position de la bouche dans le viewBox
       const y = offsetTop + (36 / viewH) * charH;
 
       setMouth({ x, y });
@@ -56,7 +49,6 @@ const Home: React.FC = () => {
     return () => window.removeEventListener('resize', update);
   }, [size]);
 
-  // Centres des bulles autour de la bouche (px)
   const leftCenter  = { x: mouth.x - 500, y: mouth.y - 175 };
   const rightCenter = { x: mouth.x + 400, y: mouth.y };
 
@@ -70,10 +62,8 @@ const Home: React.FC = () => {
           ref={containerRef}
           className="relative min-h-screen flex flex-col items-center justify-center"
         >
-          {/* Personnage centré (AnimatedCharacter est déjà centré via left:50% / translateX(-50%)) */}
           <AnimatedCharacter size={size} className="mb-6" />
 
-          {/* BULLE GAUCHE */}
           <SpeechBubble
             cx={leftCenter.x}
             cy={leftCenter.y}
@@ -103,7 +93,6 @@ const Home: React.FC = () => {
             </div>
           </SpeechBubble>
 
-          {/* BULLE DROITE */}
           <SpeechBubble
             cx={rightCenter.x}
             cy={rightCenter.y}

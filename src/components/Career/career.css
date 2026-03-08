@@ -2,11 +2,9 @@
     --career-icon-size: 1.75rem;
 }
 
-/* --- Timeline verticale --- */
 .career-vtl-wrapper {
   position: relative;
   margin: 0 auto;
-  /* on laisse la largeur au container parent; cartes gèrent la place */
 }
 
 .career-spine {
@@ -22,7 +20,6 @@
   z-index: 0;
 }
 
-/* Durées (barres verticales colorées de part et d'autre de la spine) */
 .career-duration {
   position: absolute;
   left: 50%;
@@ -34,7 +31,6 @@
 .career-duration.work { background: var(--work-color); }
 .career-duration.education { background: var(--education-color); }
 
-/* Point sur la spine (without ping) */
 .career-dot {
   position: absolute;
   left: 50%;
@@ -51,7 +47,6 @@
 .career-dot.work { border: 3px solid var(--work-color); }
 .career-dot.education { border: 3px solid var(--education-color); }
 
-/* Cartes ancrées gauche/droite, en recyclant la présentation d’origine */
 .career-card-outer {
   position: absolute;
   width: min(680px, 48vw);
@@ -61,7 +56,6 @@
 .career-card-outer.left  { right: calc(50% + 36px); text-align: left; }
 .career-card-outer.right { left:  calc(50% + 36px); text-align: left; }
 
-/* Marqueurs d'années */
 .career-year {
   position: absolute;
   left: 50%;
@@ -105,7 +99,7 @@
 .career-header {
   display: flex;
   flex-direction: column;
-  margin-bottom: -1rem; /* rapproche le header de la description */
+  margin-bottom: -1rem;
 }
 
 .career-title-row {
@@ -124,13 +118,13 @@
 .career-title-text {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem; /* rapproche le titre et l'organisation */
+  gap: 0.25rem;
 }
 
 .career-title {
   font-weight: bold;
   line-height: 1;
-  margin-bottom: 0; /* supprime tout espace sous le titre */
+  margin-bottom: 0;
 }
 
 .career-organization-name {
@@ -141,7 +135,7 @@
   color: var(--text-grey);
   font-weight: 500;
   line-height: 1;
-  margin-top: 0; /* supprime tout espace au-dessus de l'organisation */
+  margin-top: 0;
 }
 
 .career-organization-linker {
@@ -168,19 +162,16 @@
 
 .white-bg-in-dark {
   background: #fff;
-  /* Optionnel : pour éviter que le fond blanc déborde du logo */
   padding: 0.15rem;
   border-radius: 6px;
 }
 
-/* Active le fond blanc uniquement en dark mode si vous avez un body.dark ou [data-theme="dark"] */
 @media (prefers-color-scheme: dark) {
   .white-bg-in-dark {
     background: #fff;
   }
 }
 
-/* Petits écrans: on passe en une colonne (cartes à droite) */
 @media (max-width: 900px) {
   .career-card-outer {
     width: min(640px, 92vw);

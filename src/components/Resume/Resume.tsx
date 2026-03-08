@@ -32,7 +32,6 @@ const Resume: React.FC = () => {
         </CaptchaDownload>
       </div>
 
-      {/* Sélecteurs de langue */}
       <div className="buttons-container">
         {cvFiles.map((file) => (
           <motion.button
@@ -73,7 +72,6 @@ const Resume: React.FC = () => {
         </div>
       </CaptchaReveal>
 
-      {/* Spacer to avoid content being hidden behind the footer */}
       <div style={{ height: 'var(--footer-height)' }} />
     </div>
   );

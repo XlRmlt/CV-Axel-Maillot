@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Light theme */
   --background-primary: rgba(255, 255, 255, 1);
   --background-popup: rgba(233, 237, 248, 1);
   --background-selected: rgba(242, 242, 242, 1);
@@ -9,18 +8,18 @@
   --text-primary: hsl(224, 71.4%, 4.1%);
   --text-grey: rgba(150, 150, 150, 1);
   --text-muted: hsl(220, 8.9%, 46.1%);
-  --text-highlight: hsl(231, 89%, 71%); /* Bleu vif */
+  --text-highlight: hsl(231, 89%, 71%);
   --text-gradient: linear-gradient(135deg, 
-    hsl(231, 89%, 71%), /* Bleu */
-    hsl(271, 81%, 65%)  /* Violet */
+    hsl(231, 89%, 71%),
+    hsl(271, 81%, 65%)
   );
-  --navbar-bg: rgba(255, 255, 255, 0.8);      /* Gris foncé semi-transparent */
+  --navbar-bg: rgba(255, 255, 255, 0.8);
   --navbar-text: var(--text-grey);
   --navbar-text-hover: var(--text-primary);
   --navbar-text-active: var(--text-primary);
 
   --work-color: #01a2ff;
-  --education-color: #7228f1; /* Couleur des segments de la timeline */
+  --education-color: #7228f1;
 
   --character-color: #7228f1;
   --font-family-base: 'Philosopher', sans-serif;
@@ -29,7 +28,6 @@
 }
 
 .dark {
-  /* Dark theme */
   --background-primary: rgba(3, 7, 18, 1);
   --background-popup: rgba(33, 37, 55, 1);
   --background-selected: rgba(70, 76, 90, 1);
@@ -48,12 +46,11 @@
   --navbar-text-active: var(--text-primary);
 
   --work-color: #4ECDC4;
-  --education-color: #55f; /* Couleur des segments de la timeline */
+  --education-color: #55f;
 
   --character-color: rgb(21, 152, 234);
 }
 
-/* Base styles */
 body {
   margin: 0;
   padding: 0;
@@ -71,7 +68,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
-/* Navigation styles */
 .navbar {
   position: fixed;
   top: 0;
@@ -113,7 +109,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--navbar-text-active);
 }
 
-/* Sidebar styles */
 .social-sidebar {
   position: fixed;
   top: 0;
@@ -287,7 +282,7 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   left: 1.1em;
   top: 0;
-  transform: translateY(-50%) rotate(-12.5deg); /* réduit le décalage */
+  transform: translateY(-50%) rotate(-12.5deg);
   border-width: 0 15px 16px 15px;
   border-style: solid;
   border-color: transparent transparent var(--background-popup) transparent;
@@ -301,10 +296,9 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.1);
 }
 
-/* ==== Footer ==== */
 .footer {
   position: fixed;
-  left: 60px;        /* aligne avec la sidebar */
+  left: 60px;
   right: 0;
   bottom: 0;
   height: var(--footer-height);

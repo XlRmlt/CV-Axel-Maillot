@@ -28,8 +28,6 @@ const skills = [
 
 const SkillsIcons: React.FC = () => {
   const [hovered, setHovered] = useState<number | null>(null);
-
-  // Double la liste pour le scroll infini
   const doubledSkills = [...skills, ...skills];
 
   return (

@@ -20,7 +20,6 @@ declare global {
   }
 }
 
-// -------- Modal Turnstile (interne) --------
 type CaptchaModalProps = {
   open: boolean;
   onClose: () => void;
@@ -44,7 +43,6 @@ const CaptchaModal: React.FC<CaptchaModalProps> = (props) => {
 
   useEffect(() => setMounted(true), []);
 
-  // bloque le scroll
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -126,13 +124,12 @@ const CaptchaModal: React.FC<CaptchaModalProps> = (props) => {
   return createPortal(modal, document.body);
 };
 
-// -------- 1) Révélation d’un contenu après captcha --------
 type CaptchaRevealProps = {
   children: React.ReactNode;
   title?: string;
   description?: string;
   actionLabel?: string;
-  rememberKey?: string; // si défini, on mémorise dans sessionStorage (ex: "cv-preview")
+  rememberKey?: string;
 };
 
 export const CaptchaReveal: React.FC<CaptchaRevealProps> = ({
@@ -189,11 +186,10 @@ export const CaptchaReveal: React.FC<CaptchaRevealProps> = ({
   );
 };
 
-// -------- 2) Protection d’un download par captcha --------
 type CaptchaDownloadProps = {
   href: string;
   className?: string;
-  children?: React.ReactNode;  // l’icône FaDownload par ex.
+  children?: React.ReactNode;
   ariaLabel?: string;
   filename?: string;
   title?: string;

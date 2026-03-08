@@ -47,8 +47,8 @@ interface TimelineItem {
   contractor?: string;
   contractorIcon?: string;
   contractorLink?: string;
-  debut: string; // "MM-YYYY" ou "DD-MM-YYYY"
-  fin: string;   // "MM-YYYY", "DD-MM-YYYY" ou "today"
+  debut: string;
+  fin: string;
   description: string[];
   technologies?: string[];
 }
@@ -86,10 +86,10 @@ const monthIndex = (d: Date) => {
   return year * 12 + month + (day - 1) / daysInMonth;
 };
 
-const PX_PER_MONTH = 25;      // échelle verticale
-const TOP_PADDING = 96;         // espace au-dessus de la première entrée
-const BOTTOM_PADDING = 96;      // espace en bas
-const MIN_GAP_PX = 48;          // anti-recouvrement vertical entre cartes d’un même côté
+const PX_PER_MONTH = 25;
+const TOP_PADDING = 96;
+const BOTTOM_PADDING = 96;
+const MIN_GAP_PX = 48;
 
 const Career: React.FC = () => {
   const { lang, t } = useLanguage();
@@ -212,7 +212,6 @@ const Career: React.FC = () => {
     },
   ];
 
-  // Pré-calculs temporels
   const enriched = useMemo(() => {
     const withDates = items.map(it => {
       const start = parseMonth(it.debut);
@@ -228,24 +227,19 @@ const Career: React.FC = () => {
     const maxExperienceM = Math.max(...withDates.map(i => i.endM));
     const maxM = Math.max(maxExperienceM, nowM);
 
-    // Position verticale (0 en haut = le plus récent)
     const toTopPx = (m: number) => TOP_PADDING + (maxM - m) * PX_PER_MONTH;
 
-    // Layout : tri du plus récent (haut) au plus ancien (bas)
     const sorted = [...withDates].sort((a, b) => b.midM - a.midM);
 
-    // Mesure réelle des hauteurs de cartes (environ, via le contenu)
     const getCardHeight = (item: TimelineItem) => {
-      // Base: padding + header + description + techs
-      let base = 32 + 44; // padding + header
-      base += (item.description.length * 30); // chaque ligne de description
+      let base = 32 + 44;
+      base += (item.description.length * 30);
       if (item.technologies && item.technologies.length > 0) {
-        base += 32; // ligne de technologies
+        base += 32;
       }
       return base;
     };
 
-    // Nouvelle logique d'empilement anti-recouvrement (par côté, du haut vers le bas)
     let maxBottomLeft = -Infinity;
     let maxBottomRight = -Infinity;
 
@@ -259,16 +253,13 @@ const Career: React.FC = () => {
       let adjustedCenter = topPx;
       const currentMaxBottom = (side === 'left') ? maxBottomLeft : maxBottomRight;
 
-      // bord haut réel de la carte = centre - moitié de la hauteur
       const topEdge = adjustedCenter - half;
 
-      // si le haut de la carte passe sous le bas max déjà placé + gap, on pousse
       if (topEdge < currentMaxBottom + MIN_GAP_PX) {
         const push = (currentMaxBottom + MIN_GAP_PX) - topEdge;
         adjustedCenter += push;
       }
 
-      // nouveau bas atteint par cette carte
       const adjustedBottom = adjustedCenter + half;
       if (side === 'left') {
         maxBottomLeft = Math.max(maxBottomLeft, adjustedBottom);
@@ -287,19 +278,17 @@ const Career: React.FC = () => {
     const spineTop = toTopPx(maxM);
     const spineHeight = Math.max(4, Math.abs(toTopPx(minM) - toTopPx(maxM)));
 
-    // Marqueurs d’années sur la colonne centrale
     const startYear = Math.floor(minM / 12);
     const endYear = Math.floor(maxM / 12);
     const yearMarks = [];
     for (let y = endYear; y >= startYear; y--) {
-      const january = y * 12; // Janvier de l’année y
+      const january = y * 12;
       yearMarks.push({ year: y, top: toTopPx(january) });
     }
 
     return { placed, minM, maxM, totalHeight, toTopPx, yearMarks, spineTop, spineHeight };
   }, [items]);
 
-  // Remplace la fonction de formatage par une version multilingue
   const formatMonthYear = (mmYYYY: string) => {
     if (mmYYYY.toLowerCase() === 'today') {
       return t('career.today_label');
@@ -330,13 +319,11 @@ const Career: React.FC = () => {
       </motion.h2>
 
       <div className="career-vtl-wrapper" style={{ height: enriched.totalHeight }}>
-        {/* Colonne centrale (spine) */}
         <div
           className="career-spine"
           style={{ top: enriched.spineTop, height: enriched.spineHeight, bottom: 'auto' }}
         />
 
-        {/* Marqueurs d’années */}
         {enriched.yearMarks.map(m => (
           <div key={m.year} className="career-year" style={{ top: m.top }}>
             <div className="career-year-tick" />
@@ -344,12 +331,11 @@ const Career: React.FC = () => {
           </div>
         ))}
 
-        {/* Segments de durée */}
         {enriched.placed.map((it, i) => {
-          const topStart = enriched.toTopPx(it.endM);   // fin → plus bas
-          const topEnd = enriched.toTopPx(it.startM);   // début → plus haut
+          const topStart = enriched.toTopPx(it.endM);
+          const topEnd = enriched.toTopPx(it.startM);
           const height = Math.max(4, Math.abs(topEnd - topStart));
-          const offset = it.side === 'left' ? -6 : 6;   // petit décalage à gauche/droite de la spine
+          const offset = it.side === 'left' ? -6 : 6;
           return (
             <div
               key={`${it.title}-range`}
@@ -359,7 +345,6 @@ const Career: React.FC = () => {
           );
         })}
 
-        {/* Points + Cartes (présentation d’origine) */}
         {enriched.placed.map((item, index) => (
           <motion.div
             key={`${item.title}-${index}`}
@@ -368,7 +353,6 @@ const Career: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
           >
-            {/* Point sur la spine */}
             <div className={`career-dot ${item.type}`} style={{ top: item.topPx }}>
               {item.type === 'work'
               ? <FaBriefcase className="text-primary text-sm" />
@@ -376,19 +360,15 @@ const Career: React.FC = () => {
               }
             </div>
 
-            {/* Carte ancrée à gauche/droite avec le style d’origine */}
             <div
               className={`career-card-outer ${item.side}`}
               style={{ top: item.topPx }}
             >
               <div className="career-container bg-background-popup p-6 rounded-xl hover:shadow-lg transition-shadow">
-                {/* LIGNE TITRE/ORGA + LOGO, avec la DATE AU-DESSUS */}
                 <div className="career-header">
-                  {/* Date au format About, en bleu, au-dessus */}
                   <span className="career-date-fr">{formatMonthYear(item.debut)} – {formatMonthYear(item.fin)}</span>
 
                   <div className="career-title-row">
-                    {/* Logos a gauche du bloc texte */}
                     <div className="career-logos">
                       {item.organizationIcon && (
                         item.organizationLink ? (
@@ -435,7 +415,6 @@ const Career: React.FC = () => {
                       )}
                     </div>
 
-                    {/* Bloc titre + organisation */}
                     <div className="career-title-text">
                       <h3 className="career-title">{item.title}</h3>
                       <h4 className="career-organization-name">
@@ -474,19 +453,15 @@ const Career: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Description */}
                 <div className="career-description">
                   {item.description.map((desc, i) => (
                     <p key={i} className="text-base">{desc}</p>
                   ))}
                 </div>
 
-                {/* Techs */}
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "0.25rem" }}>
                 {item.technologies?.map((tech, i) => {
-                  // Récupère le composant JSX de l'icône
                   const icon = techIcons[tech];
-                  // Récupère la prop "name" si elle existe
                   let iconName = tech;
                   if (icon && typeof icon === "object" && "props" in icon && icon.props.name) {
                     iconName = icon.props.name;

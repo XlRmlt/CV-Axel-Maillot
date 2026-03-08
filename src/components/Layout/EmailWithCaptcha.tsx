@@ -1,4 +1,3 @@
-// src/components/Layout/EmailWithCaptcha.tsx
 import React, { useEffect, useRef, useState } from 'react';
 import { SiGmail } from 'react-icons/si';
 import { createPortal } from 'react-dom';
@@ -31,8 +30,8 @@ type Props = {
   label?: string;
 };
 
-const defaultUser   = [97,120,101,108,46,109,97,105,108,108,111,116,46,112,114,111]; // "axel.maillot.pro"
-const defaultDomain = [103,109,97,105,108,46,99,111,109]; // "gmail.com"
+const defaultUser   = [97,120,101,108,46,109,97,105,108,108,111,116,46,112,114,111];
+const defaultDomain = [103,109,97,105,108,46,99,111,109];
 
 const EmailWithCaptcha: React.FC<Props> = ({
   userCodes = defaultUser,
@@ -51,7 +50,6 @@ const EmailWithCaptcha: React.FC<Props> = ({
 
   useEffect(() => setMounted(true), []);
 
-  // Bloque le scroll de la page quand la modale est ouverte
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -59,7 +57,6 @@ const EmailWithCaptcha: React.FC<Props> = ({
     return () => { document.body.style.overflow = prev; };
   }, [open]);
 
-  // Charge Turnstile au besoin
   const ensureScript = () =>
     new Promise<void>((resolve, reject) => {
       if (window.turnstile) return resolve();
@@ -71,7 +68,6 @@ const EmailWithCaptcha: React.FC<Props> = ({
       document.head.appendChild(s);
     });
 
-  // Monte le widget quand la modale s’ouvre
   useEffect(() => {
     if (!open) return;
     let cancelled = false;
@@ -97,7 +93,6 @@ const EmailWithCaptcha: React.FC<Props> = ({
     return () => { cancelled = true; };
   }, [open]);
 
-  // Redirection mailto après vérification
   useEffect(() => {
     if (!verified) return;
     (async () => {
@@ -111,10 +106,8 @@ const EmailWithCaptcha: React.FC<Props> = ({
     })();
   }, [verified, userCodes, domainCodes, subject]);
 
-  // Overlay 100% inline styles (aucune dépendance CSS)
   const overlay = open && (
     <div
-      // Vraiment plein écran et au-dessus de tout
       style={{
         position: 'fixed',
         inset: 0,
@@ -128,7 +121,7 @@ const EmailWithCaptcha: React.FC<Props> = ({
       role="dialog"
       aria-modal="true"
       aria-label="Vérification anti-robot"
-      onClick={() => setOpen(false)} // clic fond ferme
+      onClick={() => setOpen(false)}
     >
       <div
         style={{
@@ -141,14 +134,13 @@ const EmailWithCaptcha: React.FC<Props> = ({
           maxWidth: 420,
           padding: 20,
         }}
-        onClick={e => e.stopPropagation()} // ne pas fermer en cliquant dans la boîte
+        onClick={e => e.stopPropagation()}
       >
         <div style={{ textAlign: 'center', marginBottom: 8, fontWeight: 600 }}>{t('global.mail_captcha_title')}</div>
         <div style={{ textAlign: 'center', opacity: 0.75, fontSize: 14, marginBottom: 12 }}>
           {t('global.mail_captcha_desc')}
         </div>
 
-        {/* Wrapper qui centre même si l’iframe interne est positionnée en absolute */}
         <div
           ref={widgetRef}
           style={{

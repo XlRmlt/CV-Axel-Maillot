@@ -1,4 +1,3 @@
-// webpack.config.js
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
@@ -12,15 +11,13 @@ module.exports = (_env, argv) => {
   const isProd = mode === 'production';
   const repoName = 'CV-Axel-Maillot';
 
-  // --- infos git / ci
   const BRANCH = process.env.GITHUB_REF_NAME || safe('git rev-parse --abbrev-ref HEAD', 'local');
   const SHA7   = (process.env.GITHUB_SHA || safe('git rev-parse --short HEAD', '')).slice(0,7) || 'dev';
 
-  // --- version: priorité aux tags GitHub → git local → package.json
   const pkg = require('./package.json');
   const ghTag   = process.env.GITHUB_REF_TYPE === 'tag' ? (process.env.GITHUB_REF_NAME || '') : '';
-  const tagNorm = ghTag.replace(/^v/i, '');                           // "v1.0.0" -> "1.0.0"
-  const gitTag  = safe('git describe --tags --abbrev=0', '').replace(/^v/i,''); // si tu buildes localement sur un tag
+  const tagNorm = ghTag.replace(/^v/i, '');
+  const gitTag  = safe('git describe --tags --abbrev=0', '').replace(/^v/i,'');
   const VERSION = (isProd && (tagNorm || gitTag)) || pkg.version || '0.0.0';
 
   console.log(`[webpack] mode=${mode} isProd=${isProd} version=${VERSION}`);

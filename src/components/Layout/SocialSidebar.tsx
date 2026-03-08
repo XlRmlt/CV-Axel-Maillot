@@ -66,10 +66,8 @@ const SocialSidebar = () => {
         </div>
 
         <div className="social-icons">
-          {/* Email protégé par un captcha */}
           <EmailWithCaptcha className="social-icon" label="Gmail" />
 
-          {/* Autres liens sociaux */}
           {socialLinks.map((link, index) => (
             <motion.a
               key={index}

@@ -30,7 +30,7 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   flex-shrink: 0;
-  position: relative; /* Pour positionner le tooltip */
+  position: relative;
 }
 
 .about-skills-icons:hover {
@@ -62,7 +62,6 @@
   }
 }
 
-/* Pause l'animation au survol */
 .skills-scroll:hover {
   animation-play-state: paused;
 }

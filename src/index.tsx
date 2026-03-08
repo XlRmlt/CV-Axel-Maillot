@@ -5,7 +5,6 @@ import './index.css';
 import './components/Theme/theme.css';
 import { LanguageProvider } from './i18n/LanguageContext';
 
-// Initialiser le thème sombre par défaut
 if (!localStorage.theme) {
   localStorage.theme = 'dark';
   document.documentElement.classList.add('dark');

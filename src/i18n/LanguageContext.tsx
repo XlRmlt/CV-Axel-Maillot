@@ -33,7 +33,6 @@ export const LanguageProvider: React.FC<React.PropsWithChildren> = ({ children }
   const t = useMemo(() => {
     const dict = translations[lang] ?? translations.en;
     return (key: string) => {
-      // Support nested keys: "about.aboutTitle"
       const value = key.split('.').reduce((acc, k) => (acc && acc[k] !== undefined ? acc[k] : undefined), dict);
       return typeof value === 'string' ? value : key;
     };

@@ -25,10 +25,8 @@ const TypeWriter: React.FC<TypeWriterProps> = ({
     let timeout: NodeJS.Timeout;
 
     if (!isDeleting && text === currentWord) {
-      // Finished typing, wait before deleting
       timeout = setTimeout(() => setIsDeleting(true), delayBetweenWords);
     } else if (isDeleting && text === '') {
-      // Finished deleting, move to next word
       timeout = setTimeout(() => {
         setIsDeleting(false);
         setWordIndex((prev) => (prev + 1) % words.length);

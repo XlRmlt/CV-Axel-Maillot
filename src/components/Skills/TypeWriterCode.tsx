@@ -17,7 +17,6 @@ const TypeWriterCode: React.FC<TypeWriterCodeProps> = ({
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    // Réinitialiser les états quand le code change
     setDisplayed('');
     setIsComplete(false);
     
@@ -35,9 +34,8 @@ const TypeWriterCode: React.FC<TypeWriterCodeProps> = ({
     }, typingSpeed);
 
     return () => clearInterval(interval);
-  }, [code, typingSpeed]); // Retiré onComplete des dépendances
+  }, [code, typingSpeed]);
 
-  // Effet séparé pour gérer onComplete sans redémarrer l'animation
   useEffect(() => {
     if (isComplete && onComplete) {
       onComplete();
@@ -49,7 +47,7 @@ const TypeWriterCode: React.FC<TypeWriterCodeProps> = ({
         className="mt-4 rounded-lg overflow-hidden shadow-md border border-gray-700 font-mono text-sm leading-relaxed"
         style={{
             backgroundColor: '#1e1e1e',
-            color: '#10b981', // green-400
+          color: '#10b981',
             position: 'relative',
             zIndex: 10,
             marginLeft: '1rem',

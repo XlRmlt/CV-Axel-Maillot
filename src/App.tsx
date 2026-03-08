@@ -15,7 +15,6 @@ import './index.css';
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('home');
 
-  // Reset le scroll en haut à chaque changement d’onglet
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activeSection]);
@@ -41,18 +40,14 @@ const App: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-background-dark">
-      {/* Background */}
       <div className="fixed inset-0">
         <ParticlesContainer />
       </div>
       
-      {/* Structure principale */}
       <div className="relative">
-        {/* Éléments fixes */}
         <SocialSidebar />
         <NavBar activeSection={activeSection} setActiveSection={setActiveSection} />
         
-        {/* Zone de contenu avec marge pour navbar et sidebar */}
         <div style={{ paddingLeft: '69px', paddingTop: '50px' }}>
           <AnimatePresence mode="wait">
             <motion.div
