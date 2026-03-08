@@ -19,7 +19,7 @@ const techIcons: Record<string, JSX.Element> = {
   'Node.js': <SiNodedotjs className="timeline-tech-logo" title="Node.js" color="#339933" />,
   Python: <SiPython className="timeline-tech-logo" title="Python" color="#3776AB" />,
   SQL: <SiPostgresql className="timeline-tech-logo" title="SQL" color="#336791" />,
-  'R': <SiR className="timeline-tech-logo" title="R" color="#276DC3" />,
+  R: <SiR className="timeline-tech-logo" title="R" color="#276DC3" />,
   'R/Shiny': <SiR className="timeline-tech-logo" title="R/Shiny" color="#276DC3" />,
   Git: <SiGit className="timeline-tech-logo" title="Git" color="#F05032" />,
   GitLab: <SiGit className="timeline-tech-logo" title="GitLab" color="#FC6D26" />,
@@ -39,11 +39,14 @@ const techIcons: Record<string, JSX.Element> = {
 type TimelineItem = {
   id: string;
   type: string; // 'work' | 'education'
-  debut: string;       // "MM-YYYY"
-  fin: string;         // "MM-YYYY"
+  debut: string; // "MM-YYYY" ou "DD-MM-YYYY"
+  fin: string; // "MM-YYYY", "DD-MM-YYYY" ou "today"
   title: string;
   organization: string;
   organizationLink?: string;
+  contractor?: string;
+  contractorIcon?: string;
+  contractorLink?: string;
   technologies?: string[];
 };
 
@@ -51,24 +54,47 @@ type TimelineProps = {
   items: TimelineItem[];
 };
 
-const parseMonthYear = (mmYYYY: string) => {
-  // attendu "MM-YYYY"
-  const [mm, yyyy] = mmYYYY.split('-').map(Number);
-  // index mois 0..11
+const parseMonthYear = (dateStr: string) => {
+  if (dateStr.toLowerCase() === 'today') {
+    return new Date();
+  }
+
+  const parts = dateStr.split('-').map(Number);
+  if (parts.length === 3) {
+    const [dd, mm, yyyy] = parts;
+    return new Date(yyyy, (mm ?? 1) - 1, dd ?? 1);
+  }
+
+  const [mm, yyyy] = parts;
   return new Date(yyyy, (mm ?? 1) - 1, 1);
 };
 
-const monthIndex = (d: Date) => d.getFullYear() * 12 + d.getMonth();
+const monthIndex = (d: Date) => {
+  const year = d.getFullYear();
+  const month = d.getMonth();
+  const day = d.getDate();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  return year * 12 + month + (day - 1) / daysInMonth;
+};
 
 const Timeline: React.FC<TimelineProps> = ({ items }) => {
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   if (!items.length) return null;
 
   const months = monthsByLang[lang];
-  const formatRange = (start: Date, end: Date) => {
-    const s = `${months[start.getMonth()]} ${start.getFullYear()}`;
-    const e = `${months[end.getMonth()]} ${end.getFullYear()}`;
-    return `${s} – ${e}`;
+
+  const formatDate = (date: Date, raw: string) => {
+    if (raw.toLowerCase() === 'today') {
+      return t('career.today_label');
+    }
+
+    const parts = raw.split('-').map(Number);
+    const hasDay = parts.length === 3;
+    if (hasDay) {
+      return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+    }
+
+    return `${months[date.getMonth()]} ${date.getFullYear()}`;
   };
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -87,25 +113,26 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
 
     measureDimensions();
     window.addEventListener('resize', measureDimensions);
-    
+
     return () => window.removeEventListener('resize', measureDimensions);
   }, [items]);
 
   // Pré-calcule les bornes temporelles
-  const parsed = items.map(it => {
+  const parsed = items.map((it) => {
     const start = parseMonthYear(it.debut);
     const end = parseMonthYear(it.fin);
     return { ...it, start, end };
   });
 
-  const minMonth = Math.min(...parsed.map(p => monthIndex(p.start)));
-  const maxMonth = Math.max(...parsed.map(p => monthIndex(p.end)));
+  const minMonth = Math.min(...parsed.map((p) => monthIndex(p.start)));
+  const nowMonth = monthIndex(new Date());
+  const maxEventMonth = Math.max(...parsed.map((p) => monthIndex(p.end)));
+  const maxMonth = Math.max(maxEventMonth, nowMonth);
   const total = Math.max(1, maxMonth - minMonth);
 
   // Ajouter un delta pour éviter le débordement à gauche
   const deltaMargin = 7; // Marge en pourcentage
   const timelineWidth = 100 - deltaMargin; // Largeur utilisable
-
   const toPct = (m: number) => deltaMargin + ((maxMonth - m) / total) * timelineWidth;
 
   // Calcule les positions et détecte les collisions
@@ -122,40 +149,32 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
     const cardWidthPct = (dimensions.cardWidth / dimensions.containerWidth) * 100;
 
     // Séparer par type pour détecter les collisions au sein du même groupe
-    const workItems = positions.filter(p => p.type === 'work').sort((a, b) => a.left - b.left);
-    const educationItems = positions.filter(p => p.type === 'education').sort((a, b) => a.left - b.left);
+    const workItems = positions.filter((p) => p.type === 'work').sort((a, b) => a.left - b.left);
+    const educationItems = positions.filter((p) => p.type === 'education').sort((a, b) => a.left - b.left);
 
     // Fonction pour détecter et résoudre les collisions avec algorithme itératif
-    const resolveCollisions = (items: typeof positions) => {
-      // Créer des couches pour chaque offset (0, 1, 2, etc.)
-      const layers: { [offset: number]: typeof items } = {};
-      
-      // Trier les items par position horizontale pour traiter de gauche à droite
-      items.sort((a, b) => a.left - b.left);
-      
-      for (const item of items) {
+    const resolveCollisions = (layerItems: typeof positions) => {
+      const layers: { [offset: number]: typeof positions } = {};
+      layerItems.sort((a, b) => a.left - b.left);
+
+      for (const item of layerItems) {
         let placementFound = false;
         let currentOffset = 0;
-        
-        // Essayer de placer l'item dans la première couche disponible
+
         while (!placementFound) {
-          // Initialiser la couche si elle n'existe pas
           if (!layers[currentOffset]) {
             layers[currentOffset] = [];
           }
-          
-          // Vérifier s'il y a collision avec les items déjà placés dans cette couche
-          const hasCollisionInLayer = layers[currentOffset].some(placedItem => 
-            Math.abs(item.left - placedItem.left) < cardWidthPct
+
+          const hasCollisionInLayer = layers[currentOffset].some(
+            (placedItem) => Math.abs(item.left - placedItem.left) < cardWidthPct
           );
-          
+
           if (!hasCollisionInLayer) {
-            // Pas de collision, placer l'item dans cette couche
             item.offset = currentOffset;
             layers[currentOffset].push(item);
             placementFound = true;
           } else {
-            // Collision détectée, essayer la couche suivante
             currentOffset++;
           }
         }
@@ -171,58 +190,50 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
   const positionsWithOffset = calculatePositions();
 
   // === Calcul dynamique de la hauteur du conteneur ===
-  // Trouver le nombre de couches max pour chaque type
   const maxWorkOffset = positionsWithOffset
-    .filter(p => p.type === 'work')
+    .filter((p) => p.type === 'work')
     .reduce((max, p) => Math.max(max, p.offset), 0);
   const maxEduOffset = positionsWithOffset
-    .filter(p => p.type === 'education')
+    .filter((p) => p.type === 'education')
     .reduce((max, p) => Math.max(max, p.offset), 0);
 
-  // Hauteur d'une carte + marge (marge verticale entre cartes)
   const cardHeight = dimensions.cardHeight || 180;
-  const cardMargin = 12; // px, correspond à .timeline-card margin (0.75rem)
-  // Décalage vertical de base (distance entre la ligne et la première carte)
-  const baseOffset = 24; // px, correspond à 1.5rem
+  const cardMargin = 12;
+  const baseOffset = 24;
 
-  // Hauteur totale = espace au-dessus + espace au-dessous + ligne + padding
-  // Padding vertical du container : 6rem haut + 6rem bas = 192px
-  // On veut que la hauteur du container soit suffisante pour toutes les couches
   const totalHeight =
-    baseOffset + // espace entre la ligne et la première carte
-    (maxWorkOffset * (cardHeight + cardMargin)) + // couches work au-dessus
     baseOffset +
-    (maxEduOffset * (cardHeight + cardMargin)) + // couches education en dessous
-    192; // padding top + bottom
+    maxWorkOffset * (cardHeight + cardMargin) +
+    baseOffset +
+    maxEduOffset * (cardHeight + cardMargin) +
+    192;
 
-  // Calculer les années à afficher sur la timeline
   const getYearMarkers = () => {
     const startYear = Math.floor(minMonth / 12);
     const endYear = Math.floor(maxMonth / 12);
     const years = [];
-    
+
     for (let year = endYear; year >= startYear; year--) {
       const januaryMonth = year * 12;
       const position = toPct(januaryMonth);
       years.push({ year, position });
     }
-    
+
     return years;
   };
 
   const yearMarkers = getYearMarkers();
 
   return (
-    <div
-      className="timeline-container"
-      ref={containerRef}
-      style={{ minHeight: `${totalHeight}px` }}
-    >
+    <div className="timeline-container" ref={containerRef} style={{ minHeight: `${totalHeight}px` }}>
       {/* Ligne de fond */}
-      <div className="timeline-horizontal-line" style={{
-        left: `${deltaMargin}%`,
-        width: `${timelineWidth}%`
-      }} />
+      <div
+        className="timeline-horizontal-line"
+        style={{
+          left: `${deltaMargin}%`,
+          width: `${timelineWidth}%`,
+        }}
+      />
 
       {/* Marqueurs d'années */}
       {yearMarkers.map((marker) => (
@@ -237,14 +248,14 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
       ))}
 
       {/* Segments de durée */}
-      {parsed.map((p, i) => {
+      {parsed.map((p) => {
         const startM = monthIndex(p.start);
         const endM = monthIndex(p.end);
         const left = toPct(startM);
         const right = toPct(endM);
         const width = Math.abs(left - right);
         const actualLeft = Math.min(left, right);
-        
+
         return (
           <div
             key={`${p.id}-range`}
@@ -254,48 +265,46 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
         );
       })}
 
-      {positionsWithOffset.map((p, index) => {
-        return (
-          <motion.div
-            key={p.id}
-            className={'timeline-icon-container'}
-            style={{ left: `${p.left}%` }}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
-          >
-            {p.type === 'work' ? (
-              <FaBriefcase className="timeline-icon text-primary text-xl" />
-            ) : (
-              <FaGraduationCap className="timeline-icon text-primary text-xl" />
-            )}
-          </motion.div>
-        );
-      })}
+      {positionsWithOffset.map((p, index) => (
+        <motion.div
+          key={p.id}
+          className="timeline-icon-container"
+          style={{ left: `${p.left}%` }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: index * 0.08 }}
+        >
+          {p.type === 'work' ? (
+            <FaBriefcase className="timeline-icon text-primary text-xl" />
+          ) : (
+            <FaGraduationCap className="timeline-icon text-primary text-xl" />
+          )}
+        </motion.div>
+      ))}
 
       {/* Points + cartes (centrées sur le milieu de la période) */}
       {positionsWithOffset.map((p, index) => {
-        // Calculer le décalage vertical supplémentaire
-        // Utiliser calc() pour 100% de la hauteur de la carte + 0.25rem
         const offsetValue = p.offset > 0 ? `calc(100% * ${p.offset})` : '0px';
-        const baseTransform = p.type === 'work' 
-          ? 'translate(-50%, calc(-50% - 5.5rem))' 
-          : 'translate(-50%, calc(-50% + 5.5rem))';
-        
-        const finalTransform = p.offset > 0 
-          ? p.type === 'work'
-            ? `translate(-50%, calc(-50% - 5.5rem - ${offsetValue}))`
-            : `translate(-50%, calc(-50% + 5.5rem + ${offsetValue}))`
-          : baseTransform;
-        
+        const baseTransform =
+          p.type === 'work'
+            ? 'translate(-50%, calc(-50% - 5.5rem))'
+            : 'translate(-50%, calc(-50% + 5.5rem))';
+
+        const finalTransform =
+          p.offset > 0
+            ? p.type === 'work'
+              ? `translate(-50%, calc(-50% - 5.5rem - ${offsetValue}))`
+              : `translate(-50%, calc(-50% + 5.5rem + ${offsetValue}))`
+            : baseTransform;
+
         return (
           <motion.div
             key={p.id}
             className={`timeline-event ${p.type === 'work' ? 'work' : 'education'}`}
-            style={{ 
+            style={{
               left: `${p.left}%`,
-              transform: finalTransform
+              transform: finalTransform,
             }}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -303,13 +312,14 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
             transition={{ duration: 0.5, delay: index * 0.08 }}
           >
             <div className="timeline-card" ref={index === 0 ? cardRef : undefined}>
-              <span className="timeline-dates">{formatRange(p.start, p.end)}</span>
+              <span className="timeline-dates">
+                {formatDate(p.start, p.debut)} - {formatDate(p.end, p.fin)}
+              </span>
               <div className="timeline-title-container">
                 <div className="timeline-title-text">
                   <h4 className="timeline-title">{p.title}</h4>
-                  {/* Ajout du lien sur l'organisation si présent */}
-                  {p.organizationLink ? (
-                    <h4 className="timeline-organization">
+                  <h4 className="timeline-organization">
+                    {p.organizationLink ? (
                       <a
                         href={p.organizationLink}
                         target="_blank"
@@ -318,18 +328,36 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
                       >
                         {p.organization}
                       </a>
-                    </h4>
-                  ) : (
-                    <h4 className="timeline-organization">{p.organization}</h4>
-                  )}
+                    ) : (
+                      <span>{p.organization}</span>
+                    )}
+
+                    {p.contractor && (
+                      <>
+                        <span className="timeline-organization-linker">{t('career.contractor_joiner')}</span>
+                        {p.contractorLink ? (
+                          <a
+                            href={p.contractorLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ textDecoration: 'underline', color: 'inherit' }}
+                          >
+                            {p.contractor}
+                          </a>
+                        ) : (
+                          <span>{p.contractor}</span>
+                        )}
+                      </>
+                    )}
+                  </h4>
                 </div>
               </div>
 
               {p.technologies && p.technologies.length > 0 && (
                 <div className="timeline-tech-list">
-                  {p.technologies.map((t, i) => (
+                  {p.technologies.map((tech, i) => (
                     <span key={`${p.id}-tech-${i}`} className="timeline-tech">
-                      {techIcons[t] ?? <span className="timeline-tech-fallback">{t}</span>}
+                      {techIcons[tech] ?? <span className="timeline-tech-fallback">{tech}</span>}
                     </span>
                   ))}
                 </div>
